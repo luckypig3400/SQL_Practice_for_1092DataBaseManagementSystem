@@ -1,0 +1,2 @@
+# SQL_Practice_for_1092DataBaseManagementSystem
+ SQL_Practice_for_1092DataBaseManagementSystem(大二下資料庫管理系統)
