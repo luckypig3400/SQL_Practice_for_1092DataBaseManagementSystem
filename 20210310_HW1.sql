@@ -127,6 +127,8 @@ insert into Bank(BankID,BankName,BankAddress)
 values ('013','地球銀行','地球的每個角落');
 
 --3. 使用查詢(SELECT)語法查詢，某個帳戶的所有交易紀錄，交易紀錄須包含以下欄位 (查詢結果錯誤0分，每個欄位2分，合計14分)- 銀行代號、個人帳號、銀行帳號、交易編號、交易時間、交易類型、交易內容
-select * from TransactionLog As T, Bank as B , Account as A where A.AccID = T.AccID and A.BankID = B.BankID;
+select B.BankID,C.PersonalAcc,C.AccID,T.traID,T.traDate,T.traType,T.traDetail 
+from TransactionLog As T, Customer as C,Bank as B , Account as A 
+where A.AccID = T.AccID and C.AccID = T.AccID and A.BankID = B.BankID;
 
 select * from Account As A, Customer AS C WHERE A.AccID = C.AccID;
