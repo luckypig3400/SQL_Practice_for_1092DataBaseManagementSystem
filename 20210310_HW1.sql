@@ -17,8 +17,10 @@ create table Account(
 	BankID char(6),
 	AccID char(60),
 	Balance int,
-	BranchAcc char(60),
-	AccountType int,
+	BranchAccID char(60),
+	AccType char(30),
+	UpdateDate date,
+	ChangedPersonnel char(60),--異動人
 	PRIMARY KEY(AccID)
 );
 
@@ -32,6 +34,10 @@ create table Customer(
 	Birthdate date,
 	Gender char(3),
 	PostalAddress char(255),
+	City char(30),
+	Country char(30),
+	UpdateDate date,
+	ChangedPersonnel char(60),--異動人
 	PRIMARY KEY(AccID)
 );
 
@@ -45,6 +51,8 @@ create table TransactionLog(
 	ATM_ID char(60),
 	traType char(32),
 	traDetail char(255),
+	UpdateDate date,
+	ChangedPersonnel char(60),--異動人
 	PRIMARY KEY(AccID,traID)
 );
 
@@ -54,6 +62,7 @@ end
 create table Bank(
 	BankID char(6),
 	BankName char(66),
+	BankAddress char(255),
 	PRIMARY KEY(BankID)
 );
 
@@ -63,10 +72,10 @@ alter table Customer drop column Gender;--刪除欄位
 alter table Customer add Gender char(1);--新增欄位
 alter table Customer add constraint Gender DEFAULT 'U' FOR Gender;--在欄位新增約束並加入預設值
 
-insert into Account(BankID,AccID,Balance,BranchAcc,AccountType)
-values ('012','082214226',60000,'00412',1);
-insert into Account(BankID,AccID,Balance,BranchAcc,AccountType)
-values ('012','082214266',50000,'00412',1);
+insert into Account(BankID,AccID,Balance,BranchAccID,AccType)
+values ('012','082214226',60000,'00412','活期存款戶');
+insert into Account(BankID,AccID,Balance,BranchAccID,AccType)
+values ('012','082214266',50000,'00412','活期存款戶');
 insert into Customer(AccID,FirstName,LastName,Birthdate,Gender,PostalAddress)
 values ('082214226','曜承','楊','2000/07/13','M','地址範例1');
 insert into Customer(AccID,FirstName,LastName,Birthdate,Gender,PostalAddress)
@@ -79,5 +88,6 @@ insert into Bank(BankID,BankName)
 values ('012','北護銀行');
 insert into Bank(BankID,BankName)
 values ('013','北科銀行');
+
 
 select * from Account As A, Customer AS C WHERE A.AccID = C.AccID;
