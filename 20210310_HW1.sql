@@ -3,6 +3,8 @@ if DB_ID('NTUNHS_IM')IS NOT NULL begin
 	drop database NTUNHS_IM;
 	create database NTUNHS_IM;
 end
+--sql語法中的begin與end就如同C或JAVA的{}把判斷式成立後要執行的多個程式碼框起來
+--https://stackoverflow.com/questions/36279671/how-to-set-multiple-values-inside-an-if-else-statement
 else begin
 	create database NTUNHS_IM;
 end
