@@ -79,11 +79,11 @@ alter table Customer add constraint Gender DEFAULT 'U' FOR Gender;--在欄位新增約
 
 
 
-insert into Customer(PersonalAcc,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
+insert into Customer(userID,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
 values ('hjgfgfg','082214226','曜承','楊','2000/07/13','M','地址範例1','台北','台灣',GETDATE(),'楊曜承');
-insert into Customer(PersonalAcc,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
+insert into Customer(userID,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
 values ('doefko','07876467','一','測試','1990/06/03','M','地址範例2','台北','台灣',GETDATE(),'測試一');
-insert into Customer(PersonalAcc,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
+insert into Customer(userID,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
 values ('wrewrrr','896787653','柯南','江戶川','1999/06/9','M','Tokyo Hot Street 69','東京','日本',GETDATE(),'江戶川柯南');
 
 insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
@@ -132,7 +132,7 @@ insert into Bank(BankID,BankName,BankAddress)
 values ('013','地球銀行','地球的每個角落');
 
 --3. 使用查詢(SELECT)語法查詢，某個帳戶的所有交易紀錄，交易紀錄須包含以下欄位 (查詢結果錯誤0分，每個欄位2分，合計14分)- 銀行代號、個人帳號、銀行帳號、交易編號、交易時間、交易類型、交易內容
-select B.BankID,C.PersonalAcc,C.AccID,T.traID,T.traDate,T.traType,T.traDetail 
+select B.BankID,C.userID,C.AccID,T.traID,T.traDate,T.traType,T.traDetail 
 from TransactionLog As T, Customer as C,Bank as B , Account as A 
 where A.AccID = T.AccID and C.AccID = T.AccID and A.BankID = B.BankID;
 
