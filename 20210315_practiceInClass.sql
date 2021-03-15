@@ -59,6 +59,7 @@ create table TransactionLog(
 	traDetail char(255),
 	UpdateDate date,
 	ChangedPersonnel char(60),--異動人
+	traAccID char(69),--轉帳對象的銀行帳號
 	PRIMARY KEY(AccID,traID),
 );
 
