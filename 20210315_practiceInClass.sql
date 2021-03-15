@@ -30,6 +30,16 @@ create table Customer(--¦b½m²ß¤¤ºÙ¬°­Ó¤H¸ê®Æ
 	ChangedPersonnel char(60),--²§°Ê¤H
 );
 
+if OBJECT_ID('Bank')IS NOT NULL begin
+	drop table Bank;
+end
+create table Bank(
+	BankID char(6),
+	BankName char(66),
+	BankAddress char(255),
+	PRIMARY KEY(BankID),
+);
+
 if OBJECT_ID('Account')IS NOT NULL begin
 	drop table Account;
 end
@@ -65,15 +75,6 @@ create table TransactionLog(
 	Foreign Key(AccID) references Account(AccID)
 );
 
-if OBJECT_ID('Bank')IS NOT NULL begin
-	drop table Bank;
-end
-create table Bank(
-	BankID char(6),
-	BankName char(66),
-	BankAddress char(255),
-	PRIMARY KEY(BankID),
-);
 
 
 --¨Ï¥Î­×§ï¸ê®Æªíªº»yªk(alter)¡A±N©Ê§OÄæ¬°³]©w­­¨î±ø¥ó¡A¨Ã·s¼W¹w³]­È¬°U
@@ -83,14 +84,17 @@ alter table Customer add constraint Gender DEFAULT 'U' FOR Gender;--¦bÄæ¦ì·s¼W¬ù
 
 
 
-
-
 insert into Customer(userID,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
 values ('yaocheng0822','082214226','Â`©Ó','·¨','2000/07/13','M','¦a§}½d¨Ò1','¥x¥_','¥xÆW',GETDATE(),'·¨Â`©Ó');
 insert into Customer(userID,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
 values ('test1userID','07876467','¤@','´ú¸Õ','1990/06/03','M','¦a§}½d¨Ò2','¥x¥_','¥xÆW',GETDATE(),'´ú¸Õ¤@');
 insert into Customer(userID,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
 values ('conan8967','896787653','¬_«n','¦¿¤á¤t','1999/06/9','M','Tokyo Hot Street 69','ªF¨Ê','¤é¥»',GETDATE(),'¦¿¤á¤t¬_«n');
+
+insert into Bank(BankID,BankName,BankAddress)
+values ('012','¥_Å@»È¦æ','¥x¥_¥«¥_§ë°Ï©ú¼w¸ô365¸¹');
+insert into Bank(BankID,BankName,BankAddress)
+values ('013','¦a²y»È¦æ','¦a²yªº¨C­Ó¨¤¸¨');
 
 insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel,cID)
 values ('012','082214226',60000,'00333','¬¡´Á¦s´Ú¤á',GETDATE(),'·¨Â`©Ó','yaocheng0822');
@@ -132,10 +136,7 @@ values ('896787653','2',GETDATE(),'67431','´£´Ú','°»¬d¤u¨ã¼Æ¥ó',GETDATE(),'¦¿¤á¤
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
 values ('896787653','3',GETDATE(),'69696','¦s´Ú','¯}®×³ø¹S',GETDATE(),'¦¿¤á¤t¬_«n');
 
-insert into Bank(BankID,BankName,BankAddress)
-values ('012','¥_Å@»È¦æ','¥x¥_¥«¥_§ë°Ï©ú¼w¸ô365¸¹');
-insert into Bank(BankID,BankName,BankAddress)
-values ('013','¦a²y»È¦æ','¦a²yªº¨C­Ó¨¤¸¨');
+
 
 --3. ¨Ï¥Î¬d¸ß(SELECT)»yªk¬d¸ß¡A¬Y­Ó±b¤áªº©Ò¦³¥æ©ö¬ö¿ý¡A¥æ©ö¬ö¿ý¶·¥]§t¥H¤UÄæ¦ì (¬d¸ßµ²ªG¿ù»~0¤À¡A¨C­ÓÄæ¦ì2¤À¡A¦X­p14¤À)- »È¦æ¥N¸¹¡B­Ó¤H±b¸¹¡B»È¦æ±b¸¹¡B¥æ©ö½s¸¹¡B¥æ©ö®É¶¡¡B¥æ©öÃþ«¬¡B¥æ©ö¤º®e
 select B.BankID,C.userID,C.AccID,T.traID,T.traDate,T.traType,T.traDetail 
