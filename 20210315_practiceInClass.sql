@@ -15,8 +15,9 @@ if OBJECT_ID('Customer')IS NOT NULL begin
 	drop table Customer;
 end
 create table Customer(--在練習中稱為個人資料
-	userID char(66),--個人帳號似乎和銀行帳號式不同的
+	userID char(66) primary key,--個人帳號似乎和銀行帳號式不同的
 	--應該是指這個人在這間店的顧客編號
+	--客戶編號應為主鍵(如身分證字號不可重複)
 	AccID char(69),
 	FirstName char(32),
 	LastName char(32),
@@ -27,7 +28,6 @@ create table Customer(--在練習中稱為個人資料
 	Country char(30),
 	UpdateDate date,
 	ChangedPersonnel char(60),--異動人
-	PRIMARY KEY(AccID)
 );
 
 if OBJECT_ID('Account')IS NOT NULL begin
