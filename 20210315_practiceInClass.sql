@@ -41,7 +41,9 @@ create table Account(
 	AccType char(30),
 	UpdateDate date,
 	ChangedPersonnel char(60),--異動人
-	PRIMARY KEY(AccID)
+	userID char(66),
+	PRIMARY KEY(AccID),
+	foreign key(userID) references Customer(userID)
 );
 
 if OBJECT_ID('TransactionLog')IS NOT NULL begin
@@ -56,7 +58,7 @@ create table TransactionLog(
 	traDetail char(255),
 	UpdateDate date,
 	ChangedPersonnel char(60),--異動人
-	PRIMARY KEY(AccID,traID)
+	PRIMARY KEY(AccID,traID),
 );
 
 if OBJECT_ID('Bank')IS NOT NULL begin
