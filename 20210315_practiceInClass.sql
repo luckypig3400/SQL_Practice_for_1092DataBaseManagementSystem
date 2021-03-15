@@ -15,7 +15,7 @@ if OBJECT_ID('Account')IS NOT NULL begin
 end
 create table Account(
 	BankID char(6),
-	AccID char(60),
+	AccID char(69),
 	Balance int,
 	BranchAccID char(60),
 	AccType char(30),
@@ -28,7 +28,7 @@ if OBJECT_ID('Customer')IS NOT NULL begin
 	drop table Customer;
 end
 create table Customer(--在練習中稱為個人資料
-	PersonalAcc char(66),--個人帳號似乎和銀行帳號式不同的
+	userID char(66),--個人帳號似乎和銀行帳號式不同的
 	--應該是指這個人在這間店的顧客編號
 	AccID char(69),
 	FirstName char(32),
@@ -73,6 +73,10 @@ create table Bank(
 alter table Customer drop column Gender;--刪除欄位
 alter table Customer add Gender char(1);--新增欄位
 alter table Customer add constraint Gender DEFAULT 'U' FOR Gender;--在欄位新增約束並加入預設值
+
+
+
+
 
 insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
 values ('012','082214226',60000,'00333','活期存款戶',GETDATE(),'楊曜承');
