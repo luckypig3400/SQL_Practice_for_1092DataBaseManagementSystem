@@ -41,9 +41,10 @@ create table Account(
 	AccType char(30),
 	UpdateDate date,
 	ChangedPersonnel char(60),--異動人
-	userID char(66),
+	cID char(66),--要進行關聯，資料格式與長度必須與要關聯的欄位相同
+	--customerID記錄這隻銀行帳戶是誰開的連結到Customer表單
 	PRIMARY KEY(AccID),
-	foreign key(userID) references Customer(userID)
+	foreign key(cID) references Customer(userID)
 );
 
 if OBJECT_ID('TransactionLog')IS NOT NULL begin
