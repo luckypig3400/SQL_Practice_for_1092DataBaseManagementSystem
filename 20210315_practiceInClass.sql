@@ -44,7 +44,8 @@ create table Account(
 	cID char(66),--要進行關聯，資料格式與長度必須與要關聯的欄位相同
 	--customerID記錄這隻銀行帳戶是誰開的連結到Customer表單
 	PRIMARY KEY(AccID),
-	foreign key(cID) references Customer(userID)
+	foreign key(cID) references Customer(userID),
+	Foreign Key(BankID) References Bank(BankID)
 );
 
 if OBJECT_ID('TransactionLog')IS NOT NULL begin
@@ -61,6 +62,7 @@ create table TransactionLog(
 	ChangedPersonnel char(60),--異動人
 	traAccID char(69),--轉帳對象的銀行帳號
 	PRIMARY KEY(AccID,traID),
+	Foreign Key(AccID) references Account(AccID)
 );
 
 if OBJECT_ID('Bank')IS NOT NULL begin
@@ -70,7 +72,7 @@ create table Bank(
 	BankID char(6),
 	BankName char(66),
 	BankAddress char(255),
-	PRIMARY KEY(BankID)
+	PRIMARY KEY(BankID),
 );
 
 
