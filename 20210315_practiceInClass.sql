@@ -83,22 +83,22 @@ alter table Customer add constraint Gender DEFAULT 'U' FOR Gender;--在欄位新增約
 
 
 insert into Customer(userID,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
-values ('hjgfgfg','082214226','曜承','楊','2000/07/13','M','地址範例1','台北','台灣',GETDATE(),'楊曜承');
+values ('yaocheng0822','082214226','曜承','楊','2000/07/13','M','地址範例1','台北','台灣',GETDATE(),'楊曜承');
 insert into Customer(userID,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
-values ('doefko','07876467','一','測試','1990/06/03','M','地址範例2','台北','台灣',GETDATE(),'測試一');
+values ('test1userID','07876467','一','測試','1990/06/03','M','地址範例2','台北','台灣',GETDATE(),'測試一');
 insert into Customer(userID,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
-values ('wrewrrr','896787653','柯南','江戶川','1999/06/9','M','Tokyo Hot Street 69','東京','日本',GETDATE(),'江戶川柯南');
+values ('conan8967','896787653','柯南','江戶川','1999/06/9','M','Tokyo Hot Street 69','東京','日本',GETDATE(),'江戶川柯南');
 
-insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
-values ('012','082214226',60000,'00333','活期存款戶',GETDATE(),'楊曜承');
-insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
-values ('013','082214226666',3000000,'00333','定期存款戶',GETDATE(),'楊曜承');
-insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
-values ('012','07876467',60000,'00412','活期存款戶',GETDATE(),'測試一');
-insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
-values ('013','08435162776',30000,'00412','定期存款戶',GETDATE(),'測試一');
-insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
-values ('013','896787653',660000,'00412','活期存款戶',GETDATE(),'江戶川柯南');
+insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel,cID)
+values ('012','082214226',60000,'00333','活期存款戶',GETDATE(),'楊曜承','yaocheng0822');
+insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel,cID)
+values ('013','082214226666',3000000,'00333','定期存款戶',GETDATE(),'楊曜承','yaocheng0822');
+insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel,cID)
+values ('012','07876467',60000,'00412','活期存款戶',GETDATE(),'測試一','test1userID');
+insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel,cID)
+values ('013','08435162776',30000,'00412','定期存款戶',GETDATE(),'測試一','test1userID');
+insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel,cID)
+values ('013','896787653',660000,'00412','活期存款戶',GETDATE(),'江戶川柯南','conan8967');
 
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
 values ('082214226','1',GETDATE(),'3','存款','開戶存款',GETDATE(),'楊曜承');
