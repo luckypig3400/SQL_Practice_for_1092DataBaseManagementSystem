@@ -17,6 +17,12 @@ ON PRIMARY
     SIZE=4MB,
     MAXSIZE=10MB,
     FILEGROWTH=1MB)
+--可以把log檔案也附加上去
+--LOG ON
+--  ( NAME='practiceDB_log',
+--    FILENAME =
+--        'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\practiceDB_log.ldf'
+--)
 FOR ATTACH;
 
 --3. 備份資料庫
