@@ -1,14 +1,14 @@
-if DB_ID('NTUNHS_IM')IS NOT NULL begin
+if DB_ID('BANK')IS NOT NULL begin
 	use master;
-	drop database NTUNHS_IM;
-	create database NTUNHS_IM;
+	drop database BANK;
+	create database BANK;
 end
 --sql語法中的begin與end就如同C或JAVA的{}把判斷式成立後要執行的多個程式碼框起來
 --https://stackoverflow.com/questions/36279671/how-to-set-multiple-values-inside-an-if-else-statement
 else begin
-	create database NTUNHS_IM;
+	create database BANK;
 end
-use NTUNHS_IM;
+use BANK;
 
 drop table if exists Customer; --SQL Server2016開始支援 刪除已存在的資料
 create table Customer(--在練習中稱為個人資料
