@@ -30,3 +30,34 @@ BACKUP DATABASE practiceDB TO DISK = 'C:\DB_backups\practiceDB.bak';
 
 --4. 還原資料庫
 RESTORE DATABASE practiceDB FROM DISK = 'C:\DB_backups\practiceDB.bak';
+
+--5. 新建資料庫與設定參數，包含: 檔案群組(filegroup)以及記錄檔(log)
+CREATE DATABASE BANK
+ON PRIMARY
+  ( NAME='BANK_Primary',
+    FILENAME=
+       'D:\MSSQL_DB\Bank_Prm.mdf',
+    SIZE=4MB,
+    MAXSIZE=10MB,
+    FILEGROWTH=1MB),
+FILEGROUP Bank_FG1
+  ( NAME = 'Bank_FG1_Dat1',
+    FILENAME =
+       'D:\MSSQL_DB\MyDB_FG1_1.ndf',
+    SIZE = 1MB,
+    MAXSIZE=10MB,
+    FILEGROWTH=1MB),
+  ( NAME = 'Bank_FG1_Dat2',
+    FILENAME =
+        'D:\MSSQL_DB\MyDB_FG1_2.ndf',
+    SIZE = 1MB,
+    MAXSIZE=10MB,
+    FILEGROWTH=1MB)
+LOG ON
+  ( NAME='BANK_log',
+    FILENAME =
+        'D:\MSSQL_DB\BANK.ldf',
+    SIZE=1MB,
+    MAXSIZE=10MB,
+    FILEGROWTH=1MB);
+GO
