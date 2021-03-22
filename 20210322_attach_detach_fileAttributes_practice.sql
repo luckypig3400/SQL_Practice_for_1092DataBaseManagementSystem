@@ -2,7 +2,6 @@ if db_id('practiceDB') is not null begin
 	drop database practiceDB;
 end
 create database practiceDB;
-
 use practiceDB;
 
 --1. 卸離資料庫
@@ -19,3 +18,9 @@ ON PRIMARY
     MAXSIZE=10MB,
     FILEGROWTH=1MB)
 FOR ATTACH;
+
+--3. 備份資料庫
+BACKUP DATABASE practiceDB TO DISK = 'C:\DB_backups\practiceDB.bak';
+
+--4. 還原資料庫
+RESTORE DATABASE practiceDB FROM DISK = 'C:\DB_backups\practiceDB.bak';
