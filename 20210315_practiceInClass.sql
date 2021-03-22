@@ -11,9 +11,7 @@ end
 
 use NTUNHS_IM;
 
-if OBJECT_ID('Customer')IS NOT NULL begin
-	drop table Customer;
-end
+drop table if exists Customer; --SQL Server2016開始支援 刪除已存在的資料
 create table Customer(--在練習中稱為個人資料
 	userID char(66) primary key,--個人帳號似乎和銀行帳號式不同的
 	--應該是指這個人在這間店的顧客編號
