@@ -4,11 +4,11 @@ end
 create database practiceDB;
 use practiceDB;
 
---1. ������Ʈw
-use master;--�������L��Ʈw���A����
+--1. 卸離資料庫
+use master;--切換到其他資料庫中再執行
 EXEC sp_detach_db practiceDB;
 
---2. ���[��Ʈw
+--2. 附加資料庫
 CREATE DATABASE practiceDB
 ON PRIMARY
   ( NAME='practiceDB',
@@ -17,7 +17,7 @@ ON PRIMARY
     SIZE=4MB,
     MAXSIZE=10MB,
     FILEGROWTH=1MB)
---�i�H��log�ɮפ]���[�W�h
+--可以把log檔案也附加上去
 --LOG ON
 --  ( NAME='practiceDB_log',
 --    FILENAME =
@@ -25,13 +25,13 @@ ON PRIMARY
 --)
 FOR ATTACH;
 
---3. �ƥ���Ʈw
+--3. 備份資料庫
 BACKUP DATABASE practiceDB TO DISK = 'C:\DB_backups\practiceDB.bak';
 
---4. �٭��Ʈw
+--4. 還原資料庫
 RESTORE DATABASE practiceDB FROM DISK = 'C:\DB_backups\practiceDB.bak';
 
---5. �s�ظ�Ʈw�P�]�w�ѼơA�]�t: �ɮ׸s��(filegroup)�H�ΰO����(log)
+--5. 新建資料庫與設定參數，包含: 檔案群組(filegroup)以及記錄檔(log)
 CREATE DATABASE BANK
 ON PRIMARY
   ( NAME='BANK_Primary',

@@ -8,24 +8,24 @@ create table Customer(
 	Country char(50),
 	BDate datetime
 );
---4. ´¡¤J5µ§¸ê®Æ¦ÜTable
--- ²Ä¤@µ§
+--4. æ’å…¥5ç­†è³‡æ–™è‡³Table
+-- ç¬¬ä¸€ç­†
 insert into Customer(FName,LName,Address,City,Country,BDate)
 values('CY','Lien','NTUNHS', 'Taiepi','Taiwan', '19800101');
 
---5. ¬d¸ß©Ò¦³¸ê®Æ
+--5. æŸ¥è©¢æ‰€æœ‰è³‡æ–™
 select * from Customer;
 
--- ²Ä¤Gµ§
+-- ç¬¬äºŒç­†
 INSERT INTO Customer (FName, LName, Address, City, Country, BDate)
 VALUES ('AAA','Fu','NTU', 'Taipei','Taiwan', '20010301');
--- ²Ä¤Tµ§
+-- ç¬¬ä¸‰ç­†
 INSERT INTO Customer (FName, LName, Address, City, Country, BDate)
 VALUES ('GY','Chen','FJU', 'New Taipei City','Taiwan', '20010801');
--- ²Ä¥|µ§
+-- ç¬¬å››ç­†
 INSERT INTO Customer (FName, LName, Address, City, Country, BDate)
 VALUES ('KK','Wang','NCKU', 'Tainan','Taiwan', '19950630');
--- ²Ä¤­µ§
+-- ç¬¬äº”ç­†
 INSERT INTO Customer (FName, LName, Address, City, Country, BDate)
 VALUES ('NC','Lin','NUTC', 'Taichung','Taiwan', '19970515');
 

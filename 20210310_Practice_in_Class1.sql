@@ -3,7 +3,7 @@ if DB_ID('NTUNHS_IM')IS NOT NULL begin
 	drop database NTUNHS_IM;
 	create database NTUNHS_IM;
 end
---sql»yªk¤¤ªºbegin»Pend´N¦p¦PC©ÎJAVAªº{}§â§PÂ_¦¡¦¨¥ß«á­n°õ¦æªº¦h­Óµ{¦¡½X®Ø°_¨Ó
+--sqlèªæ³•ä¸­çš„beginèˆ‡endå°±å¦‚åŒCæˆ–JAVAçš„{}æŠŠåˆ¤æ–·å¼æˆç«‹å¾Œè¦åŸ·è¡Œçš„å¤šå€‹ç¨‹å¼ç¢¼æ¡†èµ·ä¾†
 --https://stackoverflow.com/questions/36279671/how-to-set-multiple-values-inside-an-if-else-statement
 else begin
 	create database NTUNHS_IM;
@@ -20,16 +20,16 @@ create table Account(
 	BranchAccID char(60),
 	AccType char(30),
 	UpdateDate date,
-	ChangedPersonnel char(60),--²§°Ê¤H
+	ChangedPersonnel char(60),--ç•°å‹•äºº
 	PRIMARY KEY(AccID)
 );
 
 if OBJECT_ID('Customer')IS NOT NULL begin
 	drop table Customer;
 end
-create table Customer(--¦b½m²ß¤¤ºÙ¬°­Ó¤H¸ê®Æ
-	PersonalAcc char(66),--­Ó¤H±b¸¹¦ü¥G©M»È¦æ±b¸¹¦¡¤£¦Pªº
-	--À³¸Ó¬O«ü³o­Ó¤H¦b³o¶¡©±ªºÅU«È½s¸¹
+create table Customer(--åœ¨ç·´ç¿’ä¸­ç¨±ç‚ºå€‹äººè³‡æ–™
+	PersonalAcc char(66),--å€‹äººå¸³è™Ÿä¼¼ä¹å’ŒéŠ€è¡Œå¸³è™Ÿå¼ä¸åŒçš„
+	--æ‡‰è©²æ˜¯æŒ‡é€™å€‹äººåœ¨é€™é–“åº—çš„é¡§å®¢ç·¨è™Ÿ
 	AccID char(69),
 	FirstName char(32),
 	LastName char(32),
@@ -39,7 +39,7 @@ create table Customer(--¦b½m²ß¤¤ºÙ¬°­Ó¤H¸ê®Æ
 	City char(30),
 	Country char(30),
 	UpdateDate date,
-	ChangedPersonnel char(60),--²§°Ê¤H
+	ChangedPersonnel char(60),--ç•°å‹•äºº
 	PRIMARY KEY(AccID)
 );
 
@@ -54,7 +54,7 @@ create table TransactionLog(
 	traType char(32),
 	traDetail char(255),
 	UpdateDate date,
-	ChangedPersonnel char(60),--²§°Ê¤H
+	ChangedPersonnel char(60),--ç•°å‹•äºº
 	PRIMARY KEY(AccID,traID)
 );
 
@@ -69,64 +69,64 @@ create table Bank(
 );
 
 
---¨Ï¥Î­×§ï¸ê®Æªíªº»yªk(alter)¡A±N©Ê§OÄæ¬°³]©w­­¨î±ø¥ó¡A¨Ã·s¼W¹w³]­È¬°U
-alter table Customer drop column Gender;--§R°£Äæ¦ì
-alter table Customer add Gender char(1);--·s¼WÄæ¦ì
-alter table Customer add constraint Gender DEFAULT 'U' FOR Gender;--¦bÄæ¦ì·s¼W¬ù§ô¨Ã¥[¤J¹w³]­È
+--ä½¿ç”¨ä¿®æ”¹è³‡æ–™è¡¨çš„èªæ³•(alter)ï¼Œå°‡æ€§åˆ¥æ¬„ç‚ºè¨­å®šé™åˆ¶æ¢ä»¶ï¼Œä¸¦æ–°å¢é è¨­å€¼ç‚ºU
+alter table Customer drop column Gender;--åˆªé™¤æ¬„ä½
+alter table Customer add Gender char(1);--æ–°å¢æ¬„ä½
+alter table Customer add constraint Gender DEFAULT 'U' FOR Gender;--åœ¨æ¬„ä½æ–°å¢ç´„æŸä¸¦åŠ å…¥é è¨­å€¼
 
 insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
-values ('012','082214226',60000,'00333','¬¡´Á¦s´Ú¤á',GETDATE(),'·¨Â`©Ó');
+values ('012','082214226',60000,'00333','æ´»æœŸå­˜æ¬¾æˆ¶',GETDATE(),'æ¥Šæ›œæ‰¿');
 insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
-values ('013','082214226666',3000000,'00333','©w´Á¦s´Ú¤á',GETDATE(),'·¨Â`©Ó');
+values ('013','082214226666',3000000,'00333','å®šæœŸå­˜æ¬¾æˆ¶',GETDATE(),'æ¥Šæ›œæ‰¿');
 insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
-values ('012','07876467',60000,'00412','¬¡´Á¦s´Ú¤á',GETDATE(),'´ú¸Õ¤@');
+values ('012','07876467',60000,'00412','æ´»æœŸå­˜æ¬¾æˆ¶',GETDATE(),'æ¸¬è©¦ä¸€');
 insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
-values ('013','08435162776',30000,'00412','©w´Á¦s´Ú¤á',GETDATE(),'´ú¸Õ¤@');
+values ('013','08435162776',30000,'00412','å®šæœŸå­˜æ¬¾æˆ¶',GETDATE(),'æ¸¬è©¦ä¸€');
 insert into Account(BankID,AccID,Balance,BranchAccID,AccType,UpdateDate,ChangedPersonnel)
-values ('013','896787653',660000,'00412','¬¡´Á¦s´Ú¤á',GETDATE(),'¦¿¤á¤t¬_«n');
+values ('013','896787653',660000,'00412','æ´»æœŸå­˜æ¬¾æˆ¶',GETDATE(),'æ±Ÿæˆ¶å·æŸ¯å—');
 
 insert into Customer(PersonalAcc,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
-values ('hjgfgfg','082214226','Â`©Ó','·¨','2000/07/13','M','¦a§}½d¨Ò1','¥x¥_','¥xÆW',GETDATE(),'·¨Â`©Ó');
+values ('hjgfgfg','082214226','æ›œæ‰¿','æ¥Š','2000/07/13','M','åœ°å€ç¯„ä¾‹1','å°åŒ—','å°ç£',GETDATE(),'æ¥Šæ›œæ‰¿');
 insert into Customer(PersonalAcc,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
-values ('doefko','07876467','¤@','´ú¸Õ','1990/06/03','M','¦a§}½d¨Ò2','¥x¥_','¥xÆW',GETDATE(),'´ú¸Õ¤@');
+values ('doefko','07876467','ä¸€','æ¸¬è©¦','1990/06/03','M','åœ°å€ç¯„ä¾‹2','å°åŒ—','å°ç£',GETDATE(),'æ¸¬è©¦ä¸€');
 insert into Customer(PersonalAcc,AccID,FirstName,LastName,Birthdate,Gender,PostalAddress,City,Country,UpdateDate,ChangedPersonnel)
-values ('wrewrrr','896787653','¬_«n','¦¿¤á¤t','1999/06/9','M','Tokyo Hot Street 69','ªF¨Ê','¤é¥»',GETDATE(),'¦¿¤á¤t¬_«n');
+values ('wrewrrr','896787653','æŸ¯å—','æ±Ÿæˆ¶å·','1999/06/9','M','Tokyo Hot Street 69','æ±äº¬','æ—¥æœ¬',GETDATE(),'æ±Ÿæˆ¶å·æŸ¯å—');
 
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('082214226','1',GETDATE(),'3','¦s´Ú','¶}¤á¦s´Ú',GETDATE(),'·¨Â`©Ó');
+values ('082214226','1',GETDATE(),'3','å­˜æ¬¾','é–‹æˆ¶å­˜æ¬¾',GETDATE(),'æ¥Šæ›œæ‰¿');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('082214226','2',GETDATE(),'3','´£´Ú','´ú¸Õ´£´Ú',GETDATE(),'·¨Â`©Ó');
+values ('082214226','2',GETDATE(),'3','ææ¬¾','æ¸¬è©¦ææ¬¾',GETDATE(),'æ¥Šæ›œæ‰¿');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('082214226','3',GETDATE(),'3','¦s´Ú','ÁÊ«ÎÀY´Ú¹w³Æª÷',GETDATE(),'·¨Â`©Ó');
+values ('082214226','3',GETDATE(),'3','å­˜æ¬¾','è³¼å±‹é ­æ¬¾é å‚™é‡‘',GETDATE(),'æ¥Šæ›œæ‰¿');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('07876467','1',GETDATE(),'3','¦s´Ú','¶}¤á¦s´Ú',GETDATE(),'´ú¸Õ¤@');
+values ('07876467','1',GETDATE(),'3','å­˜æ¬¾','é–‹æˆ¶å­˜æ¬¾',GETDATE(),'æ¸¬è©¦ä¸€');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('07876467','2',GETDATE(),'3','¦s´Ú','dwfesgtrgtrh',GETDATE(),'´ú¸Õ¤@');
+values ('07876467','2',GETDATE(),'3','å­˜æ¬¾','dwfesgtrgtrh',GETDATE(),'æ¸¬è©¦ä¸€');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('07876467','3',GETDATE(),'3','¦s´Ú','etwretrdwfesgtrgtrh',GETDATE(),'´ú¸Õ¤@');
+values ('07876467','3',GETDATE(),'3','å­˜æ¬¾','etwretrdwfesgtrgtrh',GETDATE(),'æ¸¬è©¦ä¸€');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('07876467','4',GETDATE(),'3','´£´Ú','hgfhrhgfhytdh',GETDATE(),'´ú¸Õ¤@');
+values ('07876467','4',GETDATE(),'3','ææ¬¾','hgfhrhgfhytdh',GETDATE(),'æ¸¬è©¦ä¸€');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('07876467','5',GETDATE(),'3','´£´Ú','yjuyj',GETDATE(),'´ú¸Õ¤@');
+values ('07876467','5',GETDATE(),'3','ææ¬¾','yjuyj',GETDATE(),'æ¸¬è©¦ä¸€');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('07876467','6',GETDATE(),'6','´£´Ú','otho',GETDATE(),'´ú¸Õ¤@');
+values ('07876467','6',GETDATE(),'6','ææ¬¾','otho',GETDATE(),'æ¸¬è©¦ä¸€');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('07876467','7',GETDATE(),'6','´£´Ú','???what???',GETDATE(),'´ú¸Õ¤@');
+values ('07876467','7',GETDATE(),'6','ææ¬¾','???what???',GETDATE(),'æ¸¬è©¦ä¸€');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('07876467','8',GETDATE(),'6','¦s´Ú','QwQ OuO',GETDATE(),'´ú¸Õ¤@');
+values ('07876467','8',GETDATE(),'6','å­˜æ¬¾','QwQ OuO',GETDATE(),'æ¸¬è©¦ä¸€');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('896787653','1',GETDATE(),'33','¦s´Ú','¶}¤á¦s´Ú',GETDATE(),'¦¿¤á¤t¬_«n');
+values ('896787653','1',GETDATE(),'33','å­˜æ¬¾','é–‹æˆ¶å­˜æ¬¾',GETDATE(),'æ±Ÿæˆ¶å·æŸ¯å—');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('896787653','2',GETDATE(),'67431','´£´Ú','°»¬d¤u¨ã¼Æ¥ó',GETDATE(),'¦¿¤á¤t¬_«n');
+values ('896787653','2',GETDATE(),'67431','ææ¬¾','åµæŸ¥å·¥å…·æ•¸ä»¶',GETDATE(),'æ±Ÿæˆ¶å·æŸ¯å—');
 insert into TransactionLog(AccID,traID,traDate,ATM_ID,traType,traDetail,UpdateDate,ChangedPersonnel)
-values ('896787653','3',GETDATE(),'69696','¦s´Ú','¯}®×³ø¹S',GETDATE(),'¦¿¤á¤t¬_«n');
+values ('896787653','3',GETDATE(),'69696','å­˜æ¬¾','ç ´æ¡ˆå ±é…¬',GETDATE(),'æ±Ÿæˆ¶å·æŸ¯å—');
 
 insert into Bank(BankID,BankName,BankAddress)
-values ('012','¥_Å@»È¦æ','¥x¥_¥«¥_§ë°Ï©ú¼w¸ô365¸¹');
+values ('012','åŒ—è­·éŠ€è¡Œ','å°åŒ—å¸‚åŒ—æŠ•å€æ˜å¾·è·¯365è™Ÿ');
 insert into Bank(BankID,BankName,BankAddress)
-values ('013','¦a²y»È¦æ','¦a²yªº¨C­Ó¨¤¸¨');
+values ('013','åœ°çƒéŠ€è¡Œ','åœ°çƒçš„æ¯å€‹è§’è½');
 
---3. ¨Ï¥Î¬d¸ß(SELECT)»yªk¬d¸ß¡A¬Y­Ó±b¤áªº©Ò¦³¥æ©ö¬ö¿ı¡A¥æ©ö¬ö¿ı¶·¥]§t¥H¤UÄæ¦ì (¬d¸ßµ²ªG¿ù»~0¤À¡A¨C­ÓÄæ¦ì2¤À¡A¦X­p14¤À)- »È¦æ¥N¸¹¡B­Ó¤H±b¸¹¡B»È¦æ±b¸¹¡B¥æ©ö½s¸¹¡B¥æ©ö®É¶¡¡B¥æ©öÃş«¬¡B¥æ©ö¤º®e
+--3. ä½¿ç”¨æŸ¥è©¢(SELECT)èªæ³•æŸ¥è©¢ï¼ŒæŸå€‹å¸³æˆ¶çš„æ‰€æœ‰äº¤æ˜“ç´€éŒ„ï¼Œäº¤æ˜“ç´€éŒ„é ˆåŒ…å«ä»¥ä¸‹æ¬„ä½ (æŸ¥è©¢çµæœéŒ¯èª¤0åˆ†ï¼Œæ¯å€‹æ¬„ä½2åˆ†ï¼Œåˆè¨ˆ14åˆ†)- éŠ€è¡Œä»£è™Ÿã€å€‹äººå¸³è™Ÿã€éŠ€è¡Œå¸³è™Ÿã€äº¤æ˜“ç·¨è™Ÿã€äº¤æ˜“æ™‚é–“ã€äº¤æ˜“é¡å‹ã€äº¤æ˜“å…§å®¹
 select B.BankID,C.PersonalAcc,C.AccID,T.traID,T.traDate,T.traType,T.traDetail 
 from TransactionLog As T, Customer as C,Bank as B , Account as A 
 where A.AccID = T.AccID and C.AccID = T.AccID and A.BankID = B.BankID;
