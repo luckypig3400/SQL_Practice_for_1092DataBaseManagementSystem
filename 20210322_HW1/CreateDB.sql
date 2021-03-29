@@ -12,21 +12,39 @@
  - 1.5  在[個人資訊]的[性別]欄位中，設定預設值為'U'  (5分)
  - 1.6  在[個人資訊]的ID設定資料型態為int,且為PRIMARY KEY，且預設初始值為100000, 當新增資料時，每次數值自動加2 (5分)
 */
+use master;
+
 if DB_ID('BANK')IS NOT NULL begin
-	use master;
 	drop database BANK;
-	create database BANK;
 end
 --sql語法中的begin與end就如同C或JAVA的{}把判斷式成立後要執行的多個程式碼框起來
-else begin
-	create database BANK
-	on primary(name='BANK',
-	filename='D:\MSSQL_DB\BANK.mdf',
-	SIZE=4MB,
-	MAXSIZE=12MB,
-	FILEGROWTH=1MB),
-	
-end
+create database BANK
+	ON PRIMARY(
+		name='BANK',
+		filename='D:\MSSQL_DB\BANK.mdf',
+		SIZE=4MB,
+		MAXSIZE=12MB,
+		FILEGROWTH=1MB
+	),
+	FILEGROUP Bank_FG1(
+		NAME='Bank_FG1_Dat1',
+		FILENAME='D:\MSSQL_DB\MyDB_FG1_1.ndf',
+		SIZE=1MB,
+		MAXSIZE=9MB,
+		FILEGROWTH=1MB),
+		(NAME='Bank_FG1_Dat2',
+		FILENAME='D:\MSSQL_DB\MyDB_FG1_2.ndf',
+		SIZE=1MB,
+		MAXSIZE=9MB,
+		FILEGROWTH=1MB
+	)
+	LOG ON(
+		NAME='BANK_log',
+		FILENAME='D:\MSSQL_DB\BANK.ldf',
+		SIZE=1MB,
+		MAXSIZE=12MB,
+		FILEGROWTH=1MB
+	);
 
 use BANK;
 
