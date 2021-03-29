@@ -1,3 +1,17 @@
+/*
+##問題1 - CREATE TABLE
+修改[隨堂測驗1]產生的資料庫以及所屬的三個資料表 ([帳號], [個人資訊]以及[交易紀錄])語法，
+完成以下新建資料表語法，並分別儲存成一個sql執行檔，規格說明如下:
+
+1. CreateDB.sql: CREATE TABLE規格: (合計共80分)
+ - 1.1. 新增資料庫，需包含用指定特定資料檔的方式(附加資料庫FOR ATTACH) ，須提供bank.mdf(15分,bank.mdf 15分，合計30分)
+  * 提示: 需先將資料庫bank.mdf檔建立起來，再用FOR ATTACH載入MDF檔。bank.mdf 。路徑請指定為 D:\MSSQL_DB\bank.mdf
+ - 1.2. 每個資料表需建立個別的PRIMARY KEY (每個表各5分，共15分)
+ - 1.3  將[帳號], [個人資訊]這兩個資料表以[個人帳號ID]欄位進行Foreigen Key 關聯(每個表各10分，共20分)
+ - 1.4  在 [個人資訊]資料表中加入限制開戶應超過18歲才能開戶(才能建檔) (5分)
+ - 1.5  在[個人資訊]的[性別]欄位中，設定預設值為'U'  (5分)
+ - 1.6  在[個人資訊]的ID設定資料型態為int,且為PRIMARY KEY，且預設初始值為100000, 當新增資料時，每次數值自動加2 (5分)
+*/
 if DB_ID('BANK')IS NOT NULL begin
 	use master;
 	drop database BANK;
@@ -5,7 +19,13 @@ if DB_ID('BANK')IS NOT NULL begin
 end
 --sql語法中的begin與end就如同C或JAVA的{}把判斷式成立後要執行的多個程式碼框起來
 else begin
-	create database BANK;
+	create database BANK
+	on primary(name='BANK',
+	filename='D:\MSSQL_DB\BANK.mdf',
+	SIZE=4MB,
+	MAXSIZE=12MB,
+	FILEGROWTH=1MB),
+	
 end
 
 use BANK;
