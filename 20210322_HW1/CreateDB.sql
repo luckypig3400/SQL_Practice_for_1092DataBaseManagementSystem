@@ -54,7 +54,10 @@ CREATE TABLE Customer
   --https://www.w3schools.com/sql/sql_autoincrement.asp
   LName varchar(20),
   FName varchar(20),
-  BDate date,
+  BDate date check(cast(format(getdate(),'yyyyMMdd') as int) - cast(format(BDate,'yyyyMMdd') as int) >= 180000),
+  -- 1.4  在 [個人資訊]資料表中加入限制開戶應超過18歲才能開戶(才能建檔) (5分)
+  -- solution1:https://dba.stackexchange.com/questions/106898/convert-date-yyyy-mm-dd-to-integer-yyyymm/106901
+
   Sex char(1) default 'U',--直接在建立表單時新增預設值
   -- 1.5  在[個人資訊]的[性別]欄位中，設定預設值為'U'  (5分)
   Address varchar(50),
