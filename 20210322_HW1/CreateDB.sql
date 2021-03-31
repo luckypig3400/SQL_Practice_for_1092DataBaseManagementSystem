@@ -10,7 +10,7 @@
 use master;
 
 if DB_ID('BANK')IS NOT NULL begin
-	drop database BANK;
+  drop database BANK;
 end--sql語法中的begin與end就如同C或JAVA的{}把判斷式成立後要執行的多個程式碼框起來
 
 --以下建立指定路徑儲存及其他參數設定的資料庫
@@ -44,13 +44,7 @@ create database BANK
 
 use BANK;
 
-/*
- - 1.2. 每個資料表需建立個別的PRIMARY KEY (每個表各5分，共15分)
- - 1.3  將[帳號], [個人資訊]這兩個資料表以[個人帳號ID]欄位進行Foreigen Key 關聯(每個表各10分，共20分)
- - 1.4  在 [個人資訊]資料表中加入限制開戶應超過18歲才能開戶(才能建檔) (5分)
- - 1.5  在[個人資訊]的[性別]欄位中，設定預設值為'U'  (5分)
- - 1.6  在[個人資訊]的ID設定資料型態為int,且為PRIMARY KEY，且預設初始值為100000, 當新增資料時，每次數值自動加2 (5分)
-*/
+-- 1.2. 每個資料表需建立個別的PRIMARY KEY (每個表各5分，共15分)
 
 -- 新增用戶資料Table: Customer 
 CREATE TABLE Customer
@@ -66,8 +60,7 @@ CREATE TABLE Customer
   UP_Date datetime,
   UP_User int,
   PRIMARY KEY (ID)
-)
-GO
+);
 
 DECLARE @CURRENT_TS datetimeoffset = GETDATE()
 INSERT INTO Customer
@@ -94,8 +87,9 @@ CREATE TABLE Account
   AccType varchar(3),
   UP_Date datetime,
   UP_User int,
+  foreign key(ID) references Customer(ID)
+  -- 1.3  將[帳號], [個人資訊]這兩個資料表以[個人帳號ID]欄位進行Foreigen Key 關聯(每個表各10分，共20分)
 ) ON BANK_FG1;
-GO
 
 -- 插入測試資料
 DECLARE @CURRENT_TS datetimeoffset = GETDATE()
@@ -115,6 +109,9 @@ CREATE TABLE Trans
   TranNote varchar(100),
   UP_DATETIME datetime,
   UP_USR int
+  foreign key(AccID) references Account(AccID),
+  -- 1.3  將[帳號], [個人資訊]這兩個資料表以[個人帳號ID]欄位進行Foreigen Key 關聯(每個表各10分，共20分)
+  primary key(AccID, TranID)
 ) ON BANK_FG1;
 GO
 
@@ -142,6 +139,9 @@ INSERT INTO Trans
   (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
 VALUES('00000001', '007', @CURRENT_TS, 'A01', 'D05', 'B: AAA~~Now there is one TABLE available  ┬─┬ノ( º _ ºノ)....', @CURRENT_TS, '001');
 
-SELECT * FROM Customer
-SELECT * FROM Account
-SELECT * FROM Trans
+SELECT *
+FROM Customer
+SELECT *
+FROM Account
+SELECT *
+FROM Trans
