@@ -54,10 +54,12 @@ CREATE TABLE Customer
   --https://www.w3schools.com/sql/sql_autoincrement.asp
   LName varchar(20),
   FName varchar(20),
-  BDate date check(cast(format(getdate(),'yyyyMMdd') as int) - cast(format(BDate,'yyyyMMdd') as int) >= 180000),
+  BDate date check(FLOOR(DATEDIFF(DY,BDate,GETDATE())/365.25) >= 18),
   -- 1.4  在 [個人資訊]資料表中加入限制開戶應超過18歲才能開戶(才能建檔) (5分)
-  -- solution1:https://dba.stackexchange.com/questions/106898/convert-date-yyyy-mm-dd-to-integer-yyyymm/106901
-
+  -- solution 1: BDate date check(cast(format(getdate(),'yyyyMMdd') as int) - cast(format(BDate,'yyyyMMdd') as int) >= 180000),
+  -- ref1:https://dba.stackexchange.com/questions/106898/convert-date-yyyy-mm-dd-to-integer-yyyymm/106901 
+  -- solution 2: BDate date check(FLOOR(DATEDIFF(DY,BDate,GETDATE())/365.25) >= 18),
+  -- ref2:https://dotblogs.com.tw/daniel/2017/10/25/174933
   Sex char(1) default 'U',--直接在建立表單時新增預設值
   -- 1.5  在[個人資訊]的[性別]欄位中，設定預設值為'U'  (5分)
   Address varchar(50),
@@ -87,6 +89,9 @@ VALUES('002', 'CW', 'Lin', '19981002', 'F', 'Tianmu', 'Taipei', 'Taiwan', @CURRE
 INSERT INTO Customer
   (ID,Lname,FName,BDate,Sex,Address,City,Country,UP_Date,UP_User)
 VALUES('003', 'DW', 'Wang', '19981002', 'M', 'Beitou', 'Taipei', 'Taiwan', @CURRENT_TS, '0');
+INSERT INTO Customer
+  (ID,Lname,FName,BDate,Sex,Address,City,Country,UP_Date,UP_User)
+VALUES('006', 'OwO', 'YA', '20030331', 'F', 'Tianmu', 'Taipei', 'Taiwan', @CURRENT_TS, '0');
 GO
 
 -- 新增銀行帳戶Table: Account 
