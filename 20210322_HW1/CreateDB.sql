@@ -106,7 +106,7 @@ CREATE TABLE Trans
   TranTime datetime,
   AtmID varchar(3),
   TranType varchar(3),
-  TranNote varchar(100),
+  TranNote nvarchar(100),
   UP_DATETIME datetime,
   UP_USR int
   foreign key(AccID) references Account(AccID),
@@ -134,10 +134,10 @@ INSERT INTO Trans
 VALUES('00000001', '005', @CURRENT_TS, 'A01', 'C02', 'B: Sorry, there is no table available now.', @CURRENT_TS, '001');
 INSERT INTO Trans
   (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000001', '006', @CURRENT_TS, 'A01', 'D05', 'C: COW~ DROP a TABLE  (ノ° ロ °)ノ彡┻━┻!.', @CURRENT_TS, '001');
+VALUES('00000001', '006', @CURRENT_TS, 'A01', 'D05', N'C: COW~ DROP a TABLE  (ノ° ロ °)ノ彡┻━┻!.', @CURRENT_TS, '001');
 INSERT INTO Trans
   (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000001', '007', @CURRENT_TS, 'A01', 'D05', 'B: AAA~~Now there is one TABLE available  ┬─┬ノ( º _ ºノ)....', @CURRENT_TS, '001');
+VALUES('00000001', '007', @CURRENT_TS, 'A01', 'D05', N'B: AAA~~Now there is one TABLE available  ┬─┬ノ( º _ ºノ)....', @CURRENT_TS, '001');
 
 SELECT *
 FROM Customer
