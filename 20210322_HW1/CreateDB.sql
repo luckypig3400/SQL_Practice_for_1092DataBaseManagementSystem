@@ -49,18 +49,27 @@ use BANK;
 -- 新增用戶資料Table: Customer 
 CREATE TABLE Customer
 (
-  ID int,
+  ID int primary key identity(100000,2),
+  -- 1.6 在[個人資訊]的ID設定資料型態為int,且為PRIMARY KEY，且預設初始值為100000, 當新增資料時，每次數值自動加2 (5分)
+  --https://www.w3schools.com/sql/sql_autoincrement.asp
   LName varchar(20),
   FName varchar(20),
   BDate date,
-  Sex char(1),
+  Sex char(1) default 'U',--直接在建立表單時新增預設值
+  -- 1.5  在[個人資訊]的[性別]欄位中，設定預設值為'U'  (5分)
   Address varchar(50),
   City varchar(20),
   Country varchar(50),
   UP_Date datetime,
-  UP_User int,
-  PRIMARY KEY (ID)
+  UP_User int
 );
+
+set identity_insert Customer on;
+--當自動識別欄位需要Insert資料時應該怎麼辦 ?
+--https://exfast.me/2016/09/mssql-automatic-identification-field-when-required-insert-when-information-should-be-how-do/
+
+--alter table Customer add Sex char(1) default 'U';
+-- 亦可於後續表單建好後再修該表單設定預設值為'U'
 
 DECLARE @CURRENT_TS datetimeoffset = GETDATE()
 INSERT INTO Customer
