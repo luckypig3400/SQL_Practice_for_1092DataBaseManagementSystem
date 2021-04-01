@@ -2,9 +2,6 @@
 問題2 - ALTER Database
 以ALTER語法修改執行上述CreateDB.sql後的資料庫，規則說明如下
 2. AlterDB.sql: ALTER TABLE規格: (合計共70分)
- - 2.6 新增一資料表，為銀行[分行帳號資料表]內容包含: (1)分行帳號 (2)分行名稱  (5分)
- - 2.7 將上述2.6的 (1)分行帳號使用Alter語法使用Foreigen Key與
- [帳號資料表] 進行關聯，且不得破壞 2.3與1.3所建立的關聯性 (10分)
  */
 use master;
 go
@@ -54,11 +51,20 @@ alter table Customer add constraint DF__Customer__UP_Date__useOperationDate
 default GETDATE() for UP_Date;
 alter table Trans add constraint DF__Trans__UP_DATETIME__useOperationDate
 default GETDATE() for UP_DATETIME;
-exec sp_helpconstraint @objname = 'Trans';
 
+ -- 2.6 新增一資料表，為銀行[分行帳號資料表]內容包含: (1)分行帳號 (2)分行名稱  (5分)
+create table BankBranch(
+	BranchID int primary key,--分行帳號
+	BranchBankName nvarchar(30)
+);
+select BranchID from Account;
+insert into BankBranch(BranchID,BranchBankName) values(10,'北護銀行');
+--insert test data in BankBranch
 
-
-
+ -- 2.7 將上述2.6的 (1)分行帳號使用Alter語法使用Foreigen Key與
+ --[帳號資料表] 進行關聯，且不得破壞 2.3與1.3所建立的關聯性 (10分)
+alter table Account add constraint FK__Account__BranchID__123
+Foreign Key(BranchID) references BankBranch(BranchID);
 
 use master;
 --release BANK to make other sql query file use this DB
