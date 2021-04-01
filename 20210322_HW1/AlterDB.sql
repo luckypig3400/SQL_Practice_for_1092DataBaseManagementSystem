@@ -2,7 +2,6 @@
 問題2 - ALTER Database
 以ALTER語法修改執行上述CreateDB.sql後的資料庫，規則說明如下
 2. AlterDB.sql: ALTER TABLE規格: (合計共70分)
- - 2.2 修改在[個人資訊]的[性別]欄位中，將預設值改為'M' (5分)
  - 2.3 將[帳號]以及[交易紀錄]以[帳號ID]欄位進行Foreigen Key關聯
  ，且不得破壞1.3所建立的關聯性 (15分)
  - 2.4 修改 [個人資訊]資料表中超過18歲才能開戶的限制
@@ -16,6 +15,7 @@ use master;
 go
 -- 2.1 修改資料庫中的主檔，並將其SIZE, MAXSIZE以及FILEGROWTH的數值變成原本的2倍 (每個各10分，共15分)
 -- ref1:https://database.guide/how-to-increase-the-file-size-of-a-data-file-in-sql-server-t-sql/
+
 alter database BANK 
 modify file(
 	name = 'BANK',
@@ -26,3 +26,24 @@ modify file(
 );
 go
 
+use BANK;
+
+-- 2.2 修改在[個人資訊]的[性別]欄位中，將預設值改為'M' (5分)
+EXEC sp_helpconstraint @objname = 'Customer';
+--查詢物件(通常為Table)中的限制條件
+
+alter table Customer drop constraint DF__Customer__Sex__25869641;
+--把查詢到到的約束條件代號drop掉
+
+alter table Customer add constraint DF__Customer__Sex__666 default 'M'for Sex;
+--新增約束條件把Sex欄位的預設值設為M並且把該約束條件命名為DF__Customer__Sex__666
+
+
+
+
+
+
+
+
+use master;
+--release BANK to make other sql query file use this DB

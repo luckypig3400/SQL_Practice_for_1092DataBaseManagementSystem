@@ -162,3 +162,6 @@ SELECT *
 FROM Account
 SELECT *
 FROM Trans
+
+use master;
+--release BANK to make other sql query file use this DB
