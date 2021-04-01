@@ -125,9 +125,7 @@ CREATE TABLE Trans
   TranType varchar(3),
   TranNote nvarchar(100),
   UP_DATETIME datetime,
-  UP_USR int
-  foreign key(AccID) references Account(AccID),
-  -- 1.3  將[帳號], [個人資訊]這兩個資料表以[個人帳號ID]欄位進行Foreigen Key 關聯(每個表各10分，共20分)
+  UP_USR int,
   primary key(AccID, TranID)
 ) ON BANK_FG1;
 GO

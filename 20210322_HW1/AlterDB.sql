@@ -2,8 +2,6 @@
 問題2 - ALTER Database
 以ALTER語法修改執行上述CreateDB.sql後的資料庫，規則說明如下
 2. AlterDB.sql: ALTER TABLE規格: (合計共70分)
- - 2.3 將[帳號]以及[交易紀錄]以[帳號ID]欄位進行Foreigen Key關聯
- ，且不得破壞1.3所建立的關聯性 (15分)
  - 2.4 修改 [個人資訊]資料表中超過18歲才能開戶的限制
  ，並變更為國籍為Taiwan才能開戶 (5分)
  - 2.5 修改這三個資料表的[更新日期與時間]欄位，設定預設值為 "今天" (每個各10分，共15分)
@@ -38,8 +36,11 @@ alter table Customer drop constraint DF__Customer__Sex__25869641;
 alter table Customer add constraint DF__Customer__Sex__666 default 'M'for Sex;
 --新增約束條件把Sex欄位的預設值設為M並且把該約束條件命名為DF__Customer__Sex__666
 
-
-
+-- 2.3 將[帳號]以及[交易紀錄]以[帳號ID]欄位進行Foreigen Key關聯
+-- ，且不得破壞1.3所建立的關聯性 (15分)
+alter table Trans add foreign key(AccID)
+references Account(AccID);
+--https://www.w3schools.com/sql/sql_foreignkey.asp
 
 
 
