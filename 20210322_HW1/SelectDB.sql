@@ -22,8 +22,11 @@ where C.ID = A.ID and A.BranchID = B.BranchID;
  (1) "姓氏 + 名字", (2) 交易次數的結果顯示出來 
  (1:20分, 2:20分, 執行結果正確性: 20分，合計: 60分)
 */
-
-
+select C.LName + ',' + C.FName as 姓名, count(T.TranID) as 交易筆數 
+from Account as A, Customer as C, Trans as T
+where C.ID = A.ID and A.AccID = T.AccID group by C.LName, C.FName;
+--ref1:https://www.w3schools.com/sql/sql_count_avg_sum.asp
+--ref2:https://www.w3schools.com/sql/sql_groupby.asp
 
 
 use master;--release database BANK
