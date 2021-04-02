@@ -39,10 +39,12 @@ references Account(AccID);
 exec sp_helpconstraint @objname = 'Customer';
 alter table Customer drop constraint CK__Customer__BDate__24927208;
 alter table Customer add constraint CK__Customer__Country__tw check(Country = 'Taiwan');
+/*
 set identity_insert Customer on;--插入測資前先開啟允許插入自動編序欄位
 insert into Customer(ID,Lname,FName,BDate,Sex,Address,City,Country,UP_Date,UP_User)
 VALUES('007', 'Winnie', 'Pooh', '19530615', 'M', 'Winnie Road', 'Beijing', 'China', GETDATE(), '0');
 --test Data for 2.4
+*/
 
 -- 2.5 修改這三個資料表的[更新日期與時間]欄位，設定預設值為 "今天" (每個各10分，共15分)
 alter table Account add constraint DF__Account__UP_Date__useOperationDate
