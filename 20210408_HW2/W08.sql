@@ -17,3 +17,29 @@
  - 1. 經理借了書籍中所有人沒有借過的書，請將記錄此資訊新增至[圖書室借用記錄]
  - 2. 將更動的紀錄的所有欄位記錄在一個新增暫存資料表
 */
+
+if DB_ID('練習08') is not null begin
+	exec sp_detach_db 練習08;
+end
+
+create database 練習08 on primary(
+	name='練習08',
+	filename='D:\MSSQL_DB\練習08.mdf',
+	size=4MB,
+	maxsize=10MB,
+	filegrowth=1MB
+	)
+	log on(
+	name=練習08_log,
+	filename='D:\MSSQL_DB\練習08_log.ldf'
+	)
+for attach;
+/*
+[SQL] 發生 附加資料庫 失敗, 無法開啟實體檔案 “D:\xxx.mdf"。作業系統錯誤 5: “5(存取被拒。)"的訊息如何解決?
+只要先關閉 SQL Server Management Studio，
+(1)「以系統管理員身分執行」 SQL Server Management Studio
+(2) 用windows驗證登入，接著再附加資料庫即可解決此問題
+http://dev.brucelulu.com/topics/208
+*/
+go
+
