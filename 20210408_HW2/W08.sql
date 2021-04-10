@@ -27,14 +27,14 @@ go
 use 練習08;
 --### 1. 新增資料表(insert)
 --- 隨堂練習1:請將[出貨記錄].[編號]IDENTITY關閉，並手動新增一筆資料 (10)
-set IDENTITY_INSERT 出貨紀錄 on;
+set IDENTITY_INSERT 出貨記錄 on;
 declare @dataCount as int = cast( (select COUNT(*) from 出貨記錄) as int);
 --https://stackoverflow.com/questions/28916917/sql-count-rows-in-a-table
 print @dataCount;
 select * from 出貨記錄;
 set @dataCount += 1;
 INSERT INTO 出貨記錄([編號],[日期],[客戶名稱],[書名],[數量])
-VALUES(@dataCount,GETDATE(),'大雄書局','回復術士的重啟人生 (7)～即死魔法與複製技能的極致回復術～',6000);
+VALUES(@dataCount,GETDATE(),'大雄書局','回復術士的重啟人生7 即死魔法與複製技能的極致回復術',36)
 GO
 select * from 出貨記錄;
 
