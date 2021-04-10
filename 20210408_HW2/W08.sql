@@ -27,18 +27,23 @@ go
 use 練習08;
 --### 1. 新增資料表(insert)
 --- 隨堂練習1:請將[出貨記錄].[編號]IDENTITY關閉，並手動新增一筆資料 (10)
-set IDENTITY_INSERT 出貨記錄 on;
-declare @dataCount as int = cast( (select COUNT(*) from 出貨記錄) as int);
+set IDENTITY_INSERT [出貨記錄] on;
+declare @dataCount as int = cast( (select COUNT(*) from [出貨記錄]) as int);
 --https://stackoverflow.com/questions/28916917/sql-count-rows-in-a-table
 print @dataCount;
-select * from 出貨記錄;
+select * from [出貨記錄];
 set @dataCount += 1;
 INSERT INTO 出貨記錄([編號],[日期],[客戶名稱],[書名],[數量])
 VALUES(@dataCount,GETDATE(),'大雄書局','回復術士的重啟人生7 即死魔法與複製技能的極致回復術',36)
 GO
-select * from 出貨記錄;
+select * from [出貨記錄];
 
 --- 隨堂練習2:請新增[員工]中，職位為 "辦事員"的資料至[圖書室借用記錄] (10)
+select * from [員工];
+select * from [圖書室借用記錄];
+select T.* ,S.職位 as '員工職位' from [員工] as S ,[圖書室借用記錄] as T
+where S.編號=T.員工編號 and S.職位='辦事員';
+
 --- 隨堂練習3:請將SQL中定義的資料型態int, smallint, char, vchar的TYPE_NAME, PRECISION, DATA_TYPE的資訊放到自訂暫存資料表，並顯示結果 (10)
 --  -- 提示1：使用　sp_datatype_info
 --  -- 提示2：自訂暫存表的資料型態需與sp_datatype_info查詢結果的欄位資料型態相符
