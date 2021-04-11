@@ -82,9 +82,19 @@ where O.客戶名稱 = C.客戶名稱 and C.聯絡人 like '陳%';
 --插入至現有表單 https://www.w3schools.com/sql/sql_insert_into_select.asp
 select * from [詳細借用記錄];
 
+
+
 --### 2. 修改資料表(update)
 --- 隨堂練習6 圖書館員發現之前經理借的所有書籍都少紀錄一本，請將結果更新至[圖書室借用記錄] (10)
+select * from [圖書室借用記錄];
+update [圖書室借用記錄] set [數量] = [數量] + 1
+where [員工編號] = 2;--經理的編號為2
+--https://stackoverflow.com/questions/973380/sql-how-to-increase-or-decrease-one-for-a-int-column-in-one-command
+select * from [圖書室借用記錄];
+
 --- 隨堂練習7 請刪除[應徵者]未繳交自傳的資料 (10)
+
+
 
 --### 綜合練習
 --- 隨堂練習8 (30)
