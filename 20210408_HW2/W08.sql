@@ -47,7 +47,24 @@ where S.編號=T.員工編號 and S.職位='辦事員';
 --- 隨堂練習3:請將SQL中定義的資料型態int, smallint, char, vchar的TYPE_NAME, PRECISION, DATA_TYPE的資訊放到自訂暫存資料表，並顯示結果 (10)
 --  -- 提示1：使用　sp_datatype_info
 --  -- 提示2：自訂暫存表的資料型態需與sp_datatype_info查詢結果的欄位資料型態相符
+exec sp_datatype_info;
+drop table if exists #tempInfo;
+create table #tempInfo(--先按照exec執行的輸出結果建立資料型態相符的暫存表
+	TYPE_NAME varchar(30),
+	DATA_TYPE int,
+	PRECISION int,
+	drop1 varchar(30),drop2 varchar(30),drop3 varchar(30),drop4 varchar(30),drop5 varchar(30),drop6 varchar(30),
+	drop7 varchar(30),drop8 varchar(30),drop9 varchar(30),drop10 varchar(30),drop11 varchar(30),drop12 varchar(30),
+	drop13 varchar(30),drop14 varchar(30),drop15 varchar(30),drop16 varchar(30),drop17 varchar(30),
+);
+
+insert #tempInfo exec sp_datatype_info;--將exec查詢結果插入暫存表
+
+select T.TYPE_NAME, T.DATA_TYPE, T.PRECISION 
+from #tempInfo as T where T.TYPE_NAME='int' or T.TYPE_NAME= 'smallint' or T.TYPE_NAME='char' or T.TYPE_NAME='varchar';
+
 --- 隨堂練習4:顯示[出貨記錄]與[客戶]資料表中所有的資料表，顯示不能重複欄位，將聯絡人的姓氏為'陳'的聯絡人顯示出來 (10)
+
 --- 隨堂練習5:請將隨堂練習4的結果放到新增資料表[詳細借用記錄]中 (10)
 
 --### 2. 修改資料表(update)
