@@ -93,8 +93,10 @@ where [員工編號] = 2;--經理的編號為2
 select * from [圖書室借用記錄];
 
 --- 隨堂練習7 請刪除[應徵者]未繳交自傳的資料 (10)
-
-
+select * from [應徵者];
+delete from [應徵者] where [自傳] is NULL;
+--https://www.w3schools.com/sql/sql_delete.asp
+select * from [應徵者];
 
 --### 綜合練習
 --- 隨堂練習8 (30)
