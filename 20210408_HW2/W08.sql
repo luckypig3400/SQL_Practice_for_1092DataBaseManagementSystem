@@ -127,4 +127,19 @@ print(@dc);
 --插入選取的內容進表格似乎無法運用在有自動編序的表上
 --https://www.w3schools.com/sql/sql_insert_into_select.asp
 
+--https://stackoverflow.com/questions/21928952/how-can-insert-into-a-table-300-times-within-a-loop-in-sql/21929260
+alter table #notYetLentBook add id int identity(1,1);--幫抓出來的未借書單表編號
+declare @i as int = 1;
+declare @currentID as int = cast( (select COUNT(*) from [圖書室借用記錄]) as int);
+while @i <= cast( (select COUNT(*) from #notYetLentBook) as int)
+begin
+	set @currentID += 1;
+	declare @bookName as varchar(30) = cast( (select 書籍名稱 from #notYetLentBook as T where @i = T.id) as varchar);
+	insert into [圖書室借用記錄] (編號,員工編號,書名,數量,歸還日期)
+	output inserted.*
+	values(@currentID,2,@bookName,1,GETDATE());
+	set @i += 1;--更新下一次要插入的書本序號
+end;
+--https://stackoverflow.com/questions/21928952/how-can-insert-into-a-table-300-times-within-a-loop-in-sql/21929260
+
 set identity_insert 圖書室借用記錄 off;
