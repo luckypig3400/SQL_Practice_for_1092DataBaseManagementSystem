@@ -102,4 +102,25 @@ select * from [應徵者];
 --- 隨堂練習8 (30)
 -- - 1. 經理借了書籍中所有人沒有借過的書，請將記錄此資訊新增至[圖書室借用記錄]
 -- - 2. 將更動的紀錄的所有欄位記錄在一個新增暫存資料表
+select * from [圖書室借用記錄]
+select * from [書籍]
 
+select B.書籍名稱 into #notYetLentBook from [書籍] as B
+LEFT JOIN [圖書室借用記錄] as T ON T.書名 = B.書籍名稱
+where T.書名 is null;
+--https://stackoverflow.com/questions/2686254/how-to-select-all-records-from-one-table-that-do-not-exist-in-another-table
+--about LEFT JOIN https://www.w3schools.com/sql/sql_join_left.asp
+
+set identity_insert 出貨記錄 off;
+set identity_insert 圖書室借用記錄 on;
+declare @dc as int = cast( (select COUNT(*) from [圖書室借用記錄]) as int);
+set @dc += 1;
+print(@dc)
+insert into [圖書室借用記錄] (編號,員工編號,書名,數量,歸還日期)
+values(@dc,2,'test',1,GETDATE());
+
+insert into [圖書室借用記錄] (員工編號,書名,數量,歸還日期)
+output inserted.*
+select 2,書籍名稱,1,GETDATE() from #notYetLentBook;
+
+set identity_insert 圖書室借用記錄 off;
