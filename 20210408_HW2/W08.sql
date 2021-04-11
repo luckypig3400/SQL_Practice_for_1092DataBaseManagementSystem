@@ -115,12 +115,16 @@ set identity_insert 出貨記錄 off;
 set identity_insert 圖書室借用記錄 on;
 declare @dc as int = cast( (select COUNT(*) from [圖書室借用記錄]) as int);
 set @dc += 1;
-print(@dc)
-insert into [圖書室借用記錄] (編號,員工編號,書名,數量,歸還日期)
-values(@dc,2,'test',1,GETDATE());
+print(@dc);
+--insert into [圖書室借用記錄] (編號,員工編號,書名,數量,歸還日期)
+--output inserted.*
+--values(@dc,2,'test2',1,GETDATE());
+----上面為利用變數在插入時自動編序的測試範例
 
-insert into [圖書室借用記錄] (員工編號,書名,數量,歸還日期)
-output inserted.*
-select 2,書籍名稱,1,GETDATE() from #notYetLentBook;
+--insert into [圖書室借用記錄] (編號,員工編號,書名,數量,歸還日期)
+--output inserted.*
+--select @dc,2,書籍名稱,1,GETDATE() from #notYetLentBook;
+--插入選取的內容進表格似乎無法運用在有自動編序的表上
+--https://www.w3schools.com/sql/sql_insert_into_select.asp
 
 set identity_insert 圖書室借用記錄 off;
