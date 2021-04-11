@@ -65,8 +65,13 @@ from #tempInfo as T where T.TYPE_NAME in('int','smallint','char','varchar');
 --https://www.w3schools.com/sql/trysql.asp?filename=trysql_op_in
 
 --- 隨堂練習4:顯示[出貨記錄]與[客戶]資料表中所有的資料表，顯示不能重複欄位，將聯絡人的姓氏為'陳'的聯絡人顯示出來 (10)
+select O.*, C.聯絡人 from [出貨記錄] as O, [客戶] as C 
+where O.客戶名稱 = C.客戶名稱 and C.聯絡人 like '陳';
+--where like
+--https://stackoverflow.com/questions/14290857/sql-select-where-field-contains-words
 
 --- 隨堂練習5:請將隨堂練習4的結果放到新增資料表[詳細借用記錄]中 (10)
+
 
 --### 2. 修改資料表(update)
 --- 隨堂練習6 圖書館員發現之前經理借的所有書籍都少紀錄一本，請將結果更新至[圖書室借用記錄] (10)
