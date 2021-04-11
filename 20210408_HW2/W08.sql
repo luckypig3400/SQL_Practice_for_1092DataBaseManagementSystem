@@ -27,6 +27,7 @@ go
 use 練習08;
 --### 1. 新增資料表(insert)
 --- 隨堂練習1:請將[出貨記錄].[編號]IDENTITY關閉，並手動新增一筆資料 (10)
+set IDENTITY_INSERT [圖書室借用記錄] off;
 set IDENTITY_INSERT [出貨記錄] on;
 declare @dataCount as int = cast( (select COUNT(*) from [出貨記錄]) as int);
 --https://stackoverflow.com/questions/28916917/sql-count-rows-in-a-table
@@ -37,12 +38,18 @@ INSERT INTO 出貨記錄([編號],[日期],[客戶名稱],[書名],[數量])
 VALUES(@dataCount,GETDATE(),'大雄書局','回復術士的重啟人生7 即死魔法與複製技能的極致回復術',36)
 GO
 select * from [出貨記錄];
+------------------------------------
+
+
 
 --- 隨堂練習2:請新增[員工]中，職位為 "辦事員"的資料至[圖書室借用記錄] (10)
 select * from [員工];
 select * from [圖書室借用記錄];
 select T.* ,S.職位 as '員工職位' from [員工] as S ,[圖書室借用記錄] as T
 where S.編號=T.員工編號 and S.職位='辦事員';
+------------------------------------
+
+
 
 --- 隨堂練習3:請將SQL中定義的資料型態int, smallint, char, vchar的TYPE_NAME, PRECISION, DATA_TYPE的資訊放到自訂暫存資料表，並顯示結果 (10)
 --  -- 提示1：使用　sp_datatype_info
@@ -63,12 +70,18 @@ insert #tempInfo exec sp_datatype_info;--將exec查詢結果插入暫存表
 select T.TYPE_NAME, T.DATA_TYPE, T.PRECISION 
 from #tempInfo as T where T.TYPE_NAME in('int','smallint','char','varchar');
 --https://www.w3schools.com/sql/trysql.asp?filename=trysql_op_in
+------------------------------------
+
+
 
 --- 隨堂練習4:顯示[出貨記錄]與[客戶]資料表中所有的資料表，顯示不能重複欄位，將聯絡人的姓氏為'陳'的聯絡人顯示出來 (10)
 select O.*, C.聯絡人 from [出貨記錄] as O, [客戶] as C 
 where O.客戶名稱 = C.客戶名稱 and C.聯絡人 like '陳%';
 --where like %表示萬用字元
 --https://stackoverflow.com/questions/14290857/sql-select-where-field-contains-words
+------------------------------------
+
+
 
 --- 隨堂練習5:請將隨堂練習4的結果放到新增資料表[詳細借用記錄]中 (10)
 drop table if exists 詳細借用記錄;
@@ -81,6 +94,7 @@ where O.客戶名稱 = C.客戶名稱 and C.聯絡人 like '陳%';
 --插入到新表單 https://www.w3schools.com/sql/sql_select_into.asp
 --插入至現有表單 https://www.w3schools.com/sql/sql_insert_into_select.asp
 select * from [詳細借用記錄];
+------------------------------------
 
 
 
@@ -91,6 +105,9 @@ update [圖書室借用記錄] set [數量] = [數量] + 1
 where [員工編號] = 2;--經理的編號為2
 --https://stackoverflow.com/questions/973380/sql-how-to-increase-or-decrease-one-for-a-int-column-in-one-command
 select * from [圖書室借用記錄];
+------------------------------------
+
+
 
 --- 隨堂練習7 請刪除[應徵者]未繳交自傳的資料 (10)
 select * from [應徵者];
@@ -107,6 +124,7 @@ select * from [應徵者];
 -- - 2. 將更動的紀錄的所有欄位記錄在一個新增暫存資料表
 
 --以下先找出尚未被借閱過的書本名稱
+drop table if exists #notYetLentBook
 select B.書籍名稱 into #notYetLentBook from [書籍] as B
 LEFT JOIN [圖書室借用記錄] as T ON T.書名 = B.書籍名稱
 where T.書名 is null;
