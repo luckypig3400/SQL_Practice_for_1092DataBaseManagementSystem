@@ -134,8 +134,9 @@ where T.書名 is null;
 set identity_insert 出貨記錄 off;
 set identity_insert 圖書室借用記錄 on;
 
---https://stackoverflow.com/questions/21928952/how-can-insert-into-a-table-300-times-within-a-loop-in-sql/21929260
 alter table #notYetLentBook add id int identity(1,1);--幫抓出來的未借書單表編號
+--https://stackoverflow.com/questions/1049210/adding-an-identity-to-an-existing-column
+
 declare @i as int = 1;
 declare @currentID as int = cast( (select COUNT(*) from [圖書室借用記錄]) as int);
 while @i <= cast( (select COUNT(*) from #notYetLentBook) as int)
