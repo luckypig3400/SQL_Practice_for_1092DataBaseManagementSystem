@@ -61,7 +61,8 @@ create table #tempInfo(--先按照exec執行的輸出結果建立資料型態相
 insert #tempInfo exec sp_datatype_info;--將exec查詢結果插入暫存表
 
 select T.TYPE_NAME, T.DATA_TYPE, T.PRECISION 
-from #tempInfo as T where T.TYPE_NAME='int' or T.TYPE_NAME= 'smallint' or T.TYPE_NAME='char' or T.TYPE_NAME='varchar';
+from #tempInfo as T where T.TYPE_NAME in('int','smallint','char','varchar');
+--https://www.w3schools.com/sql/trysql.asp?filename=trysql_op_in
 
 --- 隨堂練習4:顯示[出貨記錄]與[客戶]資料表中所有的資料表，顯示不能重複欄位，將聯絡人的姓氏為'陳'的聯絡人顯示出來 (10)
 
