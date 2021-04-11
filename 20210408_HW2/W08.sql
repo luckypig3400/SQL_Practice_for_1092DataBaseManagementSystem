@@ -97,14 +97,16 @@ select * from [應徵者];
 delete from [應徵者] where [自傳] is NULL;
 --https://www.w3schools.com/sql/sql_delete.asp
 select * from [應徵者];
+------------------------------------
+
+
 
 --### 綜合練習
 --- 隨堂練習8 (30)
 -- - 1. 經理借了書籍中所有人沒有借過的書，請將記錄此資訊新增至[圖書室借用記錄]
 -- - 2. 將更動的紀錄的所有欄位記錄在一個新增暫存資料表
-select * from [圖書室借用記錄]
-select * from [書籍]
 
+--以下先找出尚未被借閱過的書本名稱
 select B.書籍名稱 into #notYetLentBook from [書籍] as B
 LEFT JOIN [圖書室借用記錄] as T ON T.書名 = B.書籍名稱
 where T.書名 is null;
@@ -113,19 +115,6 @@ where T.書名 is null;
 
 set identity_insert 出貨記錄 off;
 set identity_insert 圖書室借用記錄 on;
-declare @dc as int = cast( (select COUNT(*) from [圖書室借用記錄]) as int);
-set @dc += 1;
-print(@dc);
---insert into [圖書室借用記錄] (編號,員工編號,書名,數量,歸還日期)
---output inserted.*
---values(@dc,2,'test2',1,GETDATE());
-----上面為利用變數在插入時自動編序的測試範例
-
---insert into [圖書室借用記錄] (編號,員工編號,書名,數量,歸還日期)
---output inserted.*
---select @dc,2,書籍名稱,1,GETDATE() from #notYetLentBook;
---插入選取的內容進表格似乎無法運用在有自動編序的表上
---https://www.w3schools.com/sql/sql_insert_into_select.asp
 
 --https://stackoverflow.com/questions/21928952/how-can-insert-into-a-table-300-times-within-a-loop-in-sql/21929260
 alter table #notYetLentBook add id int identity(1,1);--幫抓出來的未借書單表編號
@@ -143,3 +132,19 @@ end;
 --https://stackoverflow.com/questions/21928952/how-can-insert-into-a-table-300-times-within-a-loop-in-sql/21929260
 
 set identity_insert 圖書室借用記錄 off;
+
+/*以下為嘗試使用變數插入數值的練習程式碼
+declare @dc as int = cast( (select COUNT(*) from [圖書室借用記錄]) as int);
+set @dc += 1;
+print(@dc);
+insert into [圖書室借用記錄] (編號,員工編號,書名,數量,歸還日期)
+output inserted.*
+values(@dc,2,'test2',1,GETDATE());
+--上面為利用變數在插入時自動編序的測試範例
+
+insert into [圖書室借用記錄] (編號,員工編號,書名,數量,歸還日期)
+output inserted.*
+select @dc,2,書籍名稱,1,GETDATE() from #notYetLentBook;
+--插入選取的內容進表格似乎無法運用在有自動編序的表上
+--https://www.w3schools.com/sql/sql_insert_into_select.asp
+*/
