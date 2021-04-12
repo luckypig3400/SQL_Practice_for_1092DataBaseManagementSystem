@@ -82,6 +82,8 @@ CREATE TABLE TransactionLog
 GO
 
 --2.4 在[個人資訊]的[性別]欄位中，設定預設值為'F' (5分)
+ALTER TABLE PersonalInfo ADD CONSTRAINT DF__PersonalInfo__Gender__123  DEFAULT 'F' for Gender;
+
 --2.5 在[個人資訊]資料表中[身份證字號]加入數值不得為空且需唯一的限制條件 (5分)
 --2.6 每個資料表要有主鍵(Primary Key)，並用適當的Foreign Key與其他資料表關聯 (5分)
 
