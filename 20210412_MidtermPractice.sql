@@ -17,6 +17,8 @@ on Primary(
 	FILENAME='D:\\MSSQL_DB\\NTUNHS_PayDB_log.ldf'
 );
 
+
+
 --題目2：請設計三個資料表，並使用卡號與學號進行跨資料表關聯 (1) 卡片資訊、(2) 個人資料以及 (3)交易紀錄，各項資料限制如下：
 --2.1卡片資訊須包含以下欄位: 卡號、UID、餘額、系所、帳戶類型、開通狀態、更新時間日期、異動人 (5分)
 use NTUNHS_PayDB;
@@ -29,13 +31,13 @@ GO
 CREATE TABLE CardInfo
 (
 	CardNumber INT NOT NULL PRIMARY KEY, -- primary key column卡號
-	UID int NOT NULL,--UID
+	UID int NOT NULL,--UID(User ID)
 	Balance int,--餘額
 	Department NVARCHAR(60),--系所
 	AccType NVARCHAR(30),--帳戶類型
 	AccStatus NVARCHAR(30),--開通狀態
 	UP_date date,--更新時間日期
-	UP_user NVARCHAR(60)--異動人
+	UP_user NVARCHAR(60),--異動人
 );
 GO
 
@@ -48,8 +50,10 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE PersonalInfo
 (
+	UID int not null PRIMARY KEY,--UID(User ID)
 	StudentID NVARCHAR(36) not null,--學號
-	PersonalID NVARCHAR(36) not null,--身份證字號
+	PersonalID NVARCHAR(36) UNIQUE not null,--身份證字號
+	--2.5 在[個人資訊]資料表中[身份證字號]加入數值不得為空且需唯一的限制條件 (5分)
 	FirstName NVARCHAR(30) not null,--姓氏
 	LastName NVARCHAR(30) not null,--名字
 	Birthdate date,--生日
@@ -77,15 +81,21 @@ CREATE TABLE TransactionLog
 	TransType NVARCHAR(30),--交易類型
 	TransDetailed NVARCHAR(99),--交易內容
 	UP_date DATE,--更新時間日期
-	UP_user NVARCHAR(36)--異動人
+	UP_user NVARCHAR(36),--異動人
+	PRIMARY KEY(CardNumber,TransId),
+	FOREIGN KEY(CardNumber) REFERENCES CardInfo(CardNumber)
+	--2.6 每個資料表要有主鍵(Primary Key)，並用適當的Foreign Key與其他資料表關聯 (5分)
 );
 GO
 
 --2.4 在[個人資訊]的[性別]欄位中，設定預設值為'F' (5分)
 ALTER TABLE PersonalInfo ADD CONSTRAINT DF__PersonalInfo__Gender__123  DEFAULT 'F' for Gender;
 
---2.5 在[個人資訊]資料表中[身份證字號]加入數值不得為空且需唯一的限制條件 (5分)
 --2.6 每個資料表要有主鍵(Primary Key)，並用適當的Foreign Key與其他資料表關聯 (5分)
+exec sp_helpconstraint @objname='CardInfo';
+alter table CardInfo add constraint FK__CardInfo__UID__123
+foreign key(UID) references PersonalInfo(UID);
+exec sp_helpconstraint @objname='CardInfo';
 
 --題目3：使用Insert語法插入資料，規格說明如下:
 --3.1 [個人資訊]: 至少有3筆資料；[帳號]: 每人至少要1筆資料 (5分)
