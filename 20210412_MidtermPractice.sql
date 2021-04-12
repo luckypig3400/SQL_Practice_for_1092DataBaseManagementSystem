@@ -19,6 +19,26 @@ on Primary(
 
 --題目2：請設計三個資料表，並使用卡號與學號進行跨資料表關聯 (1) 卡片資訊、(2) 個人資料以及 (3)交易紀錄，各項資料限制如下：
 --2.1卡片資訊須包含以下欄位: 卡號、UID、餘額、系所、帳戶類型、開通狀態、更新時間日期、異動人 (5分)
+use NTUNHS_PayDB;
+-- Create a new table called 'CardInfo' in schema 'NTUNHS_PayDB'
+-- Drop the table if it already exists
+IF OBJECT_ID('NTUNHS_PayDB.CardInfo', 'U') IS NOT NULL
+DROP TABLE NTUNHS_PayDB.CardInfo
+GO
+-- Create the table in the specified schema
+CREATE TABLE CardInfo
+(
+	CardNumber INT NOT NULL PRIMARY KEY, -- primary key column卡號
+	UID int NOT NULL,--UID
+	Balance int,--餘額
+	Department NVARCHAR(60),--系所
+	AccType NVARCHAR(30),--帳戶類型
+	AccStatus NVARCHAR(30),--開通狀態
+	UP_date date,--更新時間日期
+	UP_user NVARCHAR(60)--異動人
+);
+GO
+
 --2.2 個人資料須包含以下欄位: 學號、身份證字號、姓氏、名字、生日、性別、在學狀態、通訊地址、更新時間日期、異動人 (5分)
 --2.3 交易資訊須包含以下欄位: 卡號、交易編號、簽約店家、讀卡機號碼、交易類型、交易內容、更新時間日期、異動人 (5分)
 --2.4 在[個人資訊]的[性別]欄位中，設定預設值為'F' (5分)
