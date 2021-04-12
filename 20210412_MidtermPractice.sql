@@ -98,8 +98,34 @@ foreign key(UID) references PersonalInfo(UID);
 exec sp_helpconstraint @objname='CardInfo';
 
 --題目3：使用Insert語法插入資料，規格說明如下:
---3.1 [個人資訊]: 至少有3筆資料；[帳號]: 每人至少要1筆資料 (5分)
+--3.1 [個人資訊]: 至少有3筆資料；
+INSERT INTO PersonalInfo(UID,StudentID,PersonalID,FirstName,LastName,Birthdate,Gender,SchoolStatus,ContactAddress,UP_date,UP_user)
+VALUES
+	(1,'082214666','A121564566','曉明','王','2000-09-16','M','在學中','台北市明德路666號',GETDATE(),'王曉明'),
+	(2,'072214666','A225315531','曉夢','王','1999-06-06','F','在學中','台北市明德路666號',GETDATE(),'王曉夢'),
+	(3,'032214888','Q123535453','嘉明','李','1995-06-06','M','畢業','新北市東明街564號',GETDATE(),'李嘉明');
+-- [帳號(卡片資訊)]: 每人至少要1筆資料 (5分)
+INSERT INTO CardInfo(CardNumber,UID,Balance,Department,AccType,AccStatus,UP_date,UP_user)
+VALUES
+	(10600601,1,6000,'資管系','一般','正常',getdate(),'王曉明'),
+	(10600602,2,9600,'資管系','VIP','正常',getdate(),'王曉夢'),
+	(10200606,3,3,'護理系','VVIP','已停卡',getdate(),'李嘉明');
+
 --3.2 [交易紀錄] :至少15筆資料，每個帳號須包含至少1筆交易紀錄 (5分)
+INSERT INTO TransactionLog(CardNumber,TransId,CooperateStore,CardReaderID,TransType,TransDetailed,UP_date,UP_user)
+VALUES
+	(10600601,1,'小石鍋',6,'付款','醬燒肉飯',getdate(),'王曉明'),
+	(10600601,2,'小木屋鬆餅',7,'付款','原味',getdate(),'王曉明'),
+	(10600601,3,'OWO',9,'付款','qwq',getdate(),'王曉明'),
+	(10600602,1,'小石鍋',6,'付款','醬燒肉飯',getdate(),'王曉夢'),
+	(10600602,2,'小石鍋',6,'付款','dfdafdfd',getdate(),'王曉夢'),
+	(10600602,3,'Big石鍋',23,'付款','dfdafdfd',getdate(),'王曉夢'),
+	(10200606,1,'Big石鍋',23,'付款','dfdafdfd',getdate(),'李嘉明'),
+	(10200606,2,'Big石鍋',23,'付款','dfdafdfd',getdate(),'李嘉明'),
+	(10200606,3,'Big石鍋',23,'付款','dfdafdfd',getdate(),'李嘉明'),
+	(10200606,4,'BigDollar',33,'付款','wsjflio',getdate(),'李嘉明'),
+	(10200606,5,'BigDollar',33,'付款','wsjflio',getdate(),'李嘉明'),
+	(10200606,6,'BigDollar',33,'付款','wowPork',getdate(),'李嘉明')
 
 --題目4：請使用Update語法任意修改 [個人資訊]中的一筆資料，並有異動結果顯示出來，例如:原在學狀態VS 異動後在學狀態或原地址VS 更新後地址 (5分)
 
