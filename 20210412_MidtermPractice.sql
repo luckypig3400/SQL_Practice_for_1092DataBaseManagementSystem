@@ -133,13 +133,33 @@ VALUES
 	(10200606,11,'甕中傳奇',36,'付款','原味加麵',getdate(),'李嘉明'),
 	(10200606,12,'Big石鍋',23,'付款','WOW 麻辣大牛鍋',getdate(),'李嘉明');
 
+
+
 --題目4：請使用Update語法任意修改 [個人資訊]中的一筆資料，並有異動結果顯示出來，例如:原在學狀態VS 異動後在學狀態或原地址VS 更新後地址 (5分)
 select * from PersonalInfo;
 update PersonalInfo set ContactAddress='新北市東明街二段564號'
 output inserted.* where UID=3;
 
+
+
 --題目5：使用SELECT查詢語法進行跨資料表查詢，並顯示輸出結果。
---5.1 查詢條件為: 「所有非鎖卡的帳號之所有交易結果」。結果需顯示以下欄位: (1)所有[交易紀錄]欄位、(2)卡號、(3) 顯示名稱為 「姓名」，並以"姓氏 + 名字"組合，兩個欄位間使用空白符號間隔 (4) 顯示名稱為「基本資訊」，內容以「學號/生日/性別」格式組合顯示，欄位間使用「/」符號間隔，並顯示輸出結果 (5分)
+--5.1 查詢條件為: 「所有非鎖卡的帳號之所有交易結果」。結果需顯示以下欄位: 
+--(1)所有[交易紀錄]欄位、(2)卡號、(3) 顯示名稱為 「姓名」，並以"姓氏 + 名字"組合，兩個欄位間使用空白符號間隔
+--(4) 顯示名稱為「基本資訊」，內容以「學號/生日/性別」格式組合顯示，欄位間使用「/」符號間隔，並顯示輸出結果 (5分)
+select T.*, C.CardNumber, P.LastName + ' ' + P.FirstName as '姓名',
+P.StudentID + '/' + cast(P.Birthdate as varchar(30)) + '/' + P.Gender as '基本資訊'
+from PersonalInfo as P, CardInfo as C, TransactionLog as T
+where C.AccStatus='已停卡' and C.CardNumber = T.CardNumber and C.UID = P.UID
+
 --5.2 請撰寫複合式SQL語法，使用SELECT INTO與其他語法組合，將上題「不重複的查詢結果」，寫入至一個新增暫存資料表(名稱為#LOCK_CARDS)，並顯示輸出結果 (5分)
+select T.*, P.LastName + ' ' + P.FirstName as '姓名',
+P.StudentID + '/' + cast(P.Birthdate as varchar(30)) + '/' + P.Gender as '基本資訊'
+into #LOCK_CARDS
+from PersonalInfo as P, CardInfo as C, TransactionLog as T
+where C.AccStatus='已停卡' and C.CardNumber = T.CardNumber and C.UID = P.UID;
+
+select * from #LOCK_CARDS;
+
+
 
 --題目6：請將上述題目1-5合併並儲存同一個sql檔(檔名: runMe.sql)將此SQL檔上傳至iLMS作為上機考的答案卷。執行此sql時，中間不得發生錯誤，並將所有題目的結果完成，最後應顯示題目4與題目5的三個輸出結果 (10%)
