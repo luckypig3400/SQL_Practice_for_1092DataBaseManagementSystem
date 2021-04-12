@@ -62,6 +62,25 @@ CREATE TABLE PersonalInfo
 GO
 
 --2.3 交易資訊須包含以下欄位: 卡號、交易編號、簽約店家、讀卡機號碼、交易類型、交易內容、更新時間日期、異動人 (5分)
+-- Create a new table called 'TransactionLog' in schema 'NTUNHS_PayDB'
+-- Drop the table if it already exists
+IF OBJECT_ID('NTUNHS_PayDB.TransactionLog', 'U') IS NOT NULL
+DROP TABLE NTUNHS_PayDB.TransactionLog
+GO
+-- Create the table in the specified schema
+CREATE TABLE TransactionLog
+(
+	CardNumber int not null,--卡號
+	TransId INT NOT NULL,--交易編號
+	CooperateStore NVARCHAR(60),--簽約店家
+	CardReaderID int,--讀卡機號碼
+	TransType NVARCHAR(30),--交易類型
+	TransDetailed NVARCHAR(99),--交易內容
+	UP_date DATE,--更新時間日期
+	UP_user NVARCHAR(36)--異動人
+);
+GO
+
 --2.4 在[個人資訊]的[性別]欄位中，設定預設值為'F' (5分)
 --2.5 在[個人資訊]資料表中[身份證字號]加入數值不得為空且需唯一的限制條件 (5分)
 --2.6 每個資料表要有主鍵(Primary Key)，並用適當的Foreign Key與其他資料表關聯 (5分)
