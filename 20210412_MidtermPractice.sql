@@ -152,6 +152,7 @@ from PersonalInfo as P, CardInfo as C, TransactionLog as T
 where C.AccStatus='已停卡' and C.CardNumber = T.CardNumber and C.UID = P.UID
 
 --5.2 請撰寫複合式SQL語法，使用SELECT INTO與其他語法組合，將上題「不重複的查詢結果」，寫入至一個新增暫存資料表(名稱為#LOCK_CARDS)，並顯示輸出結果 (5分)
+drop table if exists #LOCK_CARDS;
 select T.*, P.LastName + ' ' + P.FirstName as '姓名',
 P.StudentID + '/' + cast(P.Birthdate as varchar(30)) + '/' + P.Gender as '基本資訊'
 into #LOCK_CARDS
