@@ -2,6 +2,20 @@
 --說明:『北護學生會』期望製作一套『北護卡儲值系統』，請寫出系統資料庫之T-SQL:
 --題目1：請使用T-SQL語法撰寫建立資料庫語法，規格如下：
 --1.1 新增資料庫，包含指定資料檔路徑，資料檔需包含(1)主要儲存檔以及(2) log檔 (5分)
+use master;
+if DB_ID('NTUNHS_PayDB') is not null begin
+	drop DATABASE NTUNHS_PayDB;
+end
+
+create database NTUNHS_PayDB
+on Primary(
+	name='NTUNHS_PayDB',
+	filename='D:\\MSSQL_DB\\NTUNHS_PayDB.mdf'
+
+)log on(
+	name='NTUNHS_PayDB_log',
+	FILENAME='D:\\MSSQL_DB\\NTUNHS_PayDB_log.ldf'
+);
 
 --題目2：請設計三個資料表，並使用卡號與學號進行跨資料表關聯 (1) 卡片資訊、(2) 個人資料以及 (3)交易紀錄，各項資料限制如下：
 --2.1卡片資訊須包含以下欄位: 卡號、UID、餘額、系所、帳戶類型、開通狀態、更新時間日期、異動人 (5分)
