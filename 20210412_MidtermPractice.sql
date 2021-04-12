@@ -92,10 +92,10 @@ GO
 ALTER TABLE PersonalInfo ADD CONSTRAINT DF__PersonalInfo__Gender__123  DEFAULT 'F' for Gender;
 
 --2.6 每個資料表要有主鍵(Primary Key)，並用適當的Foreign Key與其他資料表關聯 (5分)
-exec sp_helpconstraint @objname='CardInfo';
+--exec sp_helpconstraint @objname='CardInfo';
 alter table CardInfo add constraint FK__CardInfo__UID__123
 foreign key(UID) references PersonalInfo(UID);
-exec sp_helpconstraint @objname='CardInfo';
+--exec sp_helpconstraint @objname='CardInfo';
 
 --題目3：使用Insert語法插入資料，規格說明如下:
 --3.1 [個人資訊]: 至少有3筆資料；
@@ -125,7 +125,13 @@ VALUES
 	(10200606,3,'Big石鍋',23,'付款','dfdafdfd',getdate(),'李嘉明'),
 	(10200606,4,'BigDollar',33,'付款','wsjflio',getdate(),'李嘉明'),
 	(10200606,5,'BigDollar',33,'付款','wsjflio',getdate(),'李嘉明'),
-	(10200606,6,'BigDollar',33,'付款','wowPork',getdate(),'李嘉明')
+	(10200606,6,'BigDollar',33,'儲值','60000',getdate(),'李嘉明'),
+	(10200606,7,'甕中傳奇',36,'付款','原味',getdate(),'李嘉明'),
+	(10200606,8,'甕中傳奇',36,'付款','蒜香',getdate(),'李嘉明'),
+	(10200606,9,'甕中傳奇',36,'付款','麻辣番茄',getdate(),'李嘉明'),
+	(10200606,10,'甕中傳奇',36,'付款','南洋椰香',getdate(),'李嘉明'),
+	(10200606,11,'甕中傳奇',36,'付款','原味加麵',getdate(),'李嘉明'),
+	(10200606,12,'Big石鍋',23,'付款','WOW 麻辣大牛鍋',getdate(),'李嘉明');
 
 --題目4：請使用Update語法任意修改 [個人資訊]中的一筆資料，並有異動結果顯示出來，例如:原在學狀態VS 異動後在學狀態或原地址VS 更新後地址 (5分)
 
