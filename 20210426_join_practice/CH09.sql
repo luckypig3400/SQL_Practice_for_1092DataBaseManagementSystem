@@ -1,222 +1,222 @@
-USE  ╫m╡ъ09
+USE  Г╥╢Г©▓09
 
 GO
 -- P9-4a
 
 SELECT * 
-FROM ╝ядy 
+FROM Ф⌡╦Г╠█ 
 
 GO
 -- P9-4b
 
-SELECT ╝ядy╕W╨ы, CAST(╩Ы╝Ф * 0.8 AS numeric(4, 0) )  AS  ╖И╕╘╩Ы
-FROM ╝ядy 
+SELECT Ф⌡╦Г╠█Е░█Г╗╠, CAST(Е┐╧Ф═╪ * 0.8 AS numeric(4, 0) )  AS  Ф┼≤Ф┴ёЕ┐╧
+FROM Ф⌡╦Г╠█ 
 
 GO
 -- P9-5a
 
-SELECT '╓j╝a╕n' , 3+5 , LOWER('ABC')
+SELECT 'Е╓╖Е╝╤Е╔╫' , 3+5 , LOWER('ABC')
 
 GO
 -- P9-5b
 
-SELECT ╔X╙╘╓╫╔q 
-FROM  ╝ядy 
+SELECT Е┤╨Г┴┬Е┘╛Е▐╦ 
+FROM  Ф⌡╦Г╠█ 
 
 GO
 -- P9-6a
 
-SELECT DISTINCT ╔X╙╘╓╫╔q
-FROM ╝ядy 
+SELECT DISTINCT Е┤╨Г┴┬Е┘╛Е▐╦
+FROM Ф⌡╦Г╠█ 
 
 GO
 -- P9-6b
 
 SELECT TOP 2 * 
-FROM ╝ядy
+FROM Ф⌡╦Г╠█
 
 GO
 -- P9-7a
 
 SELECT TOP 30 PERCENT * 
-FROM ╝ядy
+FROM Ф⌡╦Г╠█
 
 GO
 -- P9-7b
 
 SELECT TOP 3*
-FROM  ╝ядy
-ORDER BY ╩Ы╝Ф
+FROM  Ф⌡╦Г╠█
+ORDER BY Е┐╧Ф═╪
 
 GO
 -- P9-8
 
 SELECT TOP 3   WITH TIES *
-FROM ╝ядy
-ORDER BY ╩Ы╝Ф
+FROM Ф⌡╦Г╠█
+ORDER BY Е┐╧Ф═╪
 
 GO
 -- P9-10a
 
 SELECT IDENTITYCOL, ROWGUIDCOL 
-FROM ╝ядy 
+FROM Ф⌡╦Г╠█ 
 
 GO
 -- P9-10b
 
-SELECT ╝ядy╕W╨ы AS ╧q╦ё╝ядy╕W╨ы 
-FROM ╝ядy 
+SELECT Ф⌡╦Г╠█Е░█Г╗╠ AS И⌡╩Х┘╕Ф⌡╦Г╠█Е░█Г╗╠ 
+FROM Ф⌡╦Г╠█ 
 
 GO
 -- P9-11
 
-SELECT ╚х.╚х╓А╕W╨ы, ╚х.аp╣╦╓H, ╪ф╤q, ╝я╕W
-FROM   ╚х╓А AS ╚х JOIN ╔XЁf╟O©Щ AS ╔X
-       ON ╚х.╚х╓А╕W╨ы = ╔X.╚х╓А╕W╨ы
+SELECT Е╝╒.Е╝╒Ф┬╤Е░█Г╗╠, Е╝╒.Х│╞Г╣║Д╨╨, Ф∙╦И┤▐, Ф⌡╦Е░█
+FROM   Е╝╒Ф┬╤ AS Е╝╒ JOIN Е┤╨Х╡╗Х╗≤И▄└ AS Е┤╨
+       ON Е╝╒.Е╝╒Ф┬╤Е░█Г╗╠ = Е┤╨.Е╝╒Ф┬╤Е░█Г╗╠
 
 GO
 -- P9-12
 
-SELECT ╔Ь╧╨╝ядy.╫s╦╧, ╕W╨ы, ╩Ы©З
-FROM   ╔Ь╧╨╝ядy JOIN ╔Ь╧╨╝ядy╧w╘w╩Ы
-       ON ╔Ь╧╨╝ядy.╫s╦╧ = ╔Ь╧╨╝ядy╧w╘w╩Ы.╫s╦╧ 
+SELECT Д╪│Е┼┐Ф⌡╦Г╠█.Г╥╗Х≥÷, Е░█Г╗╠, Е┐╧И▄╒
+FROM   Д╪│Е┼┐Ф⌡╦Г╠█ JOIN Д╪│Е┼┐Ф⌡╦Г╠█И═░Е╝ Е┐╧
+       ON Д╪│Е┼┐Ф⌡╦Г╠█.Г╥╗Х≥÷ = Д╪│Е┼┐Ф⌡╦Г╠█И═░Е╝ Е┐╧.Г╥╗Х≥÷ 
 
 GO
 -- P9-13             
 
-SELECT ╔Ь╧╨╝ядy.╫s╦╧, ╕W╨ы, ╩Ы©З
-FROM  ╔Ь╧╨╝ядy, ╔Ь╧╨╝ядy╧w╘w╩Ы
-WHERE ╔Ь╧╨╝ядy.╫s╦╧ = ╔Ь╧╨╝ядy╧w╘w╩Ы.╫s╦╧
+SELECT Д╪│Е┼┐Ф⌡╦Г╠█.Г╥╗Х≥÷, Е░█Г╗╠, Е┐╧И▄╒
+FROM  Д╪│Е┼┐Ф⌡╦Г╠█, Д╪│Е┼┐Ф⌡╦Г╠█И═░Е╝ Е┐╧
+WHERE Д╪│Е┼┐Ф⌡╦Г╠█.Г╥╗Х≥÷ = Д╪│Е┼┐Ф⌡╦Г╠█И═░Е╝ Е┐╧.Г╥╗Х≥÷
  
 
 GO
 -- P9-14a
 
-SELECT ╨X.╡ё╚~╕W╨ы AS ╨X╨X╓╫╔q╡ё╚~╕W╨ы, ╨X.╩Ы╝Ф , 
-             ╪п.╡ё╚~╕W╨ы AS ╪п╪п╓╫╔q╡ё╚~╕W╨ы, ╪п.╩Ы╝Ф 
-FROM    ╨X╨X╓╫╔q AS ╨X  JOIN  ╪п╪п╓╫╔q AS ╪п 
-             ON  ╨X.╡ё╚~╕W╨ы = ╪п.╡ё╚~╕W╨ы
+SELECT Ф≈≈.Г■╒Е⌠│Е░█Г╗╠ AS Ф≈≈Ф≈≈Е┘╛Е▐╦Г■╒Е⌠│Е░█Г╗╠, Ф≈≈.Е┐╧Ф═╪ , 
+             Ф╗≥.Г■╒Е⌠│Е░█Г╗╠ AS Ф╗≥Ф╗≥Е┘╛Е▐╦Г■╒Е⌠│Е░█Г╗╠, Ф╗≥.Е┐╧Ф═╪ 
+FROM    Ф≈≈Ф≈≈Е┘╛Е▐╦ AS Ф≈≈  JOIN  Ф╗≥Ф╗≥Е┘╛Е▐╦ AS Ф╗≥ 
+             ON  Ф≈≈.Г■╒Е⌠│Е░█Г╗╠ = Ф╗≥.Г■╒Е⌠│Е░█Г╗╠
 
 GO
 -- P9-14b
 
-SELECT ╨X.╡ё╚~╕W╨ы AS ╨X╨X╓╫╔q╡ё╚~╕W╨ы, ╨X.╩Ы╝Ф , 
-             ╪п.╡ё╚~╕W╨ы AS ╪п╪п╓╫╔q╡ё╚~╕W╨ы, ╪п.╩Ы╝Ф
-FROM   ╨X╨X╓╫╔q AS ╨X  LEFT JOIN  ╪п╪п╓╫╔q AS ╪п 
-             ON  ╨X.╡ё╚~╕W╨ы = ╪п.╡ё╚~╕W╨ы
+SELECT Ф≈≈.Г■╒Е⌠│Е░█Г╗╠ AS Ф≈≈Ф≈≈Е┘╛Е▐╦Г■╒Е⌠│Е░█Г╗╠, Ф≈≈.Е┐╧Ф═╪ , 
+             Ф╗≥.Г■╒Е⌠│Е░█Г╗╠ AS Ф╗≥Ф╗≥Е┘╛Е▐╦Г■╒Е⌠│Е░█Г╗╠, Ф╗≥.Е┐╧Ф═╪
+FROM   Ф≈≈Ф≈≈Е┘╛Е▐╦ AS Ф≈≈  LEFT JOIN  Ф╗≥Ф╗≥Е┘╛Е▐╦ AS Ф╗≥ 
+             ON  Ф≈≈.Г■╒Е⌠│Е░█Г╗╠ = Ф╗≥.Г■╒Е⌠│Е░█Г╗╠
 
 GO
 -- P9-15a
 
-SELECT ╨X.╡ё╚~╕W╨ы AS ╨X╨X╓╫╔q╡ё╚~╕W╨ы, ╨X.╩Ы╝Ф ,
-             ╪п.╡ё╚~╕W╨ы AS ╪п╪п╓╫╔q╡ё╚~╕W╨ы, ╪п.╩Ы╝Ф 
-FROM    ╨X╨X╓╫╔q AS ╨X  RIGHT JOIN  ╪п╪п╓╫╔q AS ╪п
-            ON  ╨X.╡ё╚~╕W╨ы = ╪п.╡ё╚~╕W╨ы
+SELECT Ф≈≈.Г■╒Е⌠│Е░█Г╗╠ AS Ф≈≈Ф≈≈Е┘╛Е▐╦Г■╒Е⌠│Е░█Г╗╠, Ф≈≈.Е┐╧Ф═╪ ,
+             Ф╗≥.Г■╒Е⌠│Е░█Г╗╠ AS Ф╗≥Ф╗≥Е┘╛Е▐╦Г■╒Е⌠│Е░█Г╗╠, Ф╗≥.Е┐╧Ф═╪ 
+FROM    Ф≈≈Ф≈≈Е┘╛Е▐╦ AS Ф≈≈  RIGHT JOIN  Ф╗≥Ф╗≥Е┘╛Е▐╦ AS Ф╗≥
+            ON  Ф≈≈.Г■╒Е⌠│Е░█Г╗╠ = Ф╗≥.Г■╒Е⌠│Е░█Г╗╠
 
 GO
 -- P9-15b
 
-SELECT ╨X.╡ё╚~╕W╨ы AS ╨X╨X╓╫╔q╡ё╚~╕W╨ы, ╨X.╩Ы╝Ф , 
-             ╪п.╡ё╚~╕W╨ы AS ╪п╪п╓╫╔q╡ё╚~╕W╨ы, ╪п.╩Ы╝Ф 
-FROM   ╨X╨X╓╫╔q AS ╨X  FULL JOIN  ╪п╪п╓╫╔q AS ╪п 
-            ON ╨X.╡ё╚~╕W╨ы = ╪п.╡ё╚~╕W╨ы 
+SELECT Ф≈≈.Г■╒Е⌠│Е░█Г╗╠ AS Ф≈≈Ф≈≈Е┘╛Е▐╦Г■╒Е⌠│Е░█Г╗╠, Ф≈≈.Е┐╧Ф═╪ , 
+             Ф╗≥.Г■╒Е⌠│Е░█Г╗╠ AS Ф╗≥Ф╗≥Е┘╛Е▐╦Г■╒Е⌠│Е░█Г╗╠, Ф╗≥.Е┐╧Ф═╪ 
+FROM   Ф≈≈Ф≈≈Е┘╛Е▐╦ AS Ф≈≈  FULL JOIN  Ф╗≥Ф╗≥Е┘╛Е▐╦ AS Ф╗≥ 
+            ON Ф≈≈.Г■╒Е⌠│Е░█Г╗╠ = Ф╗≥.Г■╒Е⌠│Е░█Г╗╠ 
 
 GO
 -- P9-15c
 
-SELECT ╨X.╡ё╚~╕W╨ы AS ╨X╨X╓╫╔q╡ё╚~╕W╨ы, ╨X.╩Ы╝Ф ,
-             ╪п.╡ё╚~╕W╨ы AS ╪п╪п╓╫╔q╡ё╚~╕W╨ы, ╪п.╩Ы╝Ф 
-FROM   ╨X╨X╓╫╔q AS ╨X  CROSS JOIN  ╪п╪п╓╫╔q AS ╪п 
+SELECT Ф≈≈.Г■╒Е⌠│Е░█Г╗╠ AS Ф≈≈Ф≈≈Е┘╛Е▐╦Г■╒Е⌠│Е░█Г╗╠, Ф≈≈.Е┐╧Ф═╪ ,
+             Ф╗≥.Г■╒Е⌠│Е░█Г╗╠ AS Ф╗≥Ф╗≥Е┘╛Е▐╦Г■╒Е⌠│Е░█Г╗╠, Ф╗≥.Е┐╧Ф═╪ 
+FROM   Ф≈≈Ф≈≈Е┘╛Е▐╦ AS Ф≈≈  CROSS JOIN  Ф╗≥Ф╗≥Е┘╛Е▐╦ AS Ф╗≥ 
 
 GO
 -- P9-17a
 
-SELECT ╜Ш╓u.╘m╕W, ╜Ш╓u.б╬╕Л, 
-             ╙Ь╘x.╘m╕W AS ╔D╨ч
-FROM    ╜Ш╓u  LEFT JOIN  ╜Ш╓u AS ╙Ь╘x
-             ON  ╜Ш╓u.╔D╨ч╫s╦╧ = ╙Ь╘x.╫s╦╧
+SELECT Е⌠║Е╥╔.Е╖⌠Е░█, Е⌠║Е╥╔.Х│╥Д╫█, 
+             И∙╥Е╝≤.Е╖⌠Е░█ AS Д╦╩Г╝║
+FROM    Е⌠║Е╥╔  LEFT JOIN  Е⌠║Е╥╔ AS И∙╥Е╝≤
+             ON  Е⌠║Е╥╔.Д╦╩Г╝║Г╥╗Х≥÷ = И∙╥Е╝≤.Г╥╗Х≥÷
 
 GO
 -- P9-17b
 
 SELECT  *
-FROM    ╜Ш╓u
-WHERE   ╘й╖O = '╓k' 
+FROM    Е⌠║Е╥╔
+WHERE   Ф─╖Е┬╔ = 'Е╔Ё' 
 
 GO
 -- P9-19a
 
-SELECT  ╚х╓А╕W╨ы, SUM(╪ф╤q) AS ╔XЁf╪ф╤q 
-FROM     ╔XЁf╟O©Щ
-GROUP BY  ╚х╓А╕W╨ы 
+SELECT  Е╝╒Ф┬╤Е░█Г╗╠, SUM(Ф∙╦И┤▐) AS Е┤╨Х╡╗Ф∙╦И┤▐ 
+FROM     Е┤╨Х╡╗Х╗≤И▄└
+GROUP BY  Е╝╒Ф┬╤Е░█Г╗╠ 
 
 GO
 -- P9-19b
 
-SELECT ╚х╓А╕W╨ы , 
-              DATEPART(MONTH, ╓И╢а) AS ╓К╔В ,
-              SUM(╪ф╤q) AS ╔XЁf╪ф╤q
-FROM   ╔XЁf╟O©Щ
-GROUP BY ╚х╓А╕W╨ы, DATEPART(MONTH, ╓И╢а)
-ORDER BY ╚х╓А╕W╨ы, DATEPART(MONTH, ╓И╢а)
+SELECT Е╝╒Ф┬╤Е░█Г╗╠ , 
+              DATEPART(MONTH, Ф≈╔Ф°÷) AS Ф°┬Д╩╫ ,
+              SUM(Ф∙╦И┤▐) AS Е┤╨Х╡╗Ф∙╦И┤▐
+FROM   Е┤╨Х╡╗Х╗≤И▄└
+GROUP BY Е╝╒Ф┬╤Е░█Г╗╠, DATEPART(MONTH, Ф≈╔Ф°÷)
+ORDER BY Е╝╒Ф┬╤Е░█Г╗╠, DATEPART(MONTH, Ф≈╔Ф°÷)
 
 GO
 -- P9-20
 
-SELECT  ╚х╓А╕W╨ы, ╝я╕W, SUM(╪ф╤q) AS а`╪ф╤q 
-FROM     ╔XЁf╟O©Щ 
-GROUP BY  CUBE (╝я╕W, ╚х╓А╕W╨ы)
+SELECT  Е╝╒Ф┬╤Е░█Г╗╠, Ф⌡╦Е░█, SUM(Ф∙╦И┤▐) AS Г╦╫Ф∙╦И┤▐ 
+FROM     Е┤╨Х╡╗Х╗≤И▄└ 
+GROUP BY  CUBE (Ф⌡╦Е░█, Е╝╒Ф┬╤Е░█Г╗╠)
 
 GO
 -- P9-21a
 
-SELECT ╚х╓А╕W╨ы, ╝я╕W, SUM(╪ф╤q) AS а`╪ф╤q 
-FROM  ╔XЁf╟O©Щ
-GROUP BY ROLLUP(╚х╓А╕W╨ы, ╝я╕W)
+SELECT Е╝╒Ф┬╤Е░█Г╗╠, Ф⌡╦Е░█, SUM(Ф∙╦И┤▐) AS Г╦╫Ф∙╦И┤▐ 
+FROM  Е┤╨Х╡╗Х╗≤И▄└
+GROUP BY ROLLUP(Е╝╒Ф┬╤Е░█Г╗╠, Ф⌡╦Е░█)
 
 GO
 -- P9-21b
 
-SELECT  ╚х╓А╕W╨ы, ╝я╕W, SUM(╪ф╤q) AS а`╪ф╤q 
-FROM    ╔XЁf╟O©Щ
-GROUP BY ROLLUP(╝я╕W, ╚х╓А╕W╨ы) 
+SELECT  Е╝╒Ф┬╤Е░█Г╗╠, Ф⌡╦Е░█, SUM(Ф∙╦И┤▐) AS Г╦╫Ф∙╦И┤▐ 
+FROM    Е┤╨Х╡╗Х╗≤И▄└
+GROUP BY ROLLUP(Ф⌡╦Е░█, Е╝╒Ф┬╤Е░█Г╗╠) 
 
 GO
 -- P9-23a
 
-SELECT   ╚х╓А╕W╨ы, ╝я╕W, SUM(╪ф╤q) AS а`╪ф╤q 
-FROM      ╔XЁf╟O©Щ
-GROUP BY  ╚х╓А╕W╨ы, ╝я╕W 
-HAVING SUM(╪ф╤q) >= 6 
+SELECT   Е╝╒Ф┬╤Е░█Г╗╠, Ф⌡╦Е░█, SUM(Ф∙╦И┤▐) AS Г╦╫Ф∙╦И┤▐ 
+FROM      Е┤╨Х╡╗Х╗≤И▄└
+GROUP BY  Е╝╒Ф┬╤Е░█Г╗╠, Ф⌡╦Е░█ 
+HAVING SUM(Ф∙╦И┤▐) >= 6 
 
 GO
 -- P9-23b
 
-SELECT  ╚х╓А╕W╨ы, ╝я╕W, COUNT(*) AS ╕╦╪ф 
-FROM     ╔XЁf╟O©Щ
-GROUP BY  ╚х╓А╕W╨ы, ╝я╕W 
+SELECT  Е╝╒Ф┬╤Е░█Г╗╠, Ф⌡╦Е░█, COUNT(*) AS Ф╛║Ф∙╦ 
+FROM     Е┤╨Х╡╗Х╗≤И▄└
+GROUP BY  Е╝╒Ф┬╤Е░█Г╗╠, Ф⌡╦Е░█ 
 HAVING COUNT(*) > 1 
 
 GO
 -- P9-25a
 
 SELECT * 
-FROM   ╔XЁf╟O©Щ 
-ORDER BY  ╚х╓А╕W╨ы DESC,  ╪ф╤q ASC 
+FROM   Е┤╨Х╡╗Х╗≤И▄└ 
+ORDER BY  Е╝╒Ф┬╤Е░█Г╗╠ DESC,  Ф∙╦И┤▐ ASC 
 
 GO
 
 -- P9-25b
 
 SELECT *
-FROM ╔XЁf╟O©Щ
-ORDER BY ╚х╓А╕W╨ы DESC, ╪ф╤q ASC
+FROM Е┤╨Х╡╗Х╗≤И▄└
+ORDER BY Е╝╒Ф┬╤Е░█Г╗╠ DESC, Ф∙╦И┤▐ ASC
 OFFSET 3 ROWS
 
 GO
 -- P9-26
 
 SELECT *
-FROM ╔XЁf╟O©Щ
-ORDER BY ╚х╓А╕W╨ы DESC, ╪ф╤q ASC
+FROM Е┤╨Х╡╗Х╗≤И▄└
+ORDER BY Е╝╒Ф┬╤Е░█Г╗╠ DESC, Ф∙╦И┤▐ ASC
 OFFSET 3 ROWS FETCH NEXT 4 ROWS ONLY
