@@ -1,3 +1,14 @@
+-- Attach Database
+IF DB_ID('練習09')IS NULL BEGIN
+	CREATE DATABASE 練習09 ON PRIMARY(
+		NAME='練習09',
+		FILENAME='D:\\MSSQL_DB\\練習09.mdf'
+	);
+END;
+
+
+
+use 練習09;
 -- 多條件查詢
 DECLARE @BookName nvarchar(30)
 DECLARE @SearchCond nvarchar(50)
@@ -18,6 +29,7 @@ FROM 訂單 LEFT JOIN 客戶 ON 客戶.客戶編號=訂單.客戶編號
 
 
 -- 使用IFF範例
+drop table if exists #Result2
 SELECT IIF(書名 LIKE '%LINUX%', 'Linux', 'Windows') 類別,  本數 into #Result2
 FROM   借閱清單
 WHERE 書名 LIKE '%LINUX%' OR 書名 LIKE '%Windows%'
@@ -34,8 +46,8 @@ FROM 訂單 LEFT JOIN 客戶   ON 客戶.客戶編號=訂單.客戶編號
           LEFT JOIN 訂購項目 ON 訂購項目.訂單編號=訂單.訂單編號
           LEFT JOIN 書籍 ON 書籍.書籍編號 = 訂購項目.書籍編號
 
-drop table #temp1
-drop table #temp2
+drop table if exists #temp1
+drop table if exists #temp2
 SELECT 訂單.訂單編號, 訂單.下單日期, 客戶.客戶名稱, 客戶.聯絡人, 客戶.地址, 客戶.電話  INTO #temp1
 FROM 訂單 LEFT JOIN 客戶   ON 客戶.客戶編號=訂單.客戶編號 
 
