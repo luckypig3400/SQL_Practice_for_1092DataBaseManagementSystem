@@ -5,6 +5,7 @@ IF DB_ID('練習09') IS NULL BEGIN
 		FILENAME='D:\\MSSQL_DB\\練習09.mdf'
 	)FOR ATTACH;
 END;
+GO
 
 USE  練習09
 
