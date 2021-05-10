@@ -1,145 +1,145 @@
-IF DB_ID('╫m╡ъ10') is null BEGIN
-	CREATE DATABASE ╫m╡ъ10
+IF DB_ID('Г╥╢Г©▓10') is null BEGIN
+	CREATE DATABASE Г╥╢Г©▓10
 	ON PRIMARY(
-		name=╫m╡ъ10,
-		filename='D:\\MSSQL_DB\\╫m╡ъ10.mdf'
+		name=Г╥╢Г©▓10,
+		filename='D:\\MSSQL_DB\\Г╥╢Г©▓10.mdf'
 	) for attach;
 END;
 GO
 
-USE ╫m╡ъ10
+USE Г╥╢Г©▓10
 
 GO
 -- P10-5a
 
-SELECT аp╣╦╓H AS аэ╫п╕WЁФ, ╕a╖}
-FROM ╕X╖@╪t╟с
+SELECT Х│╞Г╣║Д╨╨ AS И┌─Х╚▀Е░█Е√╝, Е°╟Е²─
+FROM Е░┬Д╫°Е╩═Е∙├
 UNION
-SELECT аp╣╦╓H, ╕a╖}
-FROM ╚х╓А
-ORDER BY аp╣╦╓H
+SELECT Х│╞Г╣║Д╨╨, Е°╟Е²─
+FROM Е╝╒Ф┬╤
+ORDER BY Х│╞Г╣║Д╨╨
 
 GO
 -- P10-5b
 
-SELECT аp╣╦╓H AS аэ╫п╕WЁФ, ╕a╖}
-FROM ╕X╖@╪t╟с
+SELECT Х│╞Г╣║Д╨╨ AS И┌─Х╚▀Е░█Е√╝, Е°╟Е²─
+FROM Е░┬Д╫°Е╩═Е∙├
 UNION ALL
-SELECT аp╣╦╓H, ╕a╖}
-FROM ╚х╓А
-ORDER BY аp╣╦╓H
+SELECT Х│╞Г╣║Д╨╨, Е°╟Е²─
+FROM Е╝╒Ф┬╤
+ORDER BY Х│╞Г╣║Д╨╨
 
 GO
 -- P10-6
 
-SELECT аp╣╦╓H AS аэ╫п╕WЁФ, ╕a╖}
-FROM ╕X╖@╪t╟с
+SELECT Х│╞Г╣║Д╨╨ AS И┌─Х╚▀Е░█Е√╝, Е°╟Е²─
+FROM Е░┬Д╫°Е╩═Е∙├
 UNION
-SELECT аp╣╦╓H, ╕a╖}
-FROM ╚х╓А
+SELECT Х│╞Г╣║Д╨╨, Е°╟Е²─
+FROM Е╝╒Ф┬╤
 UNION 
-SELECT '╓Щ╓j╞╔', '╔x╔_╔╚╚n╗й╙F╦Т╓T╛q34╦╧5╪с'
-ORDER BY аp╣╦╓H
+SELECT 'Г▌▀Е╓╖Г═╡', 'Е▐╟Е▄≈Е╦┌Е█≈Д╨╛Ф²╠Х╥╞Д╦┴Ф╝╣34Х≥÷5Ф╗⌠'
+ORDER BY Х│╞Г╣║Д╨╨
 
 GO
 -- P10-7
 
-SELECT ╜qЁФ╫s╦╧, ╓UЁФ╓И╢а, 
-       а`╪ф╤q = (SELECT SUM(╪ф╤q) 
-                 FROM  ╜qай╤╣╔ь 
-                 WHERE ╜qЁФ╫s╦╧ = ╜qЁФ.╜qЁФ╫s╦╧)
-FROM   ╜qЁФ
+SELECT Х╗┌Е√╝Г╥╗Х≥÷, Д╦▀Е√╝Ф≈╔Ф°÷, 
+       Г╦╫Ф∙╦И┤▐ = (SELECT SUM(Ф∙╦И┤▐) 
+                 FROM  Х╗┌ХЁ╪И═┘Г⌡╝ 
+                 WHERE Х╗┌Е√╝Г╥╗Х≥÷ = Х╗┌Е√╝.Х╗┌Е√╝Г╥╗Х≥÷)
+FROM   Х╗┌Е√╝
 
 GO
 -- P10-8
 
-SELECT ╡ё╚~╕W╨ы, 
-       ╕й╓ю╓Я = ╩Ы╝Ф * 100 / ( SELECT SUM (╩Ы╝Ф) FROM ╪п╪п╓╫╔q ) 
-FROM ╪п╪п╓╫╔q
+SELECT Г■╒Е⌠│Е░█Г╗╠, 
+       Г≥╬Е┬├Ф╞■ = Е┐╧Ф═╪ * 100 / ( SELECT SUM (Е┐╧Ф═╪) FROM Ф╗≥Ф╗≥Е┘╛Е▐╦ ) 
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦
 
 GO
 -- P10-9a
 
-SELECT ╡ё╚~╕W╨ы, ╩Ы╝Ф 
-FROM    ╨X╨X╓╫╔q 
-WHERE ╩Ы╝Ф > ( SELECT MAX(╩Ы╝Ф) FROM  ╪п╪п╓╫╔q ) 
+SELECT Г■╒Е⌠│Е░█Г╗╠, Е┐╧Ф═╪ 
+FROM    Ф≈≈Ф≈≈Е┘╛Е▐╦ 
+WHERE Е┐╧Ф═╪ > ( SELECT MAX(Е┐╧Ф═╪) FROM  Ф╗≥Ф╗≥Е┘╛Е▐╦ ) 
 
 GO
 -- P10-9b
 
 SELECT * 
-FROM ╪п╪п╓╫╔q 
-WHERE ╡ё╚~╕W╨ы IN ( SELECT ╡ё╚~╕W╨ы 
-                    FROM ╨X╨X╓╫╔q ) 
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦ 
+WHERE Г■╒Е⌠│Е░█Г╗╠ IN ( SELECT Г■╒Е⌠│Е░█Г╗╠ 
+                    FROM Ф≈≈Ф≈≈Е┘╛Е▐╦ ) 
 
 GO
 -- P10-10a
 
-SELECT ╩Ы╝Ф 
-FROM ╪п╪п╓╫╔q 
-WHERE ╩Ы╝Ф <= ALL ( SELECT ╩Ы╝Ф   
-                    FROM  ╨X╨X╓╫╔q 
-                    WHERE ╩Ы╝Ф > 410)
+SELECT Е┐╧Ф═╪ 
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦ 
+WHERE Е┐╧Ф═╪ <= ALL ( SELECT Е┐╧Ф═╪   
+                    FROM  Ф≈≈Ф≈≈Е┘╛Е▐╦ 
+                    WHERE Е┐╧Ф═╪ > 410)
 
 GO
 -- P10-10b
 
-SELECT ╩Ы╝Ф 
-FROM ╪п╪п╓╫╔q 
-WHERE ╩Ы╝Ф <= ANY ( SELECT ╩Ы╝Ф
-                    FROM ╨X╨X╓╫╔q 
-                    WHERE ╩Ы╝Ф > 410 ) 
+SELECT Е┐╧Ф═╪ 
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦ 
+WHERE Е┐╧Ф═╪ <= ANY ( SELECT Е┐╧Ф═╪
+                    FROM Ф≈≈Ф≈≈Е┘╛Е▐╦ 
+                    WHERE Е┐╧Ф═╪ > 410 ) 
 
 GO
 -- P10-11a
 
 SELECT * 
-FROM ╪п╪п╓╫╔q 
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦ 
 WHERE EXISTS ( SELECT * 
-               FROM ╨X╨X╓╫╔q 
-               WHERE ╡ё╚~╕W╨ы = ╪п╪п╓╫╔q.╡ё╚~╕W╨ы
-                     AND ╩Ы╝Ф > 495) 
+               FROM Ф≈≈Ф≈≈Е┘╛Е▐╦ 
+               WHERE Г■╒Е⌠│Е░█Г╗╠ = Ф╗≥Ф╗≥Е┘╛Е▐╦.Г■╒Е⌠│Е░█Г╗╠
+                     AND Е┐╧Ф═╪ > 495) 
 
 GO
 -- P10-11b
 
-SELECT ╪п╪п╓╫╔q.* 
-FROM ╪п╪п╓╫╔q JOIN ╨X╨X╓╫╔q 
-          ON ╪п╪п╓╫╔q.╡ё╚~╕W╨ы = ╨X╨X╓╫╔q.╡ё╚~╕W╨ы
-WHERE ╨X╨X╓╫╔q.╩Ы╝Ф > 495
+SELECT Ф╗≥Ф╗≥Е┘╛Е▐╦.* 
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦ JOIN Ф≈≈Ф≈≈Е┘╛Е▐╦ 
+          ON Ф╗≥Ф╗≥Е┘╛Е▐╦.Г■╒Е⌠│Е░█Г╗╠ = Ф≈≈Ф≈≈Е┘╛Е▐╦.Г■╒Е⌠│Е░█Г╗╠
+WHERE Ф≈≈Ф≈≈Е┘╛Е▐╦.Е┐╧Ф═╪ > 495
 
 GO
 -- P10-11c
 
 SELECT * 
-FROM ╪п╪п╓╫╔q 
-WHERE ╡ё╚~╕W╨ы IN (SELECT ╡ё╚~╕W╨ы 
-                   FROM ╨X╨X╓╫╔q 
-                   WHERE ╩Ы╝Ф > 495)
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦ 
+WHERE Г■╒Е⌠│Е░█Г╗╠ IN (SELECT Г■╒Е⌠│Е░█Г╗╠ 
+                   FROM Ф≈≈Ф≈≈Е┘╛Е▐╦ 
+                   WHERE Е┐╧Ф═╪ > 495)
 
 GO
 --P10-12a
 
 SELECT *
-FROM ╪п╪п╓╫╔q
-WHERE ╡ё╚~╕W╨ы IN (SELECT ╡ё╚~╕W╨ы
-                   FROM ╨X╨X╓╫╔q)
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦
+WHERE Г■╒Е⌠│Е░█Г╗╠ IN (SELECT Г■╒Е⌠│Е░█Г╗╠
+                   FROM Ф≈≈Ф≈≈Е┘╛Е▐╦)
 
 GO
 -- P10-12b
 
 SELECT * 
-FROM ╨X╨X╓╫╔q 
-WHERE ╡ё╚~╕W╨ы IN (SELECT ╡ё╚~╕W╨ы   
-                   FROM ╪п╪п╓╫╔q  
-                   WHERE ╨X╨X╓╫╔q.╩Ы╝Ф > ╪п╪п╓╫╔q.╩Ы╝Ф) 
+FROM Ф≈≈Ф≈≈Е┘╛Е▐╦ 
+WHERE Г■╒Е⌠│Е░█Г╗╠ IN (SELECT Г■╒Е⌠│Е░█Г╗╠   
+                   FROM Ф╗≥Ф╗≥Е┘╛Е▐╦  
+                   WHERE Ф≈≈Ф≈≈Е┘╛Е▐╦.Е┐╧Ф═╪ > Ф╗≥Ф╗≥Е┘╛Е▐╦.Е┐╧Ф═╪) 
 
 GO
 -- P10-35a
 
-UPDATE  ╝ядy
-SET ╩Ы╝Ф = 400
-WHERE ╝ядy╕W╨ы = 'Windows Server ╗t╡н╧Й╟х'
+UPDATE  Ф⌡╦Г╠█
+SET Е┐╧Ф═╪ = 400
+WHERE Ф⌡╦Г╠█Е░█Г╗╠ = 'Windows Server ГЁ╩Г╣╠Е╞╕Е▀≥'
 
 GO
 -- P10-35b
@@ -147,14 +147,14 @@ GO
 DECLARE @number int
 DECLARE @string char(20) 
 SET @number = 100
-SET @string = '╓я╓я╝я╖╫'
-SELECT @number AS ╪ф╕r, @string AS ╕r╕Й
+SET @string = 'Е╓╘Е╓╘Ф⌡╦Е╠─'
+SELECT @number AS Ф∙╦Е╜≈, @string AS Е╜≈Д╦╡
 
 GO
 -- P10-36a
 
-SELECT ╝ядy╕W╨ы, ╩Ы╝Ф * 0.75 AS ╞S╢f╩Ы
-FROM ╝ядy
+SELECT Ф⌡╦Г╠█Е░█Г╗╠, Е┐╧Ф═╪ * 0.75 AS Г┴╧Ф┐═Е┐╧
+FROM Ф⌡╦Г╠█
 
 GO
 -- P10-36b
@@ -165,53 +165,53 @@ PRINT CAST('2/20/2016' AS DATETIME) + 3.25
 GO
 -- P10-37a
 
-SELECT ╝ядy╕W╨ы, ╩Ы╝Ф
-FROM ╝ядy
-WHERE ╩Ы╝Ф >= 390
+SELECT Ф⌡╦Г╠█Е░█Г╗╠, Е┐╧Ф═╪
+FROM Ф⌡╦Г╠█
+WHERE Е┐╧Ф═╪ >= 390
 
 GO
 -- P10-37b
 
-SELECT ╝ядy╕W╨ы, ╩Ы╝Ф
-FROM ╝ядy 
-WHERE ╝ядy╕W╨ы = 'AutoCAD ╧q╦ёц╦╧о╩P╧о╬г'
+SELECT Ф⌡╦Г╠█Е░█Г╗╠, Е┐╧Ф═╪
+FROM Ф⌡╦Г╠█ 
+WHERE Ф⌡╦Г╠█Е░█Г╗╠ = 'AutoCAD И⌡╩Х┘╕Г╧╙Е°√Х┬┤Е°√Е╜╦'
 
 GO
 -- P10-38a
 
 SELECT * 
-FROM ╨X╨X╓╫╔q 
-WHERE (╩Ы╝Ф > 450 AND ╩Ы╝Ф < 500) OR ╩Ы╝Ф < 430
+FROM Ф≈≈Ф≈≈Е┘╛Е▐╦ 
+WHERE (Е┐╧Ф═╪ > 450 AND Е┐╧Ф═╪ < 500) OR Е┐╧Ф═╪ < 430
 
 GO
 -- P10-48b
 
 SELECT * 
-FROM ╨X╨X╓╫╔q 
-WHERE ╩Ы╝Ф BETWEEN 420 AND 510 
+FROM Ф≈≈Ф≈≈Е┘╛Е▐╦ 
+WHERE Е┐╧Ф═╪ BETWEEN 420 AND 510 
 
 GO
 --P10-38c
 
 SELECT * 
-FROM ╪п╪п╓╫╔q 
-WHERE ╡ё╚~╕W╨ы IN ( 'SQL ╚Э╔Oд_╗Е', 'AutoCAD ╠п╬г', 'Linux ╓Б╔U' ) 
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦ 
+WHERE Г■╒Е⌠│Е░█Г╗╠ IN ( 'SQL Ф▄┤Д╩╓Е╞╤Е┘╦', 'AutoCAD Ф∙≥Е╜╦', 'Linux Ф┴▀Е├┼' ) 
 
 GO
 -- P10-39
 
 SELECT * 
-FROM ╪п╪п╓╫╔q 
-WHERE ╡ё╚~╕W╨ы LIKE '%SQL%'
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦ 
+WHERE Г■╒Е⌠│Е░█Г╗╠ LIKE '%SQL%'
 
 GO
 -- P10-40a
 
 SELECT  * 
-FROM  ╪п╪п╓╫╔q
+FROM  Ф╗≥Ф╗≥Е┘╛Е▐╦
 WHERE  NOT EXISTS ( SELECT  *  
-                    FROM  ╨X╨X╓╫╔q 
-                    WHERE  ╡ё╚~╕W╨ы = ╪п╪п╓╫╔q.╡ё╚~╕W╨ы)
+                    FROM  Ф≈≈Ф≈≈Е┘╛Е▐╦ 
+                    WHERE  Г■╒Е⌠│Е░█Г╗╠ = Ф╗≥Ф╗≥Е┘╛Е▐╦.Г■╒Е⌠│Е░█Г╗╠)
 
 GO
 -- P10-40b
@@ -223,16 +223,16 @@ PRINT 59 ^ 12
 GO
 -- P10-41a
 
-SELECT 'Linux ╛[╞╦╧Й╟х╙╨╩Ы╝Ф╛O ' + CONVERT(varchar, ╩Ы╝Ф) + ' ╓╦' 
-FROM ╪п╪п╓╫╔q 
-WHERE ╡ё╚~╕W╨ы = 'Linux ╛[╞╦╧Й╟х' 
+SELECT 'Linux Ф·╤Г╚≥Е╞╕Е▀≥Г └Е┐╧Ф═╪Ф≤╞ ' + CONVERT(varchar, Е┐╧Ф═╪) + ' Е┘┐' 
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦ 
+WHERE Г■╒Е⌠│Е░█Г╗╠ = 'Linux Ф·╤Г╚≥Е╞╕Е▀≥' 
 
 GO
 -- P10-41b
 
-SELECT -╩Ы╝Ф 
-FROM ╪п╪п╓╫╔q 
-WHERE ╡ё╚~╕W╨ы = 'Linux ╛[╞╦╧Й╟х' 
+SELECT -Е┐╧Ф═╪ 
+FROM Ф╗≥Ф╗≥Е┘╛Е▐╦ 
+WHERE Г■╒Е⌠│Е░█Г╗╠ = 'Linux Ф·╤Г╚≥Е╞╕Е▀≥' 
 
 GO
 -- P10-41c
@@ -242,9 +242,9 @@ PRINT ~ CAST(1 AS tinyint)
 GO
 -- P10-42
 
-UPDATE ╝ядy
-SET ╩Ы╝Ф += 100 
-WHERE ╝ядy╕W╨ы = 'Windows Server ╗t╡н╧Й╟х'
+UPDATE Ф⌡╦Г╠█
+SET Е┐╧Ф═╪ += 100 
+WHERE Ф⌡╦Г╠█Е░█Г╗╠ = 'Windows Server ГЁ╩Г╣╠Е╞╕Е▀≥'
 
 
 GO
@@ -252,95 +252,95 @@ GO
 
 SET ANSI_NULLS OFF
 SELECT * 
-FROM ╜Ш╓u 
-WHERE ╔D╨ч╫s╦╧ = NULL
+FROM Е⌠║Е╥╔ 
+WHERE Д╦╩Г╝║Г╥╗Х≥÷ = NULL
 
 GO
 -- P10-44
 
-SELECT ╘m╕W,
-       ISNULL(CAST(╔D╨ч╫s╦╧ AS VARCHAR), '╣L') AS ╔D╨ч
-FROM ╜Ш╓u
+SELECT Е╖⌠Е░█,
+       ISNULL(CAST(Д╦╩Г╝║Г╥╗Х≥÷ AS VARCHAR), 'Г└║') AS Д╦╩Г╝║
+FROM Е⌠║Е╥╔
 
 GO
 -- P10-45a
 
 SELECT * 
-FROM ╜Ш╓u
-WHERE ╔D╨ч╫s╦╧ IS NULL 
+FROM Е⌠║Е╥╔
+WHERE Д╦╩Г╝║Г╥╗Х≥÷ IS NULL 
 
 GO
 -- P10-45b
 
-UPDATE ╜Ш╓u
-SET ╔D╨ч╫s╦╧ = 0
-WHERE ╔D╨ч╫s╦╧ IS NULL 
+UPDATE Е⌠║Е╥╔
+SET Д╦╩Г╝║Г╥╗Х≥÷ = 0
+WHERE Д╦╩Г╝║Г╥╗Х≥÷ IS NULL 
 
 GO
 -- P10-45c
 
 SELECT *
-FROM ╜Ш╓u
-WHERE ╔D╨ч╫s╦╧ IS NOT NULL
+FROM Е⌠║Е╥╔
+WHERE Д╦╩Г╝║Г╥╗Х≥÷ IS NOT NULL
 
 GO
 -- P10-46
 
-SELECT IIF(╘й╖O=0, '╓k╔м', '╗k╔м') AS ╘й╖O, ╨║╥N╚в, COUNT(*) AS ╓H╪ф
-FROM ╟щ╗В
-GROUP BY ╘й╖O, ╨║╥N╚в  -- ╗л╘й╖O╓н╨║╥N╚в╓ю╡у╜p╪ф
-ORDER BY ╘й╖O, ╨║╥N╚в
+SELECT IIF(Ф─╖Е┬╔=0, 'Е╔ЁГ■÷', 'Г■╥Г■÷') AS Ф─╖Е┬╔, Ф╩©Ф└▐Е╨╕, COUNT(*) AS Д╨╨Ф∙╦
+FROM Е∙▐Е█╥
+GROUP BY Ф─╖Е┬╔, Ф╩©Ф└▐Е╨╕  -- Д╬²Ф─╖Е┬╔Е▐┼Ф╩©Ф└▐Е╨╕Е┬├Г╣└Х╗┬Ф∙╦
+ORDER BY Ф─╖Е┬╔, Ф╩©Ф└▐Е╨╕
 
 GO
 -- P10-47a
 
-SELECT IIF(╨║╥N╚в=3, '╨║╥N', IIF(╨║╥N╚в=2, '╘|╔i', '╝t╚l')) ╣Ш╩Ы, COUNT(*) ╓H╪ф
-FROM ╟щ╗В
-GROUP BY ╨║╥N╚в  -- ╗л╨║╥N╚в╓ю╡у╜p╪ф
-ORDER BY ╨║╥N╚в DESC
+SELECT IIF(Ф╩©Ф└▐Е╨╕=3, 'Ф╩©Ф└▐', IIF(Ф╩©Ф└▐Е╨╕=2, 'Е╟ Е▐╞', 'Е╥╝Е▀│')) Х╘∙Е┐╧, COUNT(*) Д╨╨Ф∙╦
+FROM Е∙▐Е█╥
+GROUP BY Ф╩©Ф└▐Е╨╕  -- Д╬²Ф╩©Ф└▐Е╨╕Е┬├Г╣└Х╗┬Ф∙╦
+ORDER BY Ф╩©Ф└▐Е╨╕ DESC
 
 GO
 -- P10-47b
 
-SELECT CHOOSE(╨║╥N╚в, '╝t╚l', '╘|╔i', '╨║╥N') ╣Ш╩Ы, COUNT(*) ╓H╪ф
-FROM ╟щ╗В
-GROUP BY ╨║╥N╚в  -- ╗л╨║╥N╚в╓ю╡у╜p╪ф
-ORDER BY ╨║╥N╚в DESC
+SELECT CHOOSE(Ф╩©Ф└▐Е╨╕, 'Е╥╝Е▀│', 'Е╟ Е▐╞', 'Ф╩©Ф└▐') Х╘∙Е┐╧, COUNT(*) Д╨╨Ф∙╦
+FROM Е∙▐Е█╥
+GROUP BY Ф╩©Ф└▐Е╨╕  -- Д╬²Ф╩©Ф└▐Е╨╕Е┬├Г╣└Х╗┬Ф∙╦
+ORDER BY Ф╩©Ф└▐Е╨╕ DESC
 
 GO
 -- P10-48
 
-SELECT ╝ядy╫s╦╧, ╝ядy╕W╨ы, ╩Ы╝Ф, ╔X╙╘╓╫╔q,
-       ROW_NUMBER() OVER(ORDER BY ╩Ы╝Ф) AS ╩Ы╝Ф╠ф╕W
-FROM ╝ядy
+SELECT Ф⌡╦Г╠█Г╥╗Х≥÷, Ф⌡╦Г╠█Е░█Г╗╠, Е┐╧Ф═╪, Е┤╨Г┴┬Е┘╛Е▐╦,
+       ROW_NUMBER() OVER(ORDER BY Е┐╧Ф═╪) AS Е┐╧Ф═╪Ф▌▓Е░█
+FROM Ф⌡╦Г╠█
 
 GO
 -- P10-49
 
-SELECT ╝ядy╫s╦╧, ╝ядy╕W╨ы, ╩Ы╝Ф, ╔X╙╘╓╫╔q,
-   RANK() OVER(ORDER BY ╩Ы╝Ф) AS ╩Ы╝Ф╠ф╕W
-FROM ╝ядy
+SELECT Ф⌡╦Г╠█Г╥╗Х≥÷, Ф⌡╦Г╠█Е░█Г╗╠, Е┐╧Ф═╪, Е┤╨Г┴┬Е┘╛Е▐╦,
+   RANK() OVER(ORDER BY Е┐╧Ф═╪) AS Е┐╧Ф═╪Ф▌▓Е░█
+FROM Ф⌡╦Г╠█
 
 GO
 -- P10-50a
 
-SELECT ╝ядy╫s╦╧, ╝ядy╕W╨ы, ╩Ы╝Ф, ╔X╙╘╓╫╔q,
-  DENSE_RANK() OVER(ORDER BY ╩Ы╝Ф) AS ╩Ы╝Ф╠ф╕W
-FROM ╝ядy
+SELECT Ф⌡╦Г╠█Г╥╗Х≥÷, Ф⌡╦Г╠█Е░█Г╗╠, Е┐╧Ф═╪, Е┤╨Г┴┬Е┘╛Е▐╦,
+  DENSE_RANK() OVER(ORDER BY Е┐╧Ф═╪) AS Е┐╧Ф═╪Ф▌▓Е░█
+FROM Ф⌡╦Г╠█
 
 GO
 -- P10-50b
 
-SELECT ╝ядy╫s╦╧, ╝ядy╕W╨ы, ╩Ы╝Ф, ╔X╙╘╓╫╔q,
-ROW_NUMBER() OVER(ORDER BY ╩Ы╝Ф) AS ╩Ы╝Ф╠ф╕W
-FROM ╝ядy
-ORDER BY ╩Ы╝Ф╠ф╕W                        -- ╗о╔н ORDER BY...OFFSET...
-OFFSET 4 ROWS FETCH NEXT 4 ROWS ONLY     --   ╚Э╘w╤г╕^╡д 5~8 ╣╖╟O©Щ
+SELECT Ф⌡╦Г╠█Г╥╗Х≥÷, Ф⌡╦Г╠█Е░█Г╗╠, Е┐╧Ф═╪, Е┤╨Г┴┬Е┘╛Е▐╦,
+ROW_NUMBER() OVER(ORDER BY Е┐╧Ф═╪) AS Е┐╧Ф═╪Ф▌▓Е░█
+FROM Ф⌡╦Г╠█
+ORDER BY Е┐╧Ф═╪Ф▌▓Е░█                        -- Д╫©Г■╗ ORDER BY...OFFSET...
+OFFSET 4 ROWS FETCH NEXT 4 ROWS ONLY     --   Ф▄┤Е╝ Е┌ЁЕ⌡·Г╛╛ 5~8 Г╜├Х╗≤И▄└
 
 GO
 -- P10-51
 
-SELECT ╝ядy╫s╦╧, ╝ядy╕W╨ы, ╩Ы╝Ф, ╔X╙╘╓╫╔q,
-ROW_NUMBER() OVER(PARTITION BY ╔X╙╘╓╫╔q ORDER BY ╩Ы╝Ф) AS ╩Ы╝Ф╠ф╕W
-FROM ╝ядy
+SELECT Ф⌡╦Г╠█Г╥╗Х≥÷, Ф⌡╦Г╠█Е░█Г╗╠, Е┐╧Ф═╪, Е┤╨Г┴┬Е┘╛Е▐╦,
+ROW_NUMBER() OVER(PARTITION BY Е┤╨Г┴┬Е┘╛Е▐╦ ORDER BY Е┐╧Ф═╪) AS Е┐╧Ф═╪Ф▌▓Е░█
+FROM Ф⌡╦Г╠█
 
