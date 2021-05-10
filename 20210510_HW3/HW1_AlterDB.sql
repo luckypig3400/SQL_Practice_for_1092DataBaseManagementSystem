@@ -8,17 +8,17 @@ go
 -- 2.1 修改資料庫中的主檔，並將其SIZE, MAXSIZE以及FILEGROWTH的數值變成原本的2倍 (每個各10分，共15分)
 -- ref1:https://database.guide/how-to-increase-the-file-size-of-a-data-file-in-sql-server-t-sql/
 
-alter database BANK 
+alter database BANK_HW3 
 modify file(
-	name = 'BANK',
-	filename = 'D:\MSSQL_DB\BANK.mdf',
+	name = 'BANK_HW3',
+	filename = 'D:\MSSQL_DB\BANK_HW3.mdf',
 	size=12MB,
 	maxsize=36MB,
 	filegrowth=3MB
 );
 go
 
-use BANK;
+use BANK_HW3;
 
 -- 2.2 修改在[個人資訊]的[性別]欄位中，將預設值改為'M' (5分)
 EXEC sp_helpconstraint @objname = 'Customer';
@@ -57,10 +57,10 @@ default GETDATE() for UP_DATETIME;
  -- 2.6 新增一資料表，為銀行[分行帳號資料表]內容包含: (1)分行帳號 (2)分行名稱  (5分)
 create table BankBranch(
 	BranchID int primary key,--分行帳號
-	BranchBankName nvarchar(30)
+	BranchBANK_HW3Name nvarchar(30)
 );
 select BranchID from Account;
-insert into BankBranch(BranchID,BranchBankName) values(10,'北護銀行');
+insert into BankBranch(BranchID,BranchBANK_HW3Name) values(10,'北護銀行');
 --insert test data in BankBranch
 
  -- 2.7 將上述2.6的 (1)分行帳號使用Alter語法使用Foreigen Key與
@@ -69,4 +69,4 @@ alter table Account add constraint FK__Account__BranchID__123
 Foreign Key(BranchID) references BankBranch(BranchID);
 
 use master;
---release BANK to make other sql query file use this DB
+--release BANK_HW3 to make other sql query file use this DB

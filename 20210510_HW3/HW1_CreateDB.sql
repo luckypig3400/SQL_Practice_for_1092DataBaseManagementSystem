@@ -4,45 +4,34 @@
 完成以下新建資料表語法，並分別儲存成一個sql執行檔，規格說明如下:
 
 1. CreateDB.sql: CREATE TABLE規格: (合計共80分)
- - 1.1. 新增資料庫，需包含用指定特定資料檔的方式(附加資料庫FOR ATTACH) ，須提供bank.mdf(15分,bank.mdf 15分，合計30分)
-  * 提示: 需先將資料庫bank.mdf檔建立起來，再用FOR ATTACH載入MDF檔。bank.mdf 。路徑請指定為 D:\MSSQL_DB\bank.mdf
+ - 1.1. 新增資料庫，需包含用指定特定資料檔的方式(附加資料庫FOR ATTACH) ，須提供BANK_HW3.mdf(15分,BANK_HW3.mdf 15分，合計30分)
+  * 提示: 需先將資料庫BANK_HW3.mdf檔建立起來，再用FOR ATTACH載入MDF檔。BANK_HW3.mdf 。路徑請指定為 D:\MSSQL_DB\BANK_HW3.mdf
 */
 use master;
 
-if DB_ID('BANK')IS NOT NULL begin
-  drop database BANK;
-end--sql語法中的begin與end就如同C或JAVA的{}把判斷式成立後要執行的多個程式碼框起來
+if DB_ID('BANK_HW3')IS NOT NULL begin
+  drop database BANK_HW3;
+end;--sql語法中的begin與end就如同C或JAVA的{}把判斷式成立後要執行的多個程式碼框起來
 
 --以下建立指定路徑儲存及其他參數設定的資料庫
-create database BANK
+create database BANK_HW3
 	ON PRIMARY(
-		name='BANK',
-		filename='D:\MSSQL_DB\BANK.mdf',
+		name='BANK_HW3',
+		filename='D:\MSSQL_DB\BANK_HW3.mdf',
 		SIZE=4MB,
 		MAXSIZE=12MB,
 		FILEGROWTH=1MB
-	),
-	FILEGROUP Bank_FG1(
-		NAME='Bank_FG1_Dat1',
-		FILENAME='D:\MSSQL_DB\MyDB_FG1_1.ndf',
-		SIZE=1MB,
-		MAXSIZE=9MB,
-		FILEGROWTH=1MB),
-		(NAME='Bank_FG1_Dat2',
-		FILENAME='D:\MSSQL_DB\MyDB_FG1_2.ndf',
-		SIZE=1MB,
-		MAXSIZE=9MB,
-		FILEGROWTH=1MB
 	)
 	LOG ON(
-		NAME='BANK_log',
-		FILENAME='D:\MSSQL_DB\BANK.ldf',
+		NAME='BANK_HW3_log',
+		FILENAME='D:\MSSQL_DB\BANK_HW3.ldf',
 		SIZE=1MB,
 		MAXSIZE=12MB,
 		FILEGROWTH=1MB
 	);
+GO
 
-use BANK;
+use BANK_HW3;
 
 -- 1.2. 每個資料表需建立個別的PRIMARY KEY (每個表各5分，共15分)
 
@@ -106,7 +95,7 @@ CREATE TABLE Account
   UP_User int,
   foreign key(ID) references Customer(ID)
   -- 1.3  將[帳號], [個人資訊]這兩個資料表以[個人帳號ID]欄位進行Foreigen Key 關聯(每個表各10分，共20分)
-) ON BANK_FG1;
+);
 
 -- 插入測試資料
 DECLARE @CURRENT_TS datetimeoffset = GETDATE()
@@ -127,7 +116,7 @@ CREATE TABLE Trans
   UP_DATETIME datetime,
   UP_USR int,
   primary key(AccID, TranID)
-) ON BANK_FG1;
+);
 GO
 
 -- 插入測試資料
@@ -162,4 +151,4 @@ SELECT *
 FROM Trans
 
 use master;
---release BANK to make other sql query file use this DB
+--release BANK_HW3 to make other sql query file use this DB

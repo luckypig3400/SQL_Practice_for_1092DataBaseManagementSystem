@@ -9,9 +9,9 @@
  作為區隔需分兩欄位的數值 (1:15分、2-3: 10分，4-6:  5分，
  合計: 15x1 + 10x3 + 5x3=50分)
 */
-use BANK;
+use BANK_HW3;
 select C.LName + ', ' + C.FName as 姓名,cast(C.BDate as varchar(15)) +', Sex:'+ C.Sex as 生日與性別,
-C.City +', '+ C.Country as 城市與國籍, A.AccID as 帳號, B.BranchBankName as 分行名稱, A.Balance as 餘額
+C.City +', '+ C.Country as 城市與國籍, A.AccID as 帳號, B.BranchBANK_HW3Name as 分行名稱, A.Balance as 餘額
 from Account as A, BankBranch as B, Customer as C 
 where C.ID = A.ID and A.BranchID = B.BranchID;
 
@@ -39,4 +39,4 @@ where C.ID = A.ID and A.AccID = T.AccID group by C.LName, C.FName;
 --ref2:https://www.w3schools.com/sql/sql_groupby.asp
 
 
-use master;--release database BANK
+use master;--release database BANK_HW3
