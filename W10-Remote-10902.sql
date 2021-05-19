@@ -1,3 +1,13 @@
+if DB_ID('練習10') is null begin
+	create database 練習10
+	on primary(
+		name='練習10',
+		filename='D:\\MSSQL_DB\\練習10.mdf'
+	),(
+		filename='D:\\MSSQL_DB\\練習10_log.ldf'
+	) for attach;
+begin;
+
 USE 練習10
 
 -- 子查詢
