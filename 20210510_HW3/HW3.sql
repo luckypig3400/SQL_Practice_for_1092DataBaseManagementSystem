@@ -10,12 +10,18 @@ alter table Trans drop constraint PK__Trans__1EBB4AFA98EA6895;
 alter table Trans
 alter column TranID varchar(36);
 --原先定義ID為int先將其資料型態改為varchar才能儲存字元_
+declare @newTID int = 1;
+
 declare @accID varchar(10) = '00000001';
-declare @tID int = 1;
-while @tID <= COUNT((select * from Trans where AccID = @accID))
+declare @accTID int = 1;
+declare @accTotalTrans int = (select COUNT(TranID) from Trans where AccID = @accID);
+while @accTID <= @accTotalTrans
 begin
-	print(@tID);
-	@tID + 1;
+	declare @tranTime date = (select TranTime from Trans where TranID = @accTID and AccID = @accID);
+	declare @tIDnewFormat varchar(36)
+	print(@tIDnewFormat);
+	set @accTID = @accTID + 1;
+	set @newTID = @newTID + 1;
 end;
 
 --2. 新增一個資料表LOG_SEQ，此資料表為記錄每天一共有多少筆log產生，以日期yyyymmdd作為primary key。 Schema規則如下
