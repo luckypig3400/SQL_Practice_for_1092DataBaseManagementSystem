@@ -6,7 +6,7 @@ use BANK_HW3;
 
 select * from Trans;
 exec sp_helpconstraint @objname=Trans;
-alter table Trans drop constraint PK__Trans__1EBB4AFA98EA6895;
+alter table Trans drop constraint if exists PK__Trans__1EBB4AFA98EA6895;
 alter table Trans
 alter column TranID varchar(36);
 --原先定義ID為int先將其資料型態改為varchar才能儲存字元_
