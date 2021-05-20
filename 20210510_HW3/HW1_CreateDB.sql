@@ -107,16 +107,16 @@ GO
 -- 新增交易紀錄Table: Trans 
 CREATE TABLE Trans
 (
-  AccID varchar(10),
-  TranID int,
+  AccID varchar(10) not null,
+  TranID int not null,
   TranTime datetime,
   AtmID varchar(3),
   TranType varchar(3),
   TranNote nvarchar(100),
   UP_DATETIME datetime,
-  UP_USR int,
-  primary key(AccID, TranID)
+  UP_USR int
 );
+alter table Trans add constraint PK__Trans__specified_contraintName primary key(AccID, TranID);
 GO
 
 -- 插入測試資料

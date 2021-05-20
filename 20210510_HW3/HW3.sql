@@ -6,10 +6,11 @@ use BANK_HW3;
 
 select * from Trans;
 exec sp_helpconstraint @objname=Trans;
-alter table Trans drop constraint if exists PK__Trans__1EBB4AFA98EA6895;
-alter table Trans
-alter column TranID varchar(36);
+alter table Trans drop constraint if exists PK__Trans__specified_contraintName;
+alter table Trans alter column TranID varchar(36) not null;
 --原先定義ID為int先將其資料型態改為varchar才能儲存字元_
+alter table Trans add primary key(TranID);
+-- https://www.w3schools.com/sql/sql_primarykey.ASP
 
 declare @newTID int = 1;
 
@@ -65,3 +66,5 @@ end;
 --3. 請整合1與2語法，並且將SDATE以及LOG_COUNT的結果帶入新增[交易紀錄]語法(INSERT)中 (20)
 
 --4. 請修改[個人資訊]資料表，並新增[個人密碼]欄位，使用變數宣告方式撰寫SQL Script輸入帳號與密碼，若帳密正確，顯示"密碼正確"；密碼錯誤顯示"密碼錯誤" (20)
+
+use master -- release database
