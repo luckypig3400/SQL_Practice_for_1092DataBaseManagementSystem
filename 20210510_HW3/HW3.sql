@@ -19,6 +19,7 @@ declare @accTotalTrans int = (select COUNT(TranID) from Trans where AccID = @acc
 while @accTID <= @accTotalTrans
 begin
 	declare @tranTime date = (select TranTime from Trans where TranID = cast(@accTID as varchar) and AccID = @accID);
+	--因為TranID的格式從原本的int被改成varchar了，因此在select的條件要轉成varchar才不會出錯
 	declare @tIDnewFormat varchar(36) = convert(varchar ,@tranTime ,112) + '_';
 	--時間格式convert()代碼查詢:https://dotblogs.com.tw/kevinya/2014/09/05/146474
 	--https://stackoverflow.com/questions/889629/how-to-get-a-date-in-yyyy-mm-dd-format-from-a-tsql-datetime-field/889660
@@ -26,10 +27,31 @@ begin
 	--[MS SQL] 產生數字前面補零的固定長度字串:https://felixhuang.pixnet.net/blog/post/26738193
 	set @tIDnewFormat = @tIDnewFormat + @idToMerge;
 	print(@tIDnewFormat);
-	update Trans set TranID = @tIDnewFormat where TranID = @accTID and AccID = @accID;
+	update Trans set TranID = @tIDnewFormat where TranID = cast(@accTID as varchar) and AccID = @accID;
 	set @accTID = @accTID + 1;
 	set @newTID = @newTID + 1;
 end;
+
+set @accID = '00000006';
+set @accTID = 1;
+set @accTotalTrans = (select COUNT(TranID) from Trans where AccID = @accID);
+while @accTID <= @accTotalTrans
+begin
+	set @tranTime = (select TranTime from Trans where TranID = cast(@accTID as varchar) and AccID = @accID);
+	set @tIDnewFormat = convert(varchar ,@tranTime ,112) + '_';
+	set @idToMerge = (select RIGHT('000000' + cast(@newTID as varchar), 6));
+	set @tIDnewFormat = @tIDnewFormat + @idToMerge;
+	print(@tIDnewFormat);
+	update Trans set TranID = @tIDnewFormat where TranID = cast(@accTID as varchar) and AccID = @accID;
+	set @accTID = @accTID + 1;
+	set @newTID = @newTID + 1;
+end;
+
+
+
+
+
+
 
 --2. 新增一個資料表LOG_SEQ，此資料表為記錄每天一共有多少筆log產生，以日期yyyymmdd作為primary key。 Schema規則如下
 --CREATE TABLE LOG_SEQ(
