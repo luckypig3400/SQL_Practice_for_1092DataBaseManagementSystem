@@ -10,6 +10,7 @@ alter table Trans drop constraint PK__Trans__1EBB4AFA98EA6895;
 alter table Trans
 alter column TranID varchar(36);
 --原先定義ID為int先將其資料型態改為varchar才能儲存字元_
+
 declare @newTID int = 1;
 
 declare @accID varchar(10) = '00000001';
@@ -17,14 +18,15 @@ declare @accTID int = 1;
 declare @accTotalTrans int = (select COUNT(TranID) from Trans where AccID = @accID);
 while @accTID <= @accTotalTrans
 begin
-	declare @tranTime date = (select TranTime from Trans where TranID = @accTID and AccID = @accID);
+	declare @tranTime date = (select TranTime from Trans where TranID = cast(@accTID as varchar) and AccID = @accID);
 	declare @tIDnewFormat varchar(36) = convert(varchar ,@tranTime ,112) + '_';
 	--時間格式convert()代碼查詢:https://dotblogs.com.tw/kevinya/2014/09/05/146474
 	--https://stackoverflow.com/questions/889629/how-to-get-a-date-in-yyyy-mm-dd-format-from-a-tsql-datetime-field/889660
 	declare @idToMerge varchar(15) = (select RIGHT('000000' + cast(@newTID as varchar), 6));
 	--[MS SQL] 產生數字前面補零的固定長度字串:https://felixhuang.pixnet.net/blog/post/26738193
-	print(@idToMerge);
+	set @tIDnewFormat = @tIDnewFormat + @idToMerge;
 	print(@tIDnewFormat);
+	update Trans set TranID = @tIDnewFormat where TranID = @accTID and AccID = @accID;
 	set @accTID = @accTID + 1;
 	set @newTID = @newTID + 1;
 end;
