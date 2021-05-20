@@ -9,8 +9,6 @@ exec sp_helpconstraint @objname=Trans;
 alter table Trans drop constraint if exists PK__Trans__specified_contraintName;
 alter table Trans alter column TranID varchar(36) not null;
 --原先定義ID為int先將其資料型態改為varchar才能儲存字元_
-alter table Trans add primary key(TranID);
--- https://www.w3schools.com/sql/sql_primarykey.ASP
 
 declare @newTID int = 1;
 
@@ -61,7 +59,7 @@ CREATE TABLE LOG_SEQ(
   LOG_COUNT varchar(6) NOT NULL --當天一共有多少筆log
 ) 
 -- 2.1 請撰寫SQL Script如果當天第一筆log產生時，且LOG_SEQ無資料時, 新增當天的紀錄，並給予初始化，SDATE數值指定為當天，且LOG_COUNT指定為0 (30)
-declare @queryDate date = '2021-05-19';
+declare @queryDate date = '2021-05-19';--也可替換為其他日期或getdate()
 if (select SDATE from LOG_SEQ where SDATE = CONVERT(varchar, @queryDate,112)) is null
 begin
 	insert into LOG_SEQ values(CONVERT(varchar, @queryDate,112), '0');
@@ -70,6 +68,23 @@ end;
 
 -- 2.2 呈2.1, 若每新增一筆log時，LOG_COUNT自動加1 (10)
 --提示: 2使用子查詢(Subquery)中的EXISTS語法
+declare @todayTranCount int = (select COUNT(TranID) from Trans where cast(Trans.TranTime as date) = cast(GETDATE() as date));
+declare @todayNewTID varchar(6) = cast( (@todayTranCount + 1) as varchar);
+declare @trID varchar(36) = convert(varchar, getdate(), 112) + '_' + (select Right('000000' + @todayNewTID, 6));
+
+INSERT INTO Trans (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
+VALUES('00000001', @trID, GETDATE(), 'A01', 'D05', N'Cool~\^o^/╰(*°▽°*)╯', GETDATE(), '001');
+if (select SDATE from LOG_SEQ where SDATE = CONVERT(varchar, GETDATE(), 112)) is null
+begin
+	insert into LOG_SEQ values(CONVERT(varchar, GETDATE(),112), @todayNewTID);
+end;
+else begin
+	update LOG_SEQ set LOG_COUNT = @todayNewTID where SDATE = CONVERT(varchar, GETDATE(), 112);
+end;
+
+
+
+
 
 
 --3. 請整合1與2語法，並且將SDATE以及LOG_COUNT的結果帶入新增[交易紀錄]語法(INSERT)中 (20)
