@@ -55,14 +55,21 @@ end;
 
 
 --2. 新增一個資料表LOG_SEQ，此資料表為記錄每天一共有多少筆log產生，以日期yyyymmdd作為primary key。 Schema規則如下
+drop table if exists LOG_SEQ;
 CREATE TABLE LOG_SEQ(
   SDATE varchar(8) NOT NULL PRIMARY KEY, -- 當天的log紀錄
   LOG_COUNT varchar(6) NOT NULL --當天一共有多少筆log
 ) 
 -- 2.1 請撰寫SQL Script如果當天第一筆log產生時，且LOG_SEQ無資料時, 新增當天的紀錄，並給予初始化，SDATE數值指定為當天，且LOG_COUNT指定為0 (30)
+declare @queryDate date = '2021-05-19';
+if (select SDATE from LOG_SEQ where SDATE = CONVERT(varchar, @queryDate,112)) is null
+begin
+	insert into LOG_SEQ values(CONVERT(varchar, @queryDate,112), '0');
+	print('成功建立該日期的Log');
+end;
+
 -- 2.2 呈2.1, 若每新增一筆log時，LOG_COUNT自動加1 (10)
 --提示: 2使用子查詢(Subquery)中的EXISTS語法
-
 
 
 --3. 請整合1與2語法，並且將SDATE以及LOG_COUNT的結果帶入新增[交易紀錄]語法(INSERT)中 (20)
