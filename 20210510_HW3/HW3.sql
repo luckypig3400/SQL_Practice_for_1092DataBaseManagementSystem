@@ -18,7 +18,9 @@ declare @accTotalTrans int = (select COUNT(TranID) from Trans where AccID = @acc
 while @accTID <= @accTotalTrans
 begin
 	declare @tranTime date = (select TranTime from Trans where TranID = @accTID and AccID = @accID);
-	declare @tIDnewFormat varchar(36)
+	declare @tIDnewFormat varchar(36) = convert(varchar ,@tranTime ,112) + '_';
+	--時間格式convert()代碼查詢:https://dotblogs.com.tw/kevinya/2014/09/05/146474
+	--https://stackoverflow.com/questions/889629/how-to-get-a-date-in-yyyy-mm-dd-format-from-a-tsql-datetime-field/889660
 	print(@tIDnewFormat);
 	set @accTID = @accTID + 1;
 	set @newTID = @newTID + 1;
