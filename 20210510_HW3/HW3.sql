@@ -3,9 +3,20 @@
 -- 1.2 流水號由1開始編碼，流水號不足則左邊補0。(10)
 -- 1.3 參考範例: 20190507_000001
 use BANK_HW3;
-select * from Trans;
 
-update set TranID = 
+select * from Trans;
+exec sp_helpconstraint @objname=Trans;
+alter table Trans drop constraint PK__Trans__1EBB4AFA98EA6895;
+alter table Trans
+alter column TranID varchar(36);
+--原先定義ID為int先將其資料型態改為varchar才能儲存字元_
+declare @accID varchar(10) = '00000001';
+declare @tID int = 1;
+while @tID <= COUNT((select * from Trans where AccID = @accID))
+begin
+	print(@tID);
+	@tID + 1;
+end;
 
 --2. 新增一個資料表LOG_SEQ，此資料表為記錄每天一共有多少筆log產生，以日期yyyymmdd作為primary key。 Schema規則如下
 --CREATE TABLE LOG_SEQ(
