@@ -114,6 +114,8 @@ end;
 
 
 --4. 請修改[個人資訊]資料表，並新增[個人密碼]欄位，使用變數宣告方式撰寫SQL Script輸入帳號與密碼，若帳密正確，顯示"密碼正確"；密碼錯誤顯示"密碼錯誤" (20)
+alter table Customer drop column if exists PWD;
+--https://stackoverflow.com/questions/173814/using-alter-to-drop-a-column-if-it-exists-in-mysql/173820
 alter table Customer add PWD varbinary(600);
 
 update Customer set PWD = HASHBYTES('SHA2_512', 'pwd01912') where ID = '0';
