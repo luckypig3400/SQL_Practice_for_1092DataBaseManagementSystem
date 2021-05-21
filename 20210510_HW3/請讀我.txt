@@ -1,0 +1,9 @@
+請依序執行以下檔案 謝謝!
+
+1.HW1_CreateDB.sql
+
+2.HW1_AlterDB.sql
+
+3.HW1_SelectDB.sql
+
+Final Step: HW3.sql
