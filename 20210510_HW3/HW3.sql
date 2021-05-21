@@ -5,7 +5,7 @@
 use BANK_HW3;
 
 select * from Trans;
-exec sp_helpconstraint @objname=Trans;
+--exec sp_helpconstraint @objname=Trans;
 alter table Trans drop constraint if exists PK__Trans__specified_contraintName;
 alter table Trans alter column TranID varchar(36) not null;
 --原先定義ID為int先將其資料型態改為varchar才能儲存字元_
@@ -93,9 +93,9 @@ declare @formattedDate varchar(30) = CONVERT(varchar, GETDATE(), 112);
 if (select SDATE from LOG_SEQ where SDATE = @formattedDate) is null
 begin
 	insert into LOG_SEQ values (@formattedDate, '0');
-	declare @trID varchar(36) = @formattedDate + '_' + (select RIGHT('000000'+ '1' ,6));
+	declare @todayFirstID varchar(36) = @formattedDate + '_' + (select RIGHT('000000'+ '1' ,6));
 	--使用者新增資料區域開始
-	insert into Trans VALUES('00000006', @trID, GETDATE(), 'A03', 'D66', N'QQㄋㄟㄋㄟ好喝到咩噗茶', GETDATE(), '006');
+	insert into Trans VALUES('00000006', @todayFirstID, GETDATE(), 'A03', 'D66', N'QQㄋㄟㄋㄟ好喝到咩噗茶', GETDATE(), '006');
 	--使用者新增資料區域結束
 	update LOG_SEQ set LOG_COUNT = 1 where SDATE = @formattedDate;
 end;
@@ -114,5 +114,7 @@ end;
 
 
 --4. 請修改[個人資訊]資料表，並新增[個人密碼]欄位，使用變數宣告方式撰寫SQL Script輸入帳號與密碼，若帳密正確，顯示"密碼正確"；密碼錯誤顯示"密碼錯誤" (20)
+
+
 
 use master -- release database
