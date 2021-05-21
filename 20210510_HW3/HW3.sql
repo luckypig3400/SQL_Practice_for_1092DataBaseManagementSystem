@@ -114,6 +114,22 @@ end;
 
 
 --4. 請修改[個人資訊]資料表，並新增[個人密碼]欄位，使用變數宣告方式撰寫SQL Script輸入帳號與密碼，若帳密正確，顯示"密碼正確"；密碼錯誤顯示"密碼錯誤" (20)
+alter table Customer add PWD varbinary(600);
+
+update Customer set PWD = HASHBYTES('SHA2_512', 'pwd01912') where ID = '0';
+update Customer set PWD = HASHBYTES('SHA2_512', 'pwd0011998') where ID = '001';
+update Customer set PWD = HASHBYTES('SHA2_512', 'pwd0021998') where ID = '002';
+update Customer set PWD = HASHBYTES('SHA2_512', 'pwd0031998') where ID = '003';
+update Customer set PWD = HASHBYTES('SHA2_512', 'pwd0062003') where ID = '006';
+--個人資料參考
+	--Customer (ID,Lname,FName,BDate,Sex,Address,City,Country,UP_Date,UP_User)
+	--('0', 'CY', 'Lien', '19120101', 'M', 'Neihu', 'Taipei', 'Taiwan', GETDATE(), '0'),
+	--('001', 'LJ', 'KUO', '19981002', 'F', 'Neihu', 'Taipei', 'Taiwan', GETDATE(), '0'),
+	--('002', 'CW', 'Lin', '19981002', 'F', 'Tianmu', 'Taipei', 'Taiwan', GETDATE(), '0'),
+	--('003', 'DW', 'Wang', '19981002', 'M', 'Beitou', 'Taipei', 'Taiwan', GETDATE(), '0'),
+	--('006', 'OwO', 'YA', '20030331', 'F', 'Tianmu', 'Taipei', 'Taiwan', GETDATE(), '0');
+--個人資料參考
+
 
 
 
