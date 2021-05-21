@@ -121,15 +121,25 @@ update Customer set PWD = HASHBYTES('SHA2_512', 'pwd0011998') where ID = '001';
 update Customer set PWD = HASHBYTES('SHA2_512', 'pwd0021998') where ID = '002';
 update Customer set PWD = HASHBYTES('SHA2_512', 'pwd0031998') where ID = '003';
 update Customer set PWD = HASHBYTES('SHA2_512', 'pwd0062003') where ID = '006';
---個人資料參考
+--個人資訊資料參考
 	--Customer (ID,Lname,FName,BDate,Sex,Address,City,Country,UP_Date,UP_User)
 	--('0', 'CY', 'Lien', '19120101', 'M', 'Neihu', 'Taipei', 'Taiwan', GETDATE(), '0'),
 	--('001', 'LJ', 'KUO', '19981002', 'F', 'Neihu', 'Taipei', 'Taiwan', GETDATE(), '0'),
 	--('002', 'CW', 'Lin', '19981002', 'F', 'Tianmu', 'Taipei', 'Taiwan', GETDATE(), '0'),
 	--('003', 'DW', 'Wang', '19981002', 'M', 'Beitou', 'Taipei', 'Taiwan', GETDATE(), '0'),
 	--('006', 'OwO', 'YA', '20030331', 'F', 'Tianmu', 'Taipei', 'Taiwan', GETDATE(), '0');
---個人資料參考
-
+--個人資訊資料參考
+--使用者密碼輸入區起使
+declare @inputID varchar(10) = '006';
+declare @inputPWD varchar(30) = 'pwd0062003';
+--使用者密碼輸入區終點
+if (select PWD from Customer where ID = @inputID) = HASHBYTES('SHA2_512', @inputPWD)
+begin
+	print(N'ヾ(≧▽≦*)o密碼正確~~~');
+end;
+else begin
+	print(N'`(*>﹏<*)′密碼錯誤!!!');
+end;
 
 
 
