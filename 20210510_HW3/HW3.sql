@@ -93,7 +93,7 @@ declare @formattedDate varchar(30) = CONVERT(varchar, GETDATE(), 112);
 if (select SDATE from LOG_SEQ where SDATE = @formattedDate) is null
 begin
 	insert into LOG_SEQ values (@formattedDate, '0');
-	declare @trID varchar(36) = @formattedDate + '_' + (select RIGHT('000000'+ 1 ,6));
+	declare @trID varchar(36) = @formattedDate + '_' + (select RIGHT('000000'+ '1' ,6));
 	--使用者新增資料區域開始
 	insert into Trans VALUES('00000006', @trID, GETDATE(), 'A03', 'D66', N'QQㄋㄟㄋㄟ好喝到咩噗茶', GETDATE(), '006');
 	--使用者新增資料區域結束
@@ -101,15 +101,17 @@ begin
 end;
 else begin
 	declare @newID int = (select LOG_COUNT from LOG_SEQ where SDATE = @formattedDate) + 1;
-	declare @id2wrtie varchar(36) = @formattedDate + '_' + (select RIGHT('000000' + @newID, 6));
+	declare @id2wrtie varchar(36) = @formattedDate + '_' + (select RIGHT('000000' + cast(@newID as varchar), 6));
 	--使用者新增資料區域開始
 	insert into Trans VALUES('00000006', @id2wrtie, GETDATE(), 'D33', 'G05', N'爆爆水果茶', GETDATE(), '006');
 	--使用者新增資料區域結束
 	update LOG_SEQ set LOG_COUNT = @newID where SDATE = @formattedDate;
 end;
 
-select * from LOG_SEQ
-select * from Trans
+
+
+
+
 
 --4. 請修改[個人資訊]資料表，並新增[個人密碼]欄位，使用變數宣告方式撰寫SQL Script輸入帳號與密碼，若帳密正確，顯示"密碼正確"；密碼錯誤顯示"密碼錯誤" (20)
 
