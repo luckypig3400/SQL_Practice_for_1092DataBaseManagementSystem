@@ -55,16 +55,16 @@ where 產品名稱 LIKE '_indows%'
 -- - 3 滿意
 -- - 2: 尚可
 -- - 1: 差勁
-select *
-from 問卷
-Order By 滿意度 DESC
 
+-- SQL How to replace values of select return?
+-- https://stackoverflow.com/questions/16753122/sql-how-to-replace-values-of-select-return
+-- https://www.w3schools.com/sql/sql_case.asp
 select 問卷編號,
-case
+	case
 	when 性別=1 then '男'
 	else '女'
 end as 性別,
-case
+	case
 	when 滿意度=3 then '滿意'
 	when 滿意度=2 then '尚可'
 	when 滿意度=1 then '差勁'
