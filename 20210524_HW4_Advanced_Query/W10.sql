@@ -8,7 +8,7 @@
 -- 6. 遲交0分
 USE master;
 GO
---GO 用途說明: https://blog.csdn.net/zhangqidashu/article/details/17250321
+--GO 用途說明:	https://blog.csdn.net/zhangqidashu/article/details/17250321
 IF DB_ID('練習10') IS NULL BEGIN
 	CREATE DATABASE 練習10 ON PRIMARY(
 		NAME=練習10,
@@ -23,13 +23,15 @@ USE 練習10;
 GO
 -- ### 1. 使用JOIN語法改寫10-7範例(25)
  -- - 1. 說明: 請使用OUTER　JOIN語法將[訂單]以及[訂購項目]合併，表格輸出顯示結果應與已下程式碼結果一致
- SELECT 訂單編號, 下單日期,
- 　　　　總數量 = (SELECT SUM(數量)
- 　　　　　　　　　FROM  訂購項目
-                  　　　WHERE 訂單編號 = 訂單.訂單編號)
- FROM   訂單
+SELECT 訂單編號, 下單日期,
+　　　　總數量 = (SELECT SUM(數量)
+　　　　　　　　　FROM  訂購項目
+                 　　　WHERE 訂單編號 = 訂單.訂單編號)
+FROM   訂單
 
- 
+select 訂單.訂單編號, 訂單.下單日期 FROM  訂單
+full outer join 訂購項目 on 訂購項目.訂單編號 = 訂單.訂單編號
+
 -- ### 2. 查詢欄位中不確定字元語法(25)
  -- - 1. 說明: 請查詢資料表[標標公司]中，[產品名稱]內容包含 "某某"手冊的結果，例如: 資料表產品名稱有Windows{某}{某}手冊，但查詢者忘記某某是那個兩個字，請使用LIKE語法完成此查詢結果
 
