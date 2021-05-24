@@ -15,7 +15,7 @@ IF DB_ID('練習10') IS NULL BEGIN
 		FILENAME='D:\\MSSQL_DB\\練習10.mdf'
 	)
 	LOG ON(
-		FILENAME='D:\\MSSQL_DB\\練習10_log.ldf'
+		FILENAME='D:\\MSSQL_DB\\練習10_l	og.ldf'
 	)FOR ATTACH;
 END;
 GO
@@ -36,7 +36,9 @@ Group BY 訂單.訂單編號, 訂單.下單日期
 
 -- ### 2. 查詢欄位中不確定字元語法(25)
 -- - 1. 說明: 請查詢資料表[標標公司]中，[產品名稱]內容包含 "某某"手冊的結果，例如: 資料表產品名稱有Windows{某}{某}手冊，但查詢者忘記某某是那個兩個字，請使用LIKE語法完成此查詢結果
-
+select 產品名稱
+from 標標公司
+where 產品名稱 LIKE '%手冊'
 
 -- ### 3. 查詢欄位中不確定字元包含在某個範圍語法(25)
 -- - 1. 說明: 大岳記得資料表[標標公司]中的某項產品的[產品名稱]的內容:  {某字元}indows，這個{某字元}可能是S,T,U,V W,Z,Y, Z當中某個字元， 請使用LIKE語法協助大岳完成此查詢結果
