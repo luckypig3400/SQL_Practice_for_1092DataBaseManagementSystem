@@ -8,6 +8,7 @@
 -- 6. 遲交0分
 USE master;
 GO
+--GO 用途說明: https://blog.csdn.net/zhangqidashu/article/details/17250321
 IF DB_ID('練習10') IS NULL BEGIN
 	CREATE DATABASE 練習10 ON PRIMARY(
 		NAME=練習10,
