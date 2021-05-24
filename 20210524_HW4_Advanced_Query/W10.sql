@@ -6,14 +6,27 @@
 -- 4. 請將所有語法依照順序，儲存在同一檔案，名稱W10.sql
 -- 5. 所有題目全對才給分
 -- 6. 遲交0分
-
+USE master;
+GO
+IF DB_ID('練習10') IS NULL BEGIN
+	CREATE DATABASE 練習10 ON PRIMARY(
+		NAME=練習10,
+		FILENAME='D:\\MSSQL_DB\\練習10.mdf'
+	)
+	LOG ON(
+		FILENAME='D:\\MSSQL_DB\\練習10_log.ldf'
+	)FOR ATTACH;
+END;
+GO
+USE 練習10;
+GO
 -- ### 1. 使用JOIN語法改寫10-7範例(25)
  -- - 1. 說明: 請使用OUTER　JOIN語法將[訂單]以及[訂購項目]合併，表格輸出顯示結果應與已下程式碼結果一致
--- SELECT 訂單編號, 下單日期,
--- 　　　　總數量 = (SELECT SUM(數量)
--- 　　　　　　　　　FROM  訂購項目
-                 -- 　　　WHERE 訂單編號 = 訂單.訂單編號)
--- FROM   訂單
+ SELECT 訂單編號, 下單日期,
+ 　　　　總數量 = (SELECT SUM(數量)
+ 　　　　　　　　　FROM  訂購項目
+                  　　　WHERE 訂單編號 = 訂單.訂單編號)
+ FROM   訂單
 
  
 -- ### 2. 查詢欄位中不確定字元語法(25)
@@ -32,3 +45,5 @@
     -- - 3 滿意
     -- - 2: 尚可
     -- - 1: 差勁
+
+	USE master;
