@@ -9,9 +9,20 @@
 -- - 使用者定義函數不能用來執行修改資料庫狀態的動作。
 -- - 使用者定義函式不得包含具有資料表作為其目標的 OUTPUT INTO 子句。
 
+use BankHW5
+
 --1. [作業1]-[分行帳號資料表]，輸入分行帳號，並回傳分行名稱
 -- - 使用變數宣告的方式，將分行帳號作為變數輸入
 -- - 執行預存程序時，需輸入分行帳號，輸出以TABLE型別的參數回傳查詢結果
+
+CREATE PROCEDURE BankNameQuery
+@branchID varchar(30)
+AS
+SELECT * from BankBranch WHERE BranchID = @branchID
+
+EXEC BankNameQuery @branchID = '10'
+
+
 
 --2. [作業1] 問題3 - 新增資料表與更新關聯( SelectDB.sql) - 3.2題-以TABLE型別的參數回傳查詢結果
 -- - 使用變數宣告的方式，將排序選項作為變數輸入，其中需將[次數]升冪排序設定為預設排序
