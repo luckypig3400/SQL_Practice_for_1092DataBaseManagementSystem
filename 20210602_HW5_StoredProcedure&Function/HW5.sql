@@ -30,6 +30,26 @@ EXEC BankNameQuery @branchID = '10'
 --   - 當排序=2時，顯示降冪以降冪排序；
 --   - 執行預存程序時，輸出以TABLE型別的參數回傳查詢結果
 
+
+
+--### 預存程序與函數
+--1. 預存程序 CREATE PROCEDURE
+--2. 函數 CREATE FUNCTION
+
+--### 特殊程式控制
+--1. WAITFOR (時間延遲, Delay）
+--2. RETURN (用在Function以及Stored Procedure)
+--3. EXEC(用在Stored Procedure或是SQL Script)
+--4. NULL, ISNULL, NULLIF, COALESCE
+
+--### 錯誤處理(13.7) -自習
+--1. RAISERROR
+--2. @@ERROR
+--3. TRY...CATCH
+--4. THROW
+
+
+
 --3. 載入[練習9.mdf]使用LEFT JOIN結合四個資料表，並加入搜尋條件，輸入客戶編號，查詢該客戶的訂單紀錄與相關資訊
 -- - 四個資料表為: 訂單, 客戶, 訂購項目, 書籍
 -- - 顯示欄位依左至右為: 訂單編號, 下單日期, 書籍名稱, 書籍數量, 客戶名稱, 客戶聯絡人, 客戶地址, 客戶電話
