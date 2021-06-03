@@ -29,7 +29,25 @@ EXEC BankNameQuery @branchID = '10'
 --   - 當排序=1時，顯示升冪以升冪排序，
 --   - 當排序=2時，顯示降冪以降冪排序；
 --   - 執行預存程序時，輸出以TABLE型別的參數回傳查詢結果
+CREATE PROCEDURE HW1_Q3
+@sort int
+AS
+if @sort = 1 begin
+	select C.LName + ', ' + C.FName as 姓名,cast(C.BDate as varchar(15)) +', Sex:'+ C.Sex as 生日與性別,
+	C.City +', '+ C.Country as 城市與國籍, A.AccID as 帳號, B.BranchBankName as 分行名稱, A.Balance as 餘額
+	from Account as A, BankBranch as B, Customer as C 
+	where C.ID = A.ID and A.BranchID = B.BranchID
+	order by A.AccID ASC
+end;
+else begin
+	select C.LName + ', ' + C.FName as 姓名,cast(C.BDate as varchar(15)) +', Sex:'+ C.Sex as 生日與性別,
+	C.City +', '+ C.Country as 城市與國籍, A.AccID as 帳號, B.BranchBankName as 分行名稱, A.Balance as 餘額
+	from Account as A, BankBranch as B, Customer as C 
+	where C.ID = A.ID and A.BranchID = B.BranchID
+	order by A.AccID DESC
+end;
 
+EXEC HW1_Q3 @sort = 1
 
 
 --### 預存程序與函數

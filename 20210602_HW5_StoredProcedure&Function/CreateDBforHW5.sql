@@ -142,10 +142,10 @@ default GETDATE() for UP_DATETIME;
 
 create table BankBranch(
 	BranchID int primary key,--分行帳號
-	BranchBankHW5Name nvarchar(30)
+	BranchBankName nvarchar(30)
 );
 select BranchID from Account;
-insert into BankBranch(BranchID,BranchBankHW5Name) values(10,'北護銀行');
+insert into BankBranch(BranchID,BranchBankName) values(10,'北護銀行');
 
 alter table Account add constraint FK__Account__BranchID__123
 Foreign Key(BranchID) references BankBranch(BranchID);
