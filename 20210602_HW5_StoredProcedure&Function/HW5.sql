@@ -62,3 +62,22 @@ EXEC BankNameQuery @branchID = '10'
 -- - 帳號不存在
 -- - 密碼錯誤
 -- - 帳密正確
+
+
+
+--6. 隱藏題 柯文哲慣用手勢
+CREATE TABLE RightHand(
+	ID int,
+	拇指 int,
+	食指 int,
+	中指 int,
+	無名指 int,
+	小指 int
+)
+INSERT INTO RightHand 
+VALUES	(1,1,0,0,0,0),
+		(2,0,1,0,0,0),
+		(3,0,0,1,0,0),
+		(4,0,0,0,1,0),
+		(5,0,0,0,0,1)
+SELECT * FROM RightHand WHERE ID=3
