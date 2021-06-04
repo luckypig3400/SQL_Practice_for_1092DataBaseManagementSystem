@@ -60,7 +60,9 @@ CREATE TABLE Account
 DECLARE @CURRENT_TS datetimeoffset = GETDATE()
 INSERT INTO ACCOUNT
   (ID, AccID, Balance, BranchID, AccType, UP_Date, UP_User)
-VALUES('001', '00000001', '5000', '010', 'B01', @CURRENT_TS, '0');
+VALUES	('001', 1, '5000', '010', 'B01', @CURRENT_TS, '0'),
+		('002', 2, '3000', '010', 'B01', @CURRENT_TS, '0'),
+		('003', 3, '6000', '010', 'B01', @CURRENT_TS, '0');
 GO
 
 CREATE TABLE Trans
@@ -80,25 +82,25 @@ GO
 DECLARE @CURRENT_TS datetimeoffset = GETDATE()
 INSERT INTO Trans
   (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000001', '001', @CURRENT_TS, 'A01', 'A00', 'I love writing SQL because it makes me happy', @CURRENT_TS, '001');
+VALUES('1', '001', @CURRENT_TS, 'A01', 'A00', 'I love writing SQL because it makes me happy', @CURRENT_TS, '001');
 INSERT INTO Trans
   (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000001', '002', @CURRENT_TS, 'A01', 'B01', 'I love writing Java because it makes me AAAAAA', @CURRENT_TS, '001');
+VALUES('1', '002', @CURRENT_TS, 'A01', 'B01', 'I love writing Java because it makes me AAAAAA', @CURRENT_TS, '001');
 INSERT INTO Trans
   (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000001', '003', @CURRENT_TS, 'A01', 'C01', 'B: Good night, Wellcome to Restaurant DATABASE may I help your ?', @CURRENT_TS, '001');
+VALUES('1', '003', @CURRENT_TS, 'A01', 'C01', 'B: Good night, Wellcome to Restaurant DATABASE may I help your ?', @CURRENT_TS, '001');
 INSERT INTO Trans
   (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000001', '004', @CURRENT_TS, 'A01', 'C02', 'C: Hi, we have 4 persons and wanna to CREATE a TABLE', @CURRENT_TS, '001');
+VALUES('1', '004', @CURRENT_TS, 'A01', 'C02', 'C: Hi, we have 4 persons and wanna to CREATE a TABLE', @CURRENT_TS, '001');
 INSERT INTO Trans
   (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000001', '005', @CURRENT_TS, 'A01', 'C02', 'B: Sorry, there is no table available now.', @CURRENT_TS, '001');
+VALUES('1', '005', @CURRENT_TS, 'A01', 'C02', 'B: Sorry, there is no table available now.', @CURRENT_TS, '001');
 INSERT INTO Trans
   (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000001', '006', @CURRENT_TS, 'A01', 'D05', N'C: COW~ DROP a TABLE  (ノ° ロ °)ノ彡┻━┻!.', @CURRENT_TS, '001');
+VALUES('1', '006', @CURRENT_TS, 'A01', 'D05', N'C: COW~ DROP a TABLE  (ノ° ロ °)ノ彡┻━┻!.', @CURRENT_TS, '001');
 INSERT INTO Trans
   (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000001', '007', @CURRENT_TS, 'A01', 'D05', N'B: AAA~~Now there is one TABLE available  ┬─┬ノ( º _ ºノ)....', @CURRENT_TS, '001');
+VALUES('1', '007', @CURRENT_TS, 'A01', 'D05', N'B: AAA~~Now there is one TABLE available  ┬─┬ノ( º _ ºノ)....', @CURRENT_TS, '001');
 
 SELECT *
 FROM Customer
@@ -151,13 +153,13 @@ alter table Account add constraint FK__Account__BranchID__123
 Foreign Key(BranchID) references BankBranch(BranchID);
 
 INSERT INTO ACCOUNT(ID, AccID, Balance, BranchID, AccType, UP_Date, UP_User)
-VALUES('006', '00000006', '3000', '010', 'B01', getdate(), '006');
+VALUES('006', '6', '3000', '010', 'B01', getdate(), '006');
 INSERT INTO Trans(AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000006', '001', getdate(), 'A01', 'A00', '1wow1', getdate(), '006');
+VALUES('6', '001', getdate(), 'A01', 'A00', '1wow1', getdate(), '006');
 INSERT INTO Trans(AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000006', '002', getdate(), 'A01', 'A00', '2wow2', getdate(), '006');
+VALUES('6', '002', getdate(), 'A01', 'A00', '2wow2', getdate(), '006');
 INSERT INTO Trans(AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000006', '003', getdate(), 'A01', 'A00', '3wow3', getdate(), '006');
+VALUES('6', '003', getdate(), 'A01', 'A00', '3wow3', getdate(), '006');
 
 alter table Trans drop constraint if exists PK__Trans__specified_contraintName;
 alter table Trans alter column TranID varchar(36) not null;
@@ -165,7 +167,7 @@ alter table Trans alter column TranID varchar(36) not null;
 
 declare @newTID int = 1;
 
-declare @accID varchar(10) = '00000001';
+declare @accID varchar(10) = '1';
 declare @accTID int = 1;
 declare @accTotalTrans int = (select COUNT(TranID) from Trans where AccID = @accID);
 while @accTID <= @accTotalTrans
@@ -184,7 +186,7 @@ begin
 	set @newTID = @newTID + 1;
 end;
 
-set @accID = '00000006';
+set @accID = '6';
 set @accTID = 1;
 set @accTotalTrans = (select COUNT(TranID) from Trans where AccID = @accID);
 while @accTID <= @accTotalTrans
@@ -220,7 +222,7 @@ declare @todayNewTID varchar(6) = cast( (@todayTranCount + 1) as varchar);
 declare @trID varchar(36) = convert(varchar, getdate(), 112) + '_' + (select Right('000000' + @todayNewTID, 6));
 
 INSERT INTO Trans (AccID, TranID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-VALUES('00000001', @trID, GETDATE(), 'A01', 'D05', N'Cool~\^o^/╰(*°▽°*)╯', GETDATE(), '001');
+VALUES('1', @trID, GETDATE(), 'A01', 'D05', N'Cool~\^o^/╰(*°▽°*)╯', GETDATE(), '001');
 
 if (select SDATE from LOG_SEQ where SDATE = CONVERT(varchar, GETDATE(), 112)) is null
 begin
@@ -237,7 +239,7 @@ begin
 	insert into LOG_SEQ values (@formattedDate, '0');
 	declare @todayFirstID varchar(36) = @formattedDate + '_' + (select RIGHT('000000'+ '1' ,6));
 	--使用者新增資料區域開始
-	insert into Trans VALUES('00000006', @todayFirstID, GETDATE(), 'A03', 'D66', N'QQㄋㄟㄋㄟ好喝到咩噗茶', GETDATE(), '006');
+	insert into Trans VALUES('6', @todayFirstID, GETDATE(), 'A03', 'D66', N'QQㄋㄟㄋㄟ好喝到咩噗茶', GETDATE(), '006');
 	--使用者新增資料區域結束
 	update LOG_SEQ set LOG_COUNT = 1 where SDATE = @formattedDate;
 end;
@@ -245,7 +247,7 @@ else begin
 	declare @newID int = (select LOG_COUNT from LOG_SEQ where SDATE = @formattedDate) + 1;
 	declare @id2wrtie varchar(36) = @formattedDate + '_' + (select RIGHT('000000' + cast(@newID as varchar), 6));
 	--使用者新增資料區域開始
-	insert into Trans VALUES('00000006', @id2wrtie, GETDATE(), 'D33', 'G05', N'爆爆水果茶', GETDATE(), '006');
+	insert into Trans VALUES('6', @id2wrtie, GETDATE(), 'D33', 'G05', N'爆爆水果茶', GETDATE(), '006');
 	--使用者新增資料區域結束
 	update LOG_SEQ set LOG_COUNT = @newID where SDATE = @formattedDate;
 end;
