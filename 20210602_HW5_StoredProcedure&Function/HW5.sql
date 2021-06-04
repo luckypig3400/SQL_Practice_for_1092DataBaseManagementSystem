@@ -94,14 +94,53 @@ EXEC searchOrder @customerID=1
 -- - 需回傳結果是否成功
 use BankHW5
 
+create procedure insertTranRecord
+@accID varchar(10), @atmID varchar(3), @tranType varchar(3), @note nvarchar(100), @updateUser int
+AS
+declare @formattedDate varchar(30) = CONVERT(varchar, GETDATE(), 112);
+if (select SDATE from LOG_SEQ where SDATE = @formattedDate) is null
+begin
+	insert into LOG_SEQ values (@formattedDate, '0');
+	declare @todayFirstID varchar(36) = @formattedDate + '_' + (select RIGHT('000000'+ '1' ,6));
+	insert into Trans VALUES(@accID, @todayFirstID, GETDATE(), @atmID, @tranType, @note, GETDATE(), @updateUser);
+	update LOG_SEQ set LOG_COUNT = 1 where SDATE = @formattedDate;
+end;
+else begin
+	declare @newID int = (select LOG_COUNT from LOG_SEQ where SDATE = @formattedDate) + 1;
+	declare @id2wrtie varchar(36) = @formattedDate + '_' + (select RIGHT('000000' + cast(@newID as varchar), 6));
+	insert into Trans VALUES(@accID, @id2wrtie, GETDATE(), @atmID, @tranType, @note, GETDATE(), @updateUser);
+	update LOG_SEQ set LOG_COUNT = @newID where SDATE = @formattedDate;
+end;
 
 
+EXEC insertTranRecord
+@accID=3,@atmID='A03',@tranType='C87', @note=N'Coin Master Coin Package $10Millin ○( ＾皿＾)っ', @updateUser=3
 
 
 --5. [作業3]綜合語法 -第4題 - 製作帳號密碼驗證，輸入帳號與密碼，並回傳狀態，並顯示以下結果
 -- - 帳號不存在
 -- - 密碼錯誤
 -- - 帳密正確
+
+--個人資訊資料參考
+	--Customer (ID,Lname,FName,BDate,Sex,Address,City,Country,UP_Date,UP_User)
+	--('0', 'CY', 'Lien', '19120101', 'M', 'Neihu', 'Taipei', 'Taiwan', GETDATE(), '0'),
+	--('001', 'LJ', 'KUO', '19981002', 'F', 'Neihu', 'Taipei', 'Taiwan', GETDATE(), '0'),
+	--('002', 'CW', 'Lin', '19981002', 'F', 'Tianmu', 'Taipei', 'Taiwan', GETDATE(), '0'),
+	--('003', 'DW', 'Wang', '19981002', 'M', 'Beitou', 'Taipei', 'Taiwan', GETDATE(), '0'),
+	--('006', 'OwO', 'YA', '20030331', 'F', 'Tianmu', 'Taipei', 'Taiwan', GETDATE(), '0');
+--個人資訊資料參考
+--使用者密碼輸入區起使
+declare @inputID varchar(10) = '006';
+declare @inputPWD varchar(30) = 'pwd0062003';
+--使用者密碼輸入區終點
+if (select PWD from Customer where ID = @inputID) = HASHBYTES('SHA2_512', @inputPWD)
+begin
+	print(N'ヾ(≧▽≦*)o密碼正確~~~');
+end;
+else begin
+	print(N'`(*>﹏<*)′密碼錯誤!!!');
+end;
 
 
 
@@ -121,3 +160,5 @@ VALUES	(1,1,0,0,0,0),
 		(4,0,0,0,1,0),
 		(5,0,0,0,0,1)
 SELECT * FROM RightHand WHERE ID=3
+
+use master;
