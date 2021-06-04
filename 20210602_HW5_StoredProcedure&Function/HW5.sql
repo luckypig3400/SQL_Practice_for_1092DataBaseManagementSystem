@@ -112,7 +112,6 @@ else begin
 	update LOG_SEQ set LOG_COUNT = @newID where SDATE = @formattedDate;
 end;
 
-
 EXEC insertTranRecord
 @accID=3,@atmID='A03',@tranType='C87', @note=N'Coin Master Coin Package $10Millin ○( ＾皿＾)っ', @updateUser=3
 
@@ -131,18 +130,26 @@ EXEC insertTranRecord
 	--('006', 'OwO', 'YA', '20030331', 'F', 'Tianmu', 'Taipei', 'Taiwan', GETDATE(), '0');
 --個人資訊資料參考
 --使用者密碼輸入區起使
-declare @inputID varchar(10) = '006';
-declare @inputPWD varchar(30) = 'pwd0062003';
---使用者密碼輸入區終點
-if (select PWD from Customer where ID = @inputID) = HASHBYTES('SHA2_512', @inputPWD)
-begin
-	print(N'ヾ(≧▽≦*)o密碼正確~~~');
-end;
-else begin
-	print(N'`(*>﹏<*)′密碼錯誤!!!');
-end;
 
+create Procedure customerLogin
+@inputID varchar(10) = '006', @inputPWD varchar(30) = 'pwd0062003'
+AS
+	if (select PWD from Customer where ID = @inputID) = HASHBYTES('SHA2_512', @inputPWD)
+	begin
+		print(N'ヾ(≧▽≦*)o密碼正確~~~');
+	end;
+	else if @@ROWCOUNT = 0
+	begin
+		--Simple check for SELECT query empty result
+		--https://stackoverflow.com/questions/2884996/simple-check-for-select-query-empty-result
+		print(N'`(っ °Д °;)っ帳號不存在!!!')
+	end;
+	else begin
+		print(N'`(*>﹏<*)′密碼錯誤!!!');
+	end;
 
+exec customerLogin
+exec customerLogin '666','odsoifja666'
 
 --6. 隱藏題 柯文哲慣用手勢
 CREATE TABLE RightHand(
