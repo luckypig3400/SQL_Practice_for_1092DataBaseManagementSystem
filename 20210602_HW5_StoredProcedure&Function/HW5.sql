@@ -71,6 +71,23 @@ EXEC HW1_Q3 @sort = 1
 --3. 載入[練習9.mdf]使用LEFT JOIN結合四個資料表，並加入搜尋條件，輸入客戶編號，查詢該客戶的訂單紀錄與相關資訊
 -- - 四個資料表為: 訂單, 客戶, 訂購項目, 書籍
 -- - 顯示欄位依左至右為: 訂單編號, 下單日期, 書籍名稱, 書籍數量, 客戶名稱, 客戶聯絡人, 客戶地址, 客戶電話
+use 練習09
+go
+
+drop procedure searchOrder
+create procedure searchOrder
+@customerID int
+AS
+	select	O.訂單編號, O.下單日期, B.書籍名稱, I.數量,
+			C.客戶名稱, C.聯絡人,C.地址,C.電話
+	from 訂單 as O, 客戶 as C, 訂購項目 as I
+	left join 書籍 as B on I.書籍編號 = B.書籍編號
+	where	O.客戶編號 = @customerID and O.客戶編號 = C.客戶編號
+			and O.訂單編號 = I.訂單編號
+
+EXEC searchOrder @customerID=1
+
+
 
 --4. [作業3]綜合語法: 新增一筆交易紀錄，並同步更新LOG_SEQ
 -- - LOG_SEQ中的LOG_COUNT需自動加1
