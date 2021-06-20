@@ -252,6 +252,8 @@ else begin
 	update LOG_SEQ set LOG_COUNT = @newID where SDATE = @formattedDate;
 end;
 
+alter table Trans add Primary Key(TranID);
+
 go
 alter table Customer drop column if exists PWD;
 --https://stackoverflow.com/questions/173814/using-alter-to-drop-a-column-if-it-exists-in-mysql/173820
