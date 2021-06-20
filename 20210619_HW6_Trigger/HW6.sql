@@ -27,12 +27,22 @@ insert into Trans VALUES('6', '20210620_000013', GETDATE(), 'A03', 'D66', N'信�
 	
 -- 2.請使用INSTEAD OF觸發程序，在操作新增交易紀錄時，不需要輸入TranID(範例格式: 20210524_000001)。
 --將TranID新增至交易紀錄取代原本新增交易紀錄動作。並自動更新LOG_SEG流水號 (70)
-CREATE TRIGGER AutoGenerateTranIDwhenInsert
+ALTER TRIGGER AutoGenerateTranIDwhenInsert
 on Trans
 INSTEAD OF INSERT
 AS
+declare @formattedDate varchar(9) = CONVERT(varchar, GETDATE(), 112);
+declare @todayTransCount int = (select LOG_COUNT FROM LOG_SEQ WHERE SDATE = @formattedDate);
+declare @idToMerge varchar(15) = (select RIGHT('000000' + cast((@todayTransCount+1) as varchar), 6));
 SET NOCOUNT ON; --不顯示 (?個資料列受到影響)
-print('將自動為您的交易進行編號')
+if (select TranID from inserted) is NULL begin
+	print('將自動為您的交易進行編號')
+	select * from inserted
+end
+else begin
+	print('正在檢查您所輸入的交易編號')
+end
+
 
 
 INSERT INTO Trans	(AccID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
