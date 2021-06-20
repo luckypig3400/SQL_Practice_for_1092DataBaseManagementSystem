@@ -34,10 +34,17 @@ AS
 declare @formattedDate varchar(9) = CONVERT(varchar, GETDATE(), 112);
 declare @todayTransCount int = (select LOG_COUNT FROM LOG_SEQ WHERE SDATE = @formattedDate);
 declare @idToMerge varchar(15) = (select RIGHT('000000' + cast((@todayTransCount+1) as varchar), 6));
+declare @newTranID varchar(15) = @formattedDate + '_' + @idToMerge;
 SET NOCOUNT ON; --不顯示 (?個資料列受到影響)
 if (select TranID from inserted) is NULL begin
 	print('將自動為您的交易進行編號')
-	select * from inserted
+	print('您的交易編號為:' + @newTranID);
+
+	select * into #tempTable from inserted;--把輸入的值存入暫存表
+	--因為無法更新inserted table的值，所以用暫存表來更新TranID
+	update #tempTable set TranID = @newTranID;
+
+	INSERT INTO Trans select * from #tempTable;
 end
 else begin
 	print('正在檢查您所輸入的交易編號')
