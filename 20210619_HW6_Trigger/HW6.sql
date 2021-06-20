@@ -27,7 +27,7 @@ insert into Trans VALUES('6', '20210620_000013', GETDATE(), 'A03', 'D66', N'信�
 	
 -- 2.請使用INSTEAD OF觸發程序，在操作新增交易紀錄時，不需要輸入TranID(範例格式: 20210524_000001)。
 --將TranID新增至交易紀錄取代原本新增交易紀錄動作。並自動更新LOG_SEG流水號 (70)
-ALTER TRIGGER AutoGenerateTranIDwhenInsert
+CREATE TRIGGER AutoGenerateTranIDwhenInsert
 on Trans
 INSTEAD OF INSERT
 AS
@@ -38,24 +38,34 @@ declare @newTranID varchar(15) = @formattedDate + '_' + @idToMerge;
 SET NOCOUNT ON; --不顯示 (?個資料列受到影響)
 if (select TranID from inserted) is NULL begin
 	print('將自動為您的交易進行編號')
-	print('您的交易編號為:' + @newTranID);
 
 	select * into #tempTable from inserted;--把輸入的值存入暫存表
 	--因為無法更新inserted table的值，所以用暫存表來更新TranID
 	update #tempTable set TranID = @newTranID;
 
 	INSERT INTO Trans select * from #tempTable;
+	DROP TABLE #tempTable
+	print('成功新增交易紀錄，您的交易編號為:' + @newTranID);
 end
 else begin
-	print('正在檢查您所輸入的交易編號')
+	print('正在檢查您所輸入的交易編號是否正確')
+	if(select TranID from inserted) = @newTranID begin
+		print('您輸入的ID為正確的序號，即將新增')
+		insert into Trans select * from inserted;
+	end
+	else begin
+		print('您輸入的ID錯誤!將不會新增');
+		print('請檢查後再嘗試，或是不輸入ID系統會自動為您編號');
+	end
 end
 
 
 
 INSERT INTO Trans	(AccID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
-			VALUES	('3', GETDATE(), 'G03', 'D68', N'RTX 3060Ti', GETDATE(), '003')
+			VALUES	('3', GETDATE(), 'G03', 'D69', N'RTX 3080Ti', GETDATE(), '003')
 
-select * from Trans
-select * from LOG_SEQ
+INSERT INTO Trans VALUES('3', 'tranID666', GETDATE(), 'G03', 'D69', N'RTX 3090', GETDATE(), '003')
+
+INSERT INTO Trans VALUES('3', '20210620_000019', GETDATE(), 'G03', 'D69', N'RTX 3090', GETDATE(), '003')
 
 use master;
