@@ -24,10 +24,21 @@ end
 
 insert into Trans VALUES('6', '20210620_000013', GETDATE(), 'A03', 'D66', N'信義區60坪地契乙份', GETDATE(), '006');
 
-
+	
 -- 2.請使用INSTEAD OF觸發程序，在操作新增交易紀錄時，不需要輸入TranID(範例格式: 20210524_000001)。
 --將TranID新增至交易紀錄取代原本新增交易紀錄動作。並自動更新LOG_SEG流水號 (70)
+CREATE TRIGGER AutoGenerateTranIDwhenInsert
+on Trans
+INSTEAD OF INSERT
+AS
+SET NOCOUNT ON; --不顯示 (?個資料列受到影響)
+print('將自動為您的交易進行編號')
 
 
+INSERT INTO Trans	(AccID, TranTime, AtmID, TranType, TranNote, UP_DATETIME, UP_USR)
+			VALUES	('3', GETDATE(), 'G03', 'D68', N'RTX 3060Ti', GETDATE(), '003')
+
+select * from Trans
+select * from LOG_SEQ
 
 use master;
