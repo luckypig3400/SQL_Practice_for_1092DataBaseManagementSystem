@@ -1,7 +1,33 @@
 -- 1 開發新系統使用 MySQL，舊系統使用 MS SQL。新系統上線需要將舊資料庫的所有個人資
 -- 料表資料轉移到新資料庫。舊資料表 Schema、舊資料表範例資料以及新資料表範例如下。
 -- 請解決以下問題，完成資資料轉換的 T-SQL 語法(手寫)，配分說明如下:
+create database FinalExam20210625;
+GO
+use FinalExam20210625;
+
+CREATE TABLE CUSTOMER ( --舊資料表CREATE語法
+ ID CHAR(10) PRIMARY KEY, --客戶編號
+ FULLNAME NVARCHAR(10) NOT NULL, --(1) TW=TRUE, 姓名= 姓 + 名；(2) TW=FALSE,姓名= 名+姓
+ BIRTHDATE DATE NOT NULL, --客戶生日
+ GENDER INT NOT NULL, --1為男性；0為女性
+ TW CHAR(4) NOT NULL) --1 為本國籍；0 外國籍
+
+insert into CUSTOMER 
+VALUES	(1, '叮手中', '19570617', 1, '1'),
+		(2, '韓極混', '19570617', 1, '1'),
+		(3, '蔡嬰雯', '19560831', 0, '1'),
+		(4, 'Christian Bale', '19740130', 1 ,'0')
+
 -- 1.1 請寫下合理的新資料表 CREATE 語法 (5 分)。
+CREATE TABLE CUSTOMER_NEW ( --新資料表CREATE語法
+	ID CHAR(10) PRIMARY KEY, --客戶編號
+	FNAME NVARCHAR(10) NOT NULL,
+	LNAME NVARCHAR(10) NOT NULL,
+	BIRTHDATE DATE NOT NULL, --客戶生日
+	GENDER CHAR(1) NOT NULL, --M為男性；F為女性
+	TW VARCHAR(6) NOT NULL  -- TRUE為本國籍；FALSE 外國籍
+)
+
 -- 1.2 當性別為男性時，ID 第一碼標示為 A；當性別為女性時，ID 第一碼標示為 B，編號共
 -- 4 碼，不足號需前置補 0 (5 分)
 -- 1.3 新資料表將舊資料表中「姓名」以的 FULLNAME 儲存，新資料表要將「姓」以
@@ -9,20 +35,6 @@
 -- 1.4 性別表示為 M:男性、F:女性 (5 分)
 -- 1.5 客戶生日以 yyyy-mm-dd 格式呈現, 資料型態須為 DATE (10 分)
 -- 1.6 完整轉換程式 (10 分)
-
--- CREATE TABLE CUSTOMER ( --舊資料表CREATE語法
--- ID CHAR(10) PRIMARY KEY, --客戶編號
--- FULLNAME NVARCHAR(10) NOT NULL, --(1) TW=TRUE, 姓名= 姓 + 名；(2) TW=FALSE,姓名= 名+姓
--- BIRTHDATE DATE NOT NULL, --客戶生日
--- GENDER INT NOT NULL, --1為男性；0為女性
--- TW CHAR(4) NOT NULL) --1 為本國籍；0 外國籍
-
--- 舊個人資料表
--- ID FULLNAME BIRTHDATE SEX TW
--- 1 叮手中 19570617 1 1
--- 2 韓極混 19570617 1 1
--- 3 蔡嬰雯 19560831 0 1
--- 4 Christian Bale 19740130 1 0
 
 -- 新個人資料表
 -- ID FNAME LNAME BDATE SEX TW
